@@ -1,0 +1,25 @@
+%flex {
+  display: flex;
+};
+
+%flex-center {
+  @extend %flex;
+  justify-content: center;
+  align-items: center;
+};
+
+%flex-space-between {
+  @extend %flex;
+  justify-content: space-between;
+};
+
+%flex-space-around {
+  @extend %flex;
+  justify-content: space-around;
+};
+
+%img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+};

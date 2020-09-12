@@ -1,0 +1,50 @@
+@import "../common/index";
+
+.menu-btn {
+  @extend %flex-center;
+
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: $gray-light;
+  }
+
+  @include size(40px);
+
+  &__burger {
+    @include size(20px, 2px);
+    background-color: $lilac;
+    border-radius: 15px;
+    transition: all 0.1s ease-in-out;
+
+    &:after,
+    &:before {
+      @include size(20px, 2px);
+      background-color: $lilac;
+      border-radius: 15px;
+      content: '';
+      position: absolute;
+      transition: all 0.2s ease-in-out;
+    }
+    &:after {
+      content: '';
+      transform: translateY(-5px);
+    }
+    &:before {
+      content: '';
+      transform: translateY(5px);
+    }
+    &_active {
+      background-color: transparent;
+
+      &:after {
+        content: '';
+        transform: rotate(-45deg);
+      }
+      &:before {
+        content: '';
+        transform: rotate(45deg);
+      }
+    }
+  }
+}

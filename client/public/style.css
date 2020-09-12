@@ -1,0 +1,204 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?tc1nsu');
+  src:  url('fonts/icomoon.eot?tc1nsu#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?tc1nsu') format('truetype'),
+    url('fonts/icomoon.woff?tc1nsu') format('woff'),
+    url('fonts/icomoon.svg?tc1nsu#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-achievement:before {
+  content: "\e900";
+}
+.icon-achievement-confirm:before {
+  content: "\e901";
+}
+.icon-achievement-create:before {
+  content: "\e902";
+}
+.icon-adventure:before {
+  content: "\e903";
+}
+.icon-arrow:before {
+  content: "\e904";
+}
+.icon-arrow-right:before {
+  content: "\e905";
+}
+.icon-attention:before {
+  content: "\e906";
+}
+.icon-bag:before {
+  content: "\e907";
+}
+.icon-category-art:before {
+  content: "\e908";
+}
+.icon-category-career:before {
+  content: "\e909";
+}
+.icon-category-cook:before {
+  content: "\e90a";
+}
+.icon-category-fun:before {
+  content: "\e90b";
+}
+.icon-category-household:before {
+  content: "\e90c";
+}
+.icon-category-humanity:before {
+  content: "\e90d";
+}
+.icon-category-learning:before {
+  content: "\e90e";
+}
+.icon-category-mental:before {
+  content: "\e90f";
+}
+.icon-category-mental-1:before {
+  content: "\e910";
+}
+.icon-category-outdoors:before {
+  content: "\e911";
+}
+.icon-category-reading:before {
+  content: "\e912";
+}
+.icon-category-social:before {
+  content: "\e913";
+}
+.icon-category-sport:before {
+  content: "\e914";
+}
+.icon-category-travel:before {
+  content: "\e915";
+}
+.icon-charisma:before {
+  content: "\e916";
+}
+.icon-checkbox:before {
+  content: "\e917";
+}
+.icon-check-tasks:before {
+  content: "\e918";
+}
+.icon-close:before {
+  content: "\e919";
+}
+.icon-coin:before {
+  content: "\e91a";
+}
+.icon-comment:before {
+  content: "\e91b";
+}
+.icon-culture:before {
+  content: "\e91c";
+}
+.icon-daily:before {
+  content: "\e91d";
+}
+.icon-daily-daily:before {
+  content: "\e91e";
+}
+.icon-dark-theme:before {
+  content: "\e91f";
+}
+.icon-delete:before {
+  content: "\e920";
+}
+.icon-edit:before {
+  content: "\e921";
+}
+.icon-faq:before {
+  content: "\e922";
+}
+.icon-fire:before {
+  content: "\e923";
+}
+.icon-forbidden:before {
+  content: "\e924";
+}
+.icon-gift:before {
+  content: "\e925";
+}
+.icon-habits:before {
+  content: "\e926";
+}
+.icon-humanity:before {
+  content: "\e927";
+}
+.icon-intellect:before {
+  content: "\e928";
+}
+.icon-level-up:before {
+  content: "\e929";
+}
+.icon-login:before {
+  content: "\e92a";
+}
+.icon-logout:before {
+  content: "\e92b";
+}
+.icon-minus:before {
+  content: "\e92c";
+}
+.icon-money:before {
+  content: "\e92d";
+}
+.icon-money-1:before {
+  content: "\e92e";
+}
+.icon-more:before {
+  content: "\e92f";
+}
+.icon-plus:before {
+  content: "\e930";
+}
+.icon-progress:before {
+  content: "\e931";
+}
+.icon-repeat:before {
+  content: "\e932";
+}
+.icon-rules:before {
+  content: "\e933";
+}
+.icon-search:before {
+  content: "\e934";
+}
+.icon-skills:before {
+  content: "\e935";
+}
+.icon-store:before {
+  content: "\e936";
+}
+.icon-strength:before {
+  content: "\e937";
+}
+.icon-tasks:before {
+  content: "\e938";
+}
+.icon-user:before {
+  content: "\e939";
+}
+.icon-winner:before {
+  content: "\e93a";
+}

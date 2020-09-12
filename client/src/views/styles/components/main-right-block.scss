@@ -1,0 +1,10 @@
+@import "../common/index";
+
+.main-right-block {
+  @include size(250px, 100vh);
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: $white;
+}

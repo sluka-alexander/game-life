@@ -1,0 +1,50 @@
+@import "../common/index";
+
+.left-menu-item {
+  @extend %flex;
+  @include size(100%, 40px);
+
+  min-width: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  align-items: center;
+  margin-bottom: 20px;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: $gray-light;
+  }
+
+  &__icon {
+    @include size(40px);
+
+    @extend %flex-center;
+    font-size: $icon-size-L;
+    color: $lilac;
+  }
+
+  &__text {
+    @extend %flex;
+
+    @include size(0, 20px);
+
+    align-items: center;
+    max-width: 0;
+    color: $lilac;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-transform: capitalize;
+    overflow: hidden;
+    position: relative;
+    font-size: 14px;
+    line-height: 16px;
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+
+    &_active {
+      max-width: 150px;
+      padding-left: 30px;
+      width: 150px;
+    }
+  }
+}

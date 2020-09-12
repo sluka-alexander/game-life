@@ -1,0 +1,12 @@
+@import "../common/index";
+
+.left-menu {
+  @extend %flex-space-between;
+
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  padding: 30px 30px 100px;
+  background-color: $white;
+  z-index: 5;
+}
