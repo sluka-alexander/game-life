@@ -41,7 +41,7 @@ export default {
     @extend %flex-center;
 
     position: relative;
-    margin: 0 auto;
+    margin: 0 auto 10px;
     max-width: 250px;
 
     &__items {
@@ -53,7 +53,6 @@ export default {
       border-radius: 15px;
       transition: 0.3s;
       max-width: 0;
-      cursor: pointer;
 
       &_active {
         max-width: 250px;
@@ -79,6 +78,7 @@ export default {
 
       @include size(30px, 30px);
       margin: 10px;
+      cursor: pointer;
       &:hover {
         color: $color-main;
       }

@@ -1,0 +1,6 @@
+.smooth-enter-active, .smooth-leave-active {
+  transition: opacity 0.2s;
+}
+.smooth-enter, .smooth-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}

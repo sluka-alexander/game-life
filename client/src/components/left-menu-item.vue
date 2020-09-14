@@ -1,6 +1,8 @@
 <template>
   <div>
-    <router-link :to="item" class="left-menu-item" replace v-if="item !== 'logout'">
+    <router-link
+      v-on:click.native="closeLeftMenu()"
+      :to="item" class="left-menu-item" replace v-if="item !== 'logout'">
       <div class="left-menu-item__icon">
         <div :class="{
           'icon-tasks': item === 'tasks',
@@ -32,6 +34,11 @@ export default {
   name: 'left-menu-item',
   props: {
     item: String
+  },
+  methods: {
+    closeLeftMenu () {
+      this.$store.dispatch('closeOfLeftMenu')
+    }
   },
   computed: {
     isActiveLeftMenu: function () {

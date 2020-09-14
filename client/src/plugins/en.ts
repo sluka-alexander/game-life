@@ -68,7 +68,7 @@ export default {
 
   level: {
     title: 'Level:',
-    subtitle: 'Skill:',
+    subtitle: 'Experience:',
     xp: 'XP'
   },
   rubies: {

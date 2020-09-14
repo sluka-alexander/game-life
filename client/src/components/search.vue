@@ -5,22 +5,28 @@
         <div class="search__tags-text">Tags</div>
         <div class="search__tags-icon_arrow icon-arrow"></div>
       </div>
-      <input class="search__input" placeholder="Search..." v-model="searchValue">
+      <input class="search__input" placeholder="Search..." v-model="searchValue" ref="input">
     </div>
     <div class="search__icons" :class="{'search__icons_active' : searchValue}">
       <div class="search__icon search__icon_clear icon-close"
-      :class="{ 'search__icon_clear_active' : searchValue }" @click="searchValue = ''"></div>
+      :class="{ 'search__icon_clear_active' : searchValue }" @click="clearInput()"></div>
       <div class="search__icon search__icon_search icon-search"></div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="js">
 export default {
   name: 'search',
   data () {
     return {
       searchValue: null
+    }
+  },
+  methods: {
+    clearInput () {
+      this.searchValue = null
+      this.$refs.input.focus()
     }
   }
 }
@@ -73,7 +79,8 @@ export default {
     }
 
     &__input {
-      width: 215px;
+      max-width: 215px;
+      width: 50%;
 
       font-size: $font-size-S;
     }
