@@ -2,13 +2,19 @@
   <div class="main-right-block" :class="{ 'main-right-block_close': isActiveRightBlock }">
     <div class="main-right-block__top-navbar">
       <div class="main-right-block__top-navbar-icon ">
-        <div class="icon-dark-theme"></div>
+        <div class="icon-dark-theme">
+        </div>
       </div>
       <div class="main-right-block__top-navbar-icon ">
-        <div class="icon-rus"></div>
+        <div class="icon-rus">
+          <details-menu>
+            <language></language>
+          </details-menu>
+        </div>
       </div>
       <div class="main-right-block__top-navbar-icon ">
-        <div class="icon-user"></div>
+        <div class="icon-user">
+        </div>
       </div>
     </div>
     <avatar></avatar>
@@ -21,13 +27,17 @@
 import avatar from '@/components/avatar'
 import level from '@/components/level'
 import skills from '@/components/skills'
+import detailsMenu from '@/components/details-menu'
+import language from '@/components/details/language'
 
 export default {
   name: 'main-right-block',
   components: {
     avatar,
     level,
-    skills
+    skills,
+    detailsMenu,
+    language
   },
   computed: {
     isActiveRightBlock: function () {
@@ -57,6 +67,7 @@ export default {
   background-color: $white;
   padding: 30px;
   transition: 0.3s;
+  z-index: 5;
 
   &_close {
     transform: translateX(250px);
@@ -70,13 +81,10 @@ export default {
   }
 
   &__top-navbar-icon {
-   font-size: $icon-size-L;
+    position: relative;
+    font-size: $icon-size-L;
     color: $lilac;
     cursor: pointer;
-
-    &:hover {
-      color: #4543DD;
-    }
   }
 }
 </style>

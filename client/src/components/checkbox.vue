@@ -18,7 +18,7 @@ export default {
   .checkbox {
     @extend %flex-center;
 
-    @include size(18px);
+    @include size(14px);
     position: relative;
     background-color: $gray-light;
     border-radius: 5px;
