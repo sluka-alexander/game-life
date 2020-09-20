@@ -1,6 +1,6 @@
 <template>
   <div class="tasks-panel">
-    {{ scrollStart }} {{ maxScrollLeft }}
+<!--    {{ scrollStart }} {{ maxScrollLeft }}-->
     <div class="shadow shadow__left"
          :class="{ 'shadow__left_active': scrollStart !== 0 }"></div>
     <div class="tasks-panel__columns" ref="columns" v-on:scroll="handleScroll(this)">
@@ -116,7 +116,7 @@
     </div>
     <div class="shadow shadow__right"
          :class="{ 'shadow__right_active': maxScrollLeft !== scrollStart ||
-    !scrollStart}">
+    !maxScrollLeftg}">
     </div>
   </div>
 </template>
