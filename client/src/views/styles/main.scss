@@ -2,11 +2,13 @@
 @import "components/index";
 @import "pages/index";
 @import "animate/animate";
+@import "scroll/index";
+@import "elements/index";
 
 html, body {
   padding: 0;
   margin: 0;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-style: normal;
   font-size: $font-size-main;
   background-color: $color-bgc;
@@ -21,13 +23,22 @@ a {
   text-decoration: none;
 }
 
+button {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-style: normal;
+  outline: none;
+}
+
 p {
   padding: 0;
   margin: 0;
 }
 
 textarea, input {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   resize: none;
 
   &:focus {
@@ -55,7 +66,7 @@ input::placeholder {
   }
 }
 
-.router-link-active {
+.router-link-exact-active {
   background-color: $blue-dark;
   &:hover {
     background-color: $blue-dark;
@@ -84,7 +95,8 @@ input::placeholder {
 [data-tooltip] {
   position: relative;
   &::after {
-    font-family: 'Source Sans Pro', sans-serif;
+    z-index: 15;
+    font-family: 'Open Sans', sans-serif;
     top: 110%;
     left: 0;
     font-size: 12px;
@@ -101,7 +113,7 @@ input::placeholder {
   }
 }
 [data-tooltip]:hover::after {
-  opacity: 1; /* Показываем подсказку */
+  opacity: 1;
 }
 .details-block {
   height: 100%;

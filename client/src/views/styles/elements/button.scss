@@ -1,0 +1,24 @@
+@import "../common/index";
+
+.button {
+  padding: 0 15px;
+  background-color: $color-main;
+  font-size: $font-size-XS;
+  color: $white;
+  border-radius: 5px;
+    font-weight: $weight-semi-bold;
+  height: 35px;
+  cursor: pointer;
+  display: table-cell;
+  vertical-align: middle;
+  transition: 0.2s;
+
+  &__no-active {
+    background-color: $gray;
+    pointer-events: none;
+    color: $gray-dark;
+  }
+  &:active {
+    background-color: $blue-dark;
+  }
+}

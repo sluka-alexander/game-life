@@ -1,17 +1,15 @@
 <template>
   <div class="search">
-    <div class="search__tags-and-input">
       <div class="search__tags">
         <div class="search__tags-text">Tags</div>
         <div class="search__tags-icon_arrow icon-arrow"></div>
       </div>
       <input class="search__input" placeholder="Search..." v-model="searchValue" ref="input">
-    </div>
-    <div class="search__icons" :class="{'search__icons_active' : searchValue}">
-      <div class="search__icon search__icon_clear icon-close"
-      :class="{ 'search__icon_clear_active' : searchValue }" @click="clearInput()"></div>
-      <div class="search__icon search__icon_search icon-search"></div>
-    </div>
+      <div class="search__icons" :class="{'search__icons_active' : searchValue}">
+        <div class="search__icon search__icon_clear icon-close"
+        :class="{ 'search__icon_clear_active' : searchValue }" @click="clearInput()"></div>
+        <div class="search__icon search__icon_search icon-search"></div>
+      </div>
   </div>
 </template>
 
@@ -37,16 +35,13 @@ export default {
   .search {
     @extend %flex-space-between;
 
+    flex: 0 1 0;
     height: 50px;
     max-width: 400px;
     margin: 0 auto 10px;
     background-color: $white;
     border-radius: 15px;
     padding: 10px 15px;
-
-    &__tags-and-input {
-      @extend %flex;
-    }
 
     &__tags {
       @extend %flex;
@@ -79,9 +74,8 @@ export default {
     }
 
     &__input {
-      max-width: 215px;
-      width: 50%;
-
+      padding: 0 15px;
+      width: 100%;
       font-size: $font-size-S;
     }
 

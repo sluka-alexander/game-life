@@ -1,4 +1,13 @@
 export default {
+  form: {
+    error: {
+      required: 'The field must not be empty',
+      minLength: 'Should be less than {action} characters',
+      maxLength: 'Should be more than {action} characters',
+      email: 'Please, enter correct email'
+    }
+  },
+
   items: {
     home: 'Home',
     adventure: 'Adventure',

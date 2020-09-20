@@ -1,0 +1,33 @@
+@import "../common/index";
+
+.input-form {
+  @include size(100%, 35px);
+
+  border-radius: 5px;
+  padding: 0 10px;
+  background-color: $gray-lightest;
+  transition: 0.2s;
+  font-size: $font-size-XXS;
+
+  &:hover {
+    background-color: $gray-light;
+  }
+  &:focus {
+    background-color: $white;
+    box-shadow: 0 0 5px 1px rgba(69, 67, 221, 0.5);
+  }
+  &__invalid {
+    color: $red;
+    box-shadow: 0 0 5px 1px rgba(236, 37, 36, 0.5);
+
+    &:focus {
+      box-shadow: 0 0 5px 1px rgba(236, 37, 36, 0.5);
+    }
+  }
+}
+
+.input-title {
+  font-size: $font-size-XXS;
+  font-weight: $weight-semi-bold;
+  margin-bottom: 5px;
+}

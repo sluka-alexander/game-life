@@ -1,17 +1,18 @@
 <template>
     <div class="top-menu" :class="{ 'top-menu_active': isActiveRightBlock }">
       <div class="left-menu__top-part">
-        <div class="menu-btn" @click="changeStateOfRightBlock()">
-          <div class="menu-btn__burger">
-          </div>
-        </div>
+        <resize-menu-btn v-on:click.native="changeStateOfRightBlock"></resize-menu-btn>
       </div>
     </div>
 </template>
 
 <script>
+import resizeMenuBtn from '@/components/resize-menu-btn.vue'
 export default {
   name: 'top-menu',
+  components: {
+    resizeMenuBtn
+  },
   methods: {
     changeStateOfRightBlock () {
       this.$store.dispatch('changeStateOfRightBlock')

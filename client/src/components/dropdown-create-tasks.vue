@@ -9,16 +9,20 @@
         <div class="dropdown-create-tasks__items_left"
              :class="{ 'dropdown-create-tasks__items_left_active': isActiveDropdown }">
           <div class="dropdown-create-tasks__item icon-habits"
-               data-tooltip="Habits"></div>
+               @click="openModal('habits')"
+               data-tooltip="Habit"></div>
           <div class="dropdown-create-tasks__item icon-check-tasks"
-               data-tooltip="Tasks"></div>
+               @click="openModal('tasks')"
+               data-tooltip="Task"></div>
         </div>
         <div class="dropdown-create-tasks__items_right"
              :class="{ 'dropdown-create-tasks__items_right_active': isActiveDropdown }">
           <div class="dropdown-create-tasks__item icon-daily"
-               data-tooltip="Daily chores"></div>
+               @click="openModal('daily')"
+               data-tooltip="Daily chore"></div>
           <div class="dropdown-create-tasks__item icon-achievement-create"
-               data-tooltip="Achievement"></div>
+               @click="openModal('awards')"
+               data-tooltip="Award"></div>
         </div>
       </div>
     </div>
@@ -30,6 +34,15 @@ export default {
   data () {
     return {
       isActiveDropdown: false
+    }
+  },
+  methods: {
+    assignNameModal (nameModal) {
+      this.$store.commit('assignNameModal', nameModal)
+    },
+    openModal (nameModal) {
+      this.assignNameModal(nameModal)
+      this.$store.dispatch('openModal')
     }
   }
 }

@@ -1,10 +1,12 @@
 <template>
   <div>
     <router-link
+      v-if="item !== 'logout' && item !== 'home'"
       v-on:click.native="closeLeftMenu()"
-      :to="item" class="left-menu-item" replace v-if="item !== 'logout'">
+      :to="item" class="left-menu-item" replace>
       <div class="left-menu-item__icon">
         <div :class="{
+          'icon-category-household': item === 'home',
           'icon-tasks': item === 'tasks',
           'icon-adventure': item === 'adventure',
           'icon-rules': item === 'rules',
@@ -16,6 +18,21 @@
            :class="{ 'left-menu-item__text_active': isActiveLeftMenu }">{{ item }}
       </div>
     </router-link>
+
+    <router-link
+      v-if="item === 'home'"
+      v-on:click.native="closeLeftMenu()"
+      to="/" class="left-menu-item" replace>
+      <div class="left-menu-item__icon">
+        <div :class="{
+          'icon-home': item === 'home',
+        }"></div>
+      </div>
+      <div class="left-menu-item__text"
+           :class="{ 'left-menu-item__text_active': isActiveLeftMenu }">{{ item }}
+      </div>
+    </router-link>
+
     <div :to="item" class="left-menu-item" v-if="item === 'logout'">
       <div class="left-menu-item__icon">
         <div :class="{

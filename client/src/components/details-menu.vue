@@ -15,7 +15,7 @@ export default {
 
 .dropdown-menu {
   font-size: 14px;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   position: absolute;
   top: 100%;
   margin-top: 5px;

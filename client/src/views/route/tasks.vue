@@ -2,9 +2,13 @@
   <div class="task-page">
     <div class="task-page__img">
     </div>
-    <search></search>
-    <dropdown-create-tasks></dropdown-create-tasks>
-    <tabs></tabs>
+    <div class="top-part">
+      <search></search>
+      <modal v-if="isActiveModal">
+        <create-task-modal></create-task-modal>
+      </modal>
+      <dropdown-create-tasks></dropdown-create-tasks>
+    </div>
     <tasks-panel></tasks-panel>
   </div>
 </template>
@@ -13,15 +17,29 @@
 import search from '@/components/search'
 import dropdownCreateTasks from '@/components/dropdown-create-tasks'
 import tasksPanel from '@/components/tasks-panel.vue'
-import tabs from '@/components/tabs'
+import modal from '@/components/modal'
+
+import createTaskModal from '@/components/modals/create-task-modal.vue'
 
 export default {
   name: 'tasks',
+  data () {
+    return {
+      showModal: true
+    }
+  },
   components: {
     search,
     dropdownCreateTasks,
     tasksPanel,
-    tabs
+    modal,
+    createTaskModal
+  },
+
+  computed: {
+    isActiveModal () {
+      return this.$store.getters.IS_ACTIVE_MODAL
+    }
   }
 }
 </script>
@@ -29,7 +47,14 @@ export default {
 <style lang="scss">
   @import "../styles/main";
   .task-page {
+    @extend %flex;
+
     @include size(100%);
+    position: relative;
+
+    flex-direction: column;
+    flex: 0 auto;
+
     &__img {
       background-size: contain;
       background-position:  50% 100%;

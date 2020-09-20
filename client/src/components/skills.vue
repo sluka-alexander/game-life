@@ -52,6 +52,7 @@ export default {
       color: $lilac;
       margin-bottom: 15px;
       font-size: $font-size-XS;
+      font-weight: $weight-light;
     }
 
     &__icon {

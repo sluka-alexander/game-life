@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: {
     isActiveLeftMenu: false,
     isActiveRightBlock: false,
+    isActiveModal: false,
+    nameActiveModal: null,
     dataUser: {
       firstName: 'Alexander',
       lastName: 'Sluka',
@@ -24,6 +26,15 @@ export default new Vuex.Store({
     closeOfLeftMenu (state) {
       state.isActiveLeftMenu = false
     },
+    closeModal (state) {
+      state.isActiveModal = false
+    },
+    openModal (state) {
+      state.isActiveModal = true
+    },
+    assignNameModal (state, nameModal) {
+      state.nameActiveModal = nameModal
+    },
     changeStateOfRightBlock (state) {
       state.isActiveRightBlock = !state.isActiveRightBlock
     }
@@ -34,6 +45,12 @@ export default new Vuex.Store({
     },
     closeOfLeftMenu (context) {
       context.commit('closeOfLeftMenu')
+    },
+    closeModal (context) {
+      context.commit('closeModal')
+    },
+    openModal (context) {
+      context.commit('openModal')
     },
     changeStateOfRightBlock (context) {
       context.commit('changeStateOfRightBlock')
@@ -47,6 +64,12 @@ export default new Vuex.Store({
     },
     IS_ACTIVE_RIGHT_BLOCK (state) {
       return state.isActiveRightBlock
+    },
+    IS_ACTIVE_MODAL (state) {
+      return state.isActiveModal
+    },
+    NAME_ACTIVE_MODAL (state) {
+      return state.nameActiveModal
     }
   }
 })

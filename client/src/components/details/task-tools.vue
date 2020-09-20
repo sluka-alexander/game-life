@@ -55,6 +55,7 @@ export default {
     }
   }
   &__text {
+    font-weight: $weight-light;
     margin-right: 20px;
   }
 }

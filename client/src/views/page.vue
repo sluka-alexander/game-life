@@ -47,7 +47,6 @@ export default {
   .page {
     &__top-menu {
       @extend %flex;
-
       justify-content: flex-end;
       align-items: flex-end;
      }

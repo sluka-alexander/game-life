@@ -17,7 +17,6 @@
 
   &__icon {
     @include size(40px);
-
     @extend %flex-center;
     font-size: $icon-size-L;
     color: $lilac;
@@ -36,10 +35,10 @@
     text-transform: capitalize;
     overflow: hidden;
     position: relative;
-    font-size: 14px;
+    font-size: $font-size-XS;
     line-height: 16px;
     transition: all 0.2s ease-in-out;
-    font-weight: 500;
+    font-weight: $weight-regular;
 
     &_active {
       max-width: 150px;

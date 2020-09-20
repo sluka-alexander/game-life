@@ -6,6 +6,7 @@
       </div>
     </div>
     <div class="left-menu__items">
+      <left-menu-item :item="'home'"></left-menu-item>
       <div v-for="item in items" v-bind:key="item">
         <left-menu-item :item="item"></left-menu-item>
       </div>
@@ -25,7 +26,7 @@ export default {
   },
   data () {
     return {
-      items: ['tasks', 'adventure', 'rules', 'progress', 'achievement']
+      items: ['tasks', 'adventure', 'rules', 'progress']
     }
   },
   methods: {

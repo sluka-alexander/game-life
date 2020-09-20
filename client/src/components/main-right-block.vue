@@ -67,9 +67,11 @@ export default {
   background-color: $white;
   padding: 30px;
   transition: 0.3s;
-  z-index: 5;
+  z-index: 3;
+  box-shadow: rgb(255, 255, 255) 0 80px 0, rgba(9, 30, 66, 0.08) -5px -2px 7px;
 
   &_close {
+    box-shadow: none;
     transform: translateX(250px);
   }
 
