@@ -1,6 +1,9 @@
 <template>
   <div class="tasks-panel">
-    <div class="tasks-panel__columns">
+    {{ scrollStart }} {{ maxScrollLeft }}
+    <div class="shadow shadow__left"
+         :class="{ 'shadow__left_active': scrollStart !== 0 }"></div>
+    <div class="tasks-panel__columns" ref="columns" v-on:scroll="handleScroll(this)">
       <div class="tasks-panel__column">
         <div class="tasks-panel__top-part">
           <div class="tasks-panel__column-name">{{ scrollPosition }}</div>
@@ -111,6 +114,10 @@
         <input class="tasks-panel__input">
       </div>
     </div>
+    <div class="shadow shadow__right"
+         :class="{ 'shadow__right_active': maxScrollLeft !== scrollStart ||
+    !scrollStart}">
+    </div>
   </div>
 </template>
 
@@ -130,16 +137,21 @@ export default {
     return {
       isActiveCheckbox: true,
       isActiveItemTools: false,
-      scrollPosition: null
+      scrollPosition: null,
+      scrollStart: 0,
+      maxScrollLeft: 0
     }
   },
   methods: {
-    updateScroll () {
-      this.scrollPosition = window.scrollY
+    handleScroll () {
+      setTimeout(() => {
+        this.scrollStart = Math.floor(this.$refs.columns.scrollLeft)
+        this.maxScrollLeft = Math.floor(this.$refs.columns.scrollWidth - this.$refs.columns.clientWidth)
+      }, 0)
     }
   },
-  mounted () {
-    window.addEventListener('scroll', this.updateScroll)
+  created () {
+    this.handleScroll()
   }
 }
 </script>
@@ -153,7 +165,6 @@ export default {
     position: relative;
     overflow-x: hidden;
     overflow-y: hidden;
-    width: 100%;
 
     &__column-name {
       text-align: center;
@@ -267,22 +278,26 @@ export default {
       right: 0;
     }
     .shadow {
-      width: 10px;
+      width: 30px;
       height: 100%;
       position: absolute;
       z-index: 2;
       background-color: $color-bgc;
-      &_right {
-        right: 0;
-        box-shadow: rgb(255, 255, 255) 0 80px 0, rgba(9, 30, 66, 0.08) -5px -2px 7px;
-      }
-      &_left {
-        left: 0;
-        box-shadow: rgb(255, 255, 255) 0 80px 0, rgba(9, 30, 66, 0.08) 5px -2px 7px;
-      }
+      transition: 0.1s;
+      margin-bottom: 10px;
+      &__right {
+        right: -30px;
 
-      &_active {
-        box-shadow: none;
+        &_active {
+          box-shadow: rgb(255, 255, 255) 0 80px 0, rgba(9, 30, 66, 0.08) -5px -2px 7px;
+        }
+      }
+      &__left {
+        left: -30px;
+
+        &_active {
+          box-shadow: rgb(255, 255, 255) 0 80px 0, rgba(9, 30, 66, 0.08) 5px -2px 7px;
+        }
       }
     }
   }

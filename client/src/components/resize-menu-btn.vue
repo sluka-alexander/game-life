@@ -43,11 +43,11 @@ export default {
       @include size(20px);
 
       transform: rotate(-90deg);
-      margin-left: 2px;
+      margin-left: 1px;
 
       &_active {
         transform: rotate(90deg);
-        margin-left: -2px;
+        margin-left: -1px;
       }
     }
   }
