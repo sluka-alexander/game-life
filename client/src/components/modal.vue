@@ -51,7 +51,7 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(32, 37, 59, 0.7);
+      background-color: $blackout;
       transition: opacity 0.3s ease;
     }
 
@@ -62,7 +62,7 @@ export default {
       overflow-y: auto;
       max-height: 80vh;
       position: relative;
-      padding: 30px;
+      padding: 16px;
       margin: 0 30px;
       background-color: $white;
       border-radius: 5px;
@@ -75,7 +75,7 @@ export default {
       top: 15px;
       right: 15px;
       cursor: pointer;
-      font-size: $icon-size-M;
+      font-size: $icon-size-S * 1.2;
 
       &:hover {
         color: $color-main;

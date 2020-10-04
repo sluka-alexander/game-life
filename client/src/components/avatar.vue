@@ -1,15 +1,20 @@
 <template>
   <div class="avatar-block">
     <div class="avatar-block__avatar">
-      SA
+      {{ userName.slice(0, 2).toUpperCase() }}
     </div>
-    <div class="avatar-block__name">Sluka Alexander</div>
+    <div class="avatar-block__name">{{ userName }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'avatar'
+  name: 'avatar',
+  computed: {
+    userName: function () {
+      return this.$store.getters.USER_DATA.name
+    }
+  }
 }
 </script>
 
@@ -17,7 +22,7 @@ export default {
 @import "../views/styles/common/index";
 
   .avatar-block {
-    font-size: $font-size-L;
+    font-size: $font-size-S;
 
     &__avatar {
       @extend %flex-center;
@@ -43,7 +48,7 @@ export default {
     }
 
     &__name {
-      font-weight: $weight-semi-bold;
+      font-weight: $weight-extra-bold;
       margin: 0 auto;
       text-align: center;
     }

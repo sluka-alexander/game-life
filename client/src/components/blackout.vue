@@ -19,7 +19,7 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(32, 37, 59, 0.7);
+    background-color: $blackout;
   }
 
 </style>

@@ -5,11 +5,11 @@
       <div class="task-tools__text">Edit</div>
     </div>
     <div class="task-tools__item">
-      <div class="task-tools__icon icon-arrow-right" style="transform: rotate(-90deg)"></div>
+      <div class="task-tools__icon icon-right-arrow-2" style="transform: rotate(-90deg)"></div>
       <div class="task-tools__text">Up</div>
     </div>
     <div class="task-tools__item">
-      <div class="task-tools__icon icon-arrow-right" style="transform: rotate(90deg)"></div>
+      <div class="task-tools__icon icon-right-arrow-2" style="transform: rotate(90deg)"></div>
       <div class="task-tools__text">Down</div>
     </div>
     <div class="task-tools__item">

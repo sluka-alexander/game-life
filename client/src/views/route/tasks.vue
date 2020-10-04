@@ -1,13 +1,13 @@
 <template>
-  <div class="task-page">
-    <div class="task-page__img">
-    </div>
+  <div class="task-page" id="task-page">
+    <div class="title">{{ $t('items.tasks') }}</div>
     <div class="top-part">
       <search></search>
       <modal v-if="isActiveModal">
         <create-task-modal></create-task-modal>
       </modal>
       <dropdown-create-tasks></dropdown-create-tasks>
+      <tabs></tabs>
     </div>
     <tasks-panel></tasks-panel>
   </div>
@@ -18,6 +18,7 @@ import search from '@/components/search'
 import dropdownCreateTasks from '@/components/dropdown-create-tasks'
 import tasksPanel from '@/components/tasks-panel.vue'
 import modal from '@/components/modal'
+import tabs from '@/components/tabs'
 
 import createTaskModal from '@/components/modals/create-task-modal.vue'
 
@@ -33,7 +34,8 @@ export default {
     dropdownCreateTasks,
     tasksPanel,
     modal,
-    createTaskModal
+    createTaskModal,
+    tabs
   },
 
   computed: {

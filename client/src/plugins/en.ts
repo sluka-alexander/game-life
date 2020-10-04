@@ -1,10 +1,29 @@
 export default {
   form: {
+    inputName: {
+      email: 'Email',
+      password: 'Password',
+      confirmPassword: 'Confirm password',
+      nameUser: 'Name'
+    },
+    placeholder: {
+      enterYour: 'Enter your',
+      enter: 'Enter'
+    },
     error: {
       required: 'The field must not be empty',
       minLength: 'Should be less than {action} characters',
       maxLength: 'Should be more than {action} characters',
-      email: 'Please, enter correct email'
+      email: 'Please, enter correct email',
+      notMatch: 'Passwords mismatch',
+      alreadyExist: 'An account with this email is already registered',
+      notCorrectDataL: 'Incorrect login or password'
+    },
+    link: {
+      notAccount: 'Don\'t have an account?',
+      haveAccount: 'Have an account?',
+      signIn: 'Sign in now',
+      signUp: 'Sign up now'
     }
   },
 
@@ -23,69 +42,13 @@ export default {
     rules: 'Rules',
     logout: 'Logout'
   },
-
-  titles: {
-    nameOfTask: 'Name of task',
-    levelOfDifficulty: 'level of difficulty',
-    category: 'Category',
-    desc: 'Description',
-    amountOfDays: 'amount of days'
-  },
-
-  category: {
-    arts: 'Arts',
-    careerAndFinances: 'Career & Finances',
-    healthAndFitness: 'Health & Fitness',
-    reading: 'Reading',
-    foodAndCooking: 'Food & Cooking',
-    houseHold: 'House hold',
-    travel: 'Travel',
-    schoolAndLearning: 'School & Learning',
-    fun: 'Fun',
-    mental: 'Mental',
-    humanity: 'Humanity',
-    outDoors: 'Outdoors'
-  },
-
-  btn: {
-    create: 'Create',
-    signIn: 'Sign In'
-  },
-
-  lang: {
-    ru: 'Russian',
-    en: 'English'
-  },
-
-  input: {
-    email: 'Email',
-    password: 'Password'
-  },
-
-  select: {
-    placeholder: 'Select'
-  },
-
-  validate: {
-    emptyField: 'Empty field'
-  },
-
   home: {
-    title: 'Upgrade {break} yourself  in real {break} life',
-    subtitle: 'Create missions {break} for a day and watch {break} your progress'
+    btn: 'Get started',
+    rules: 'I want to read the rules'
   },
-
   level: {
     title: 'Level:',
-    subtitle: 'Experience:',
+    subtitle: 'Skill:',
     xp: 'XP'
-  },
-  rubies: {
-    title: {
-      youHave: 'You have:',
-      rubies: 'of rubies'
-    },
-    subtitle: 'For rubies, you can buy {break} various things in the store',
-    routeStore: 'Go to store'
   }
 }

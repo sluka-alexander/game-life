@@ -14,15 +14,16 @@ export default {
 @import "../views/styles/common/index";
 
 .dropdown-menu {
-  font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
+  font-size: $font-size-XS;
+  font-family: 'Open Sans', sans-serif;
   position: absolute;
   top: 100%;
   margin-top: 5px;
   right: 0;
   left: auto;
-  border-radius: 5px;
-  box-shadow: 0 1px 8px rgba(0,0,0,.25);
+  border-radius: 3px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+  rgba(9, 30, 66, 0.31) 0px 0px 1px;
   z-index: 15;
   background-color: $white;
   user-select: none;

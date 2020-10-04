@@ -1,33 +1,61 @@
 @import "../common/index";
 
-.input-form {
-  @include size(100%, 35px);
-
+.input {
+  max-width: 300px;
+  width: 100%;
   border-radius: 5px;
-  padding: 0 10px;
-  background-color: $gray-lightest;
+  padding: 12px 15px;
+  background-color: $white;
+  border: 1px solid $gray-border;
   transition: 0.2s;
-  font-size: $font-size-XXS;
 
-  &:hover {
-    background-color: $gray-light;
-  }
+  font-size: $font-size-XS;
+
   &:focus {
     background-color: $white;
-    box-shadow: 0 0 5px 1px rgba(69, 67, 221, 0.5);
+    border-color: #B2B2B2;
   }
   &__invalid {
     color: $red;
-    box-shadow: 0 0 5px 1px rgba(236, 37, 36, 0.5);
+    border-color: $red;
 
     &:focus {
-      box-shadow: 0 0 5px 1px rgba(236, 37, 36, 0.5);
+      border-color: $red;
     }
   }
 }
 
 .input-title {
-  font-size: $font-size-XXS;
+  font-size: $font-size-XS;
   font-weight: $weight-semi-bold;
   margin-bottom: 5px;
+}
+.password {
+  position: relative;
+
+  &__control {
+    @extend %flex-center;
+
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    font-size: $icon-size-M;
+    color: $gray-dark;
+    cursor: pointer;
+
+    &_active {
+      color: $black;
+      &:after {
+        content: '';
+        @include size(1px, 17px);
+
+        position: absolute;
+        transform: rotate(45deg);
+        background-color: $black;
+      }
+    }
+  }
 }

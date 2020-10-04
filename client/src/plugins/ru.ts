@@ -1,4 +1,32 @@
 export default {
+  form: {
+    inputName: {
+      email: 'E-mail',
+      password: 'Пароль',
+      confirmPassword: 'Подтвердите пароль',
+      nameUser: 'Имя'
+    },
+    placeholder: {
+      enterYour: 'Введите ваш',
+      enter: 'Введите'
+    },
+    error: {
+      required: 'Поле не должно быть пустым',
+      minLength: 'Должно быть не менее {action} символов',
+      maxLength: 'Должно быть не более {action} символов',
+      email: 'Пожалуйста, введите корректный email',
+      notMatch: 'Пароли не совпадают',
+      alreadyExist: 'Аккаунт с таким email уже существует',
+      notCorrectDataL: 'Некорректный логин или пароль'
+    },
+    link: {
+      notAccount: 'У вас нет аккаунта?',
+      haveAccount: 'У вас есть аккаунт?',
+      signIn: 'Войти сейчас',
+      signUp: 'Зарегистрироваться'
+    }
+  },
+
   items: {
     home: 'Главная',
     newTask: 'Создать миссию',

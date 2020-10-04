@@ -1,34 +1,79 @@
 @import "../common/index";
 
 .form {
+  @extend %flex;
+
+  align-items: center;
+  flex-direction: column;
   background-color: $white;
+  width: 100%;
 
   &__title {
     @extend %flex-center;
 
     position: relative;
     font-size: $font-size-L;
-    font-weight: $weight-bold;
+    font-weight: $weight-extra-bold;
     padding-bottom: 15px;
     margin-bottom: 15px;
-
-    &:after {
-      left: 0;
-      bottom: 0;
-      position: absolute;
-      content: '';
-      @include size(100%, 1px);
-      background-color: $gray;
-    }
+    //
+    //&:after {
+    //  left: 0;
+    //  bottom: 0;
+    //  position: absolute;
+    //  content: '';
+    //  @include size(100%, 1px);
+    //  background-color: $gray;
+    //}
   }
 
   &__widget {
+    max-width: 300px;
+    width: 100%;
     margin-bottom: 15px;
   }
 
+  &__button {
+    max-width: 300px;
+    width: 100%;
+    padding: 12px 15px;
+    background-color: $blue-dark;
+    font-size: $font-size-S;
+    color: $white;
+    margin-top: 17px;
+    border-radius: 4px;
+    font-weight: $weight-semi-bold;
+    cursor: pointer;
+    display: table-cell;
+    vertical-align: middle;
+    transition: 0.2s;
+
+    &__no-active {
+      background-color: $gray;
+      pointer-events: none;
+      color: $gray-dark;
+    }
+    &:active {
+      transition: 0s;
+      background-color: $color-main;
+    }
+  }
   &__error {
-    font-size: $font-size-XXS;
-    padding: 5px 0;
+    font-size: $font-size-XS;
+    padding-top: 5px;
     color: $red;
+  }
+  &__link {
+    @extend %flex-center;
+
+    font-size: $font-size-XS;
+    font-weight: $weight-medium;
+    margin-top: 15px;
+
+    a {
+      font-weight: $weight-bold;
+      color: $color-main;
+      margin-left: 5px;
+    }
   }
 }

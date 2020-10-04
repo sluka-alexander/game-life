@@ -67,14 +67,14 @@ input::placeholder {
 }
 
 .router-link-exact-active {
-  background-color: $blue-dark;
+  background-color: $gray;
   &:hover {
-    background-color: $blue-dark;
+    background-color: $gray;
   }
   .left-menu-item {
     &__icon,
     &__text {
-      color: white;
+      color: $color-main;
     }
   }
 }
@@ -84,10 +84,10 @@ input::placeholder {
 
   position: relative;
   width: 100%;
-  padding: 80px 280px 0 130px;
+  padding: 95px 30px 0 130px;
   transition: 0.3s;
   &_active {
-    padding: 80px 30px 0 130px;
+    padding: 95px 280px 0 130px;
   }
 }
 
@@ -118,4 +118,20 @@ input::placeholder {
 .details-block {
   height: 100%;
   position: relative;
+}
+
+.title {
+  font-size: $font-size-L;
+  padding-bottom: 15px;
+  font-weight: $weight-extra-bold;
+}
+
+.subtitle {
+  font-size: $font-size-XS;
+  margin: 0 auto;
+  font-weight: $weight-medium;
+}
+.center {
+  @extend %flex-center;
+  flex-direction: column;
 }

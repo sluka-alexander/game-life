@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?nu57rj');
-  src:  url('fonts/icomoon.eot?nu57rj#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?nu57rj') format('truetype'),
-    url('fonts/icomoon.woff?nu57rj') format('woff'),
-    url('fonts/icomoon.svg?nu57rj#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?llcerv');
+  src:  url('fonts/icomoon.eot?llcerv#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?llcerv') format('truetype'),
+    url('fonts/icomoon.woff?llcerv') format('woff'),
+    url('fonts/icomoon.svg?llcerv#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,189 +25,246 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-learn:before {
+  content: "\e91c";
+}
+.icon-logout:before {
+  content: "\e922";
+}
+.icon-profile:before {
+  content: "\e900";
+}
+.icon-money:before {
+  content: "\e901";
+}
+.icon-language:before {
+  content: "\e902";
+}
+.icon-language-2:before {
+  content: "\e904";
+}
+.icon-comments:before {
+  content: "\e906";
+}
 .icon-daily:before {
+  content: "\e907";
+}
+.icon-heart:before {
+  content: "\e908";
+}
+.icon-view:before {
+  content: "\e909";
+}
+.icon-right-arrow:before {
+  content: "\e90a";
+}
+.icon-home:before {
+  content: "\e90b";
+}
+.icon-search:before {
+  content: "\e90c";
+}
+.icon-home-2:before {
+  content: "\e90d";
+}
+.icon-adventure:before {
+  content: "\e90e";
+}
+.icon-right-arrow-2:before {
+  content: "\e90f";
+}
+.icon-book:before {
+  content: "\e910";
+}
+.icon-comment-2:before {
+  content: "\e911";
+}
+.icon-check:before {
+  content: "\e912";
+}
+.icon-achievement:before {
+  content: "\e913";
+}
+.icon-awards:before {
+  content: "\e914";
+}
+.icon-moon:before {
+  content: "\e915";
+}
+.icon-moon-filled:before {
+  content: "\e916";
+}
+.icon-habits:before {
+  content: "\e917";
+}
+.icon-home-3:before {
+  content: "\e918";
+}
+.icon-remove:before {
+  content: "\e919";
+}
+.icon-cancel:before {
+  content: "\e91a";
+}
+.icon-delete:before {
+  content: "\e91b";
+}
+.icon-plus:before {
+  content: "\e91d";
+}
+.icon-login:before {
+  content: "\e91e";
+}
+.icon-refresh:before {
+  content: "\e91f";
+}
+.icon-gift:before {
+  content: "\e920";
+}
+.icon-piggy-bank:before {
+  content: "\e921";
+}
+.icon-fun:before {
+  content: "\e923";
+}
+.icon-sport:before {
+  content: "\e924";
+}
+.icon-travel:before {
+  content: "\e925";
+}
+.icon-access:before {
+  content: "\e926";
+}
+.icon-progress:before {
+  content: "\e927";
+}
+.icon-progress-2:before {
+  content: "\e928";
+}
+.icon-art:before {
+  content: "\e929";
+}
+.icon-culture:before {
+  content: "\e92a";
+}
+.icon-bell:before {
+  content: "\e92b";
+}
+.icon-intellect:before {
+  content: "\e92c";
+}
+.icon-strength:before {
+  content: "\e92d";
+}
+.icon-humanity:before {
+  content: "\e92e";
+}
+.icon-goal:before {
+  content: "\e92f";
+}
+.icon-rocket:before {
+  content: "\e930";
+}
+.icon-career:before {
+  content: "\e931";
+}
+.icon-travel-2:before {
+  content: "\e932";
+}
+.icon-star:before {
+  content: "\e933";
+}
+.icon-star-filled:before {
+  content: "\e934";
+}
+.icon-star-2:before {
+  content: "\e935";
+}
+.icon-star-2-filled:before {
+  content: "\e936";
+}
+.icon-fire:before {
+  content: "\e937";
+}
+.icon-fire-filled:before {
+  content: "\e938";
+}
+.icon-minus:before {
+  content: "\e939";
+}
+.icon-plus-2:before {
+  content: "\e93a";
+}
+.icon-more-2:before {
+  content: "\e93b";
+}
+.icon-more-1:before {
+  content: "\e93c";
+}
+.icon-more:before {
+  content: "\e93d";
+}
+.icon-clapping:before {
+  content: "\e93f";
+}
+.icon-target:before {
+  content: "\e940";
+}
+.icon-check-2:before {
+  content: "\e941";
+}
+.icon-select:before {
+  content: "\e942";
+}
+.icon-warning:before {
+  content: "\e943";
+}
+.icon-cook:before {
+  content: "\e944";
+}
+.icon-mental:before {
+  content: "\e945";
+}
+.icon-outdoor:before {
+  content: "\e949";
+}
+.icon-rules:before {
+  content: "\e94a";
+}
+.icon-clear:before {
+  content: "\e94b";
+}
+.icon-charisma:before {
+  content: "\e94c";
+}
+.icon-social:before {
+  content: "\e94d";
+}
+.icon-user-2:before {
+  content: "\e94e";
+}
+.icon-search-2:before {
+  content: "\e94f";
+}
+.icon-swords:before {
+  content: "\e951";
+}
+.icon-sword-2:before {
+  content: "\e952";
+}
+.icon-list:before {
+  content: "\e953";
+}
+.icon-daily-2:before {
   content: "\e903";
 }
 .icon-close:before {
   content: "\e905";
 }
-.icon-arrow-right:before {
+.icon-right:before {
   content: "\e946";
-}
-.icon-delete:before {
-  content: "\e947";
 }
 .icon-edit:before {
   content: "\e948";
-}
-.icon-tasks:before {
-  content: "\e93d";
-}
-.icon-adventure:before {
-  content: "\e93f";
-}
-.icon-book:before {
-  content: "\e941";
-}
-.icon-progress:before {
-  content: "\e943";
-}
-.icon-logout:before {
-  content: "\e944";
-}
-.icon-home:before {
-  content: "\e945";
-}
-.icon-achievement:before {
-  content: "\e900";
-}
-.icon-achievement-confirm:before {
-  content: "\e901";
-}
-.icon-achievement-create:before {
-  content: "\e902";
-}
-.icon-arrow:before {
-  content: "\e904";
-}
-.icon-attention:before {
-  content: "\e906";
-}
-.icon-bag:before {
-  content: "\e907";
-}
-.icon-category-art:before {
-  content: "\e908";
-}
-.icon-category-career:before {
-  content: "\e909";
-}
-.icon-category-cook:before {
-  content: "\e90a";
-}
-.icon-category-fun:before {
-  content: "\e90b";
-}
-.icon-category-household:before {
-  content: "\e90c";
-}
-.icon-category-humanity:before {
-  content: "\e90d";
-}
-.icon-category-learning:before {
-  content: "\e90e";
-}
-.icon-category-mental:before {
-  content: "\e90f";
-}
-.icon-category-mental-1:before {
-  content: "\e910";
-}
-.icon-category-outdoors:before {
-  content: "\e911";
-}
-.icon-category-reading:before {
-  content: "\e912";
-}
-.icon-category-social:before {
-  content: "\e913";
-}
-.icon-category-sport:before {
-  content: "\e914";
-}
-.icon-category-travel:before {
-  content: "\e915";
-}
-.icon-charisma:before {
-  content: "\e916";
-}
-.icon-checkbox:before {
-  content: "\e917";
-}
-.icon-check-tasks:before {
-  content: "\e918";
-}
-.icon-coin:before {
-  content: "\e91a";
-}
-.icon-comment:before {
-  content: "\e91b";
-}
-.icon-culture:before {
-  content: "\e91c";
-}
-.icon-daily1:before {
-  content: "\e91d";
-}
-.icon-dark-theme:before {
-  content: "\e91f";
-}
-.icon-faq:before {
-  content: "\e922";
-}
-.icon-fire:before {
-  content: "\e923";
-}
-.icon-forbidden:before {
-  content: "\e924";
-}
-.icon-gift:before {
-  content: "\e925";
-}
-.icon-habits:before {
-  content: "\e926";
-}
-.icon-humanity:before {
-  content: "\e927";
-}
-.icon-intellect:before {
-  content: "\e928";
-}
-.icon-level-up:before {
-  content: "\e929";
-}
-.icon-login:before {
-  content: "\e92a";
-}
-.icon-minus:before {
-  content: "\e92c";
-}
-.icon-money:before {
-  content: "\e92d";
-}
-.icon-money-1:before {
-  content: "\e92e";
-}
-.icon-more:before {
-  content: "\e92f";
-}
-.icon-plus:before {
-  content: "\e930";
-}
-.icon-progress-active:before {
-  content: "\e931";
-}
-.icon-repeat:before {
-  content: "\e932";
-}
-.icon-rules:before {
-  content: "\e933";
-}
-.icon-search:before {
-  content: "\e934";
-}
-.icon-skills:before {
-  content: "\e935";
-}
-.icon-store:before {
-  content: "\e936";
-}
-.icon-strength:before {
-  content: "\e937";
-}
-.icon-user:before {
-  content: "\e939";
-}
-.icon-winner:before {
-  content: "\e93a";
 }

@@ -1,30 +1,46 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
+
+import environment from './environment'
+import endpoints from './endpoints.const'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    status: '',
+    error: '',
+    token: localStorage.getItem('token') || null,
+    isAdmin: false,
+    userData: {},
     isActiveLeftMenu: false,
-    isActiveRightBlock: false,
+    isActiveRightBlock: true,
     isActiveModal: false,
-    nameActiveModal: null,
-    dataUser: {
-      firstName: 'Alexander',
-      lastName: 'Sluka',
-      skills: {
-        strength: 100,
-        intellect: 150,
-        culture: 10
-      }
-    }
+    nameActiveModal: null
   },
   mutations: {
+    errorAuth (state) {
+      state.status = 'ErrorAuth'
+    },
+    successAuth (state, token) {
+      state.status = 'Success Auth'
+      state.token = token
+    },
+    success (state) {
+      state.status = 'Success'
+    },
     changeStateOfLeftMenu (state) {
       state.isActiveLeftMenu = !state.isActiveLeftMenu
     },
     closeOfLeftMenu (state) {
       state.isActiveLeftMenu = false
+    },
+    logout (state) {
+      state.status = ''
+      state.token = null
+      state.isAdmin = false
+      state.userData = {}
     },
     closeModal (state) {
       state.isActiveModal = false
@@ -40,6 +56,50 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    register ({ commit }, user) {
+      return new Promise((resolve, reject) => {
+        axios.post(`${environment.baseUrl}${endpoints.REGISTER}`, user)
+          .then((res: unknown) => {
+            commit('success')
+            resolve(res)
+          }).catch((err: any) => {
+            commit('errorAuth', err)
+            reject(err)
+          })
+      })
+    },
+    login ({ commit }, user) {
+      return new Promise((resolve, reject) => {
+        axios.post(`${environment.baseUrl}${endpoints.LOGIN}`, user)
+          .then(res => {
+            localStorage.setItem('token', res.data.token)
+            commit('successAuth', res.data.token)
+            this.state.userData = res.data.user
+            resolve(res)
+          })
+          .catch(err => {
+            commit('errorAuth', err)
+            localStorage.removeItem('token')
+            reject(err)
+          })
+      })
+    },
+    logout ({ commit }) {
+      commit('logout')
+      localStorage.removeItem('token')
+    },
+    getDataUser ({ dispatch, commit }) {
+      return axios.post(`${environment.baseUrl}${endpoints.USERDATA}`, null,
+        { headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` } })
+        .then(res => {
+          commit('success')
+          this.state.userData = res.data.user
+          console.log(this.state.userData)
+        }).catch(() => {
+          commit('error')
+        })
+    },
+
     changeStateOfLeftMenu (context) {
       context.commit('changeStateOfLeftMenu')
     },
@@ -59,6 +119,12 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
+    USER_DATA: (state) => {
+      return state.userData
+    },
+    IS_LOGGED_IN: (state) => {
+      return !!state.token
+    },
     IS_ACTIVE_LEFT_MENU (state) {
       return state.isActiveLeftMenu
     },

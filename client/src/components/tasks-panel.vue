@@ -1,9 +1,8 @@
 <template>
-  <div class="tasks-panel">
-<!--    {{ scrollStart }} {{ maxScrollLeft }}-->
-    <div class="shadow shadow__left"
-         :class="{ 'shadow__left_active': scrollStart !== 0 }"></div>
-    <div class="tasks-panel__columns" ref="columns" v-on:scroll="handleScroll(this)">
+  <div class="tasks-panel" ref="panel">
+    <div class="shadow shadow__left"></div>
+    <div class="tasks-panel__columns" ref="columns" v-on:scroll="handleScroll(this)"
+    id="columns">
       <div class="tasks-panel__column">
         <div class="tasks-panel__top-part">
           <div class="tasks-panel__column-name">{{ scrollPosition }}</div>
@@ -33,90 +32,11 @@
               </details-menu>
             </div>
           </div>
-          <div class="tasks-panel__item">
-            <div class="tasks-panel__item-main-part">
-              <checkbox :isActiveCheckbox="isActiveCheckbox"
-                        v-on:click.native="isActiveCheckbox = !isActiveCheckbox"></checkbox>
-              <div class="tasks-panel__item-icon-level icon-fire"></div>
-              <div class="tasks-panel__item-name-and-desc">
-                <div class="tasks-panel__item-name">Task 1
-                </div>
-                <div class="tasks-panel__item-desc">FFFFFFFFFFF SSSSddddddddddddddddddfffffffff
-                  ffffffffffffffffffff
-                </div>
-              </div>
-            </div>
-            <div class="details-block details-more">
-              <div class="tasks-panel__item-more icon-more"
-                   :class="{ 'tasks-panel__item-more_active': isActiveItemTools}"
-                   @click="isActiveItemTools = !isActiveItemTools">
-              </div>
-              <details-menu v-if="isActiveItemTools">
-                <task-tools></task-tools>
-              </details-menu>
-            </div>
-          </div>
-          <div class="tasks-panel__item">
-            <div class="tasks-panel__item-main-part">
-              <checkbox :isActiveCheckbox="isActiveCheckbox"
-                        v-on:click.native="isActiveCheckbox = !isActiveCheckbox"></checkbox>
-              <div class="tasks-panel__item-icon-level icon-fire"></div>
-              <div class="tasks-panel__item-name-and-desc">
-                <div class="tasks-panel__item-name">Task 1
-                </div>
-                <div class="tasks-panel__item-desc">FFFFFFFFFFF SSSSddddddddddddddddddfffffffff
-                  ffffffffffffffffffff
-                </div>
-              </div>
-            </div>
-            <div class="details-block details-more">
-              <div class="tasks-panel__item-more icon-more"
-                   :class="{ 'tasks-panel__item-more_active': isActiveItemTools}"
-                   @click="isActiveItemTools = !isActiveItemTools">
-              </div>
-              <details-menu v-if="isActiveItemTools">
-                <task-tools></task-tools>
-              </details-menu>
-            </div>
-          </div>
-          <div class="tasks-panel__item">
-            <div class="tasks-panel__item-main-part">
-              <checkbox :isActiveCheckbox="isActiveCheckbox"
-                        v-on:click.native="isActiveCheckbox = !isActiveCheckbox"></checkbox>
-              <div class="tasks-panel__item-icon-level icon-fire"></div>
-              <div class="tasks-panel__item-name-and-desc">
-                <div class="tasks-panel__item-name">Task 1
-                </div>
-                <div class="tasks-panel__item-desc">FFFFFFFFFFF SSSSddddddddddddddddddfffffffff
-                  ffffffffffffffffffff
-                </div>
-              </div>
-            </div>
-            <div class="details-block details-more">
-              <div class="tasks-panel__item-more icon-more"
-                   :class="{ 'tasks-panel__item-more_active': isActiveItemTools}"
-                   @click="isActiveItemTools = !isActiveItemTools">
-              </div>
-              <details-menu v-if="isActiveItemTools">
-                <task-tools></task-tools>
-              </details-menu>
-            </div>
-          </div>
         </div>
-      </div>
-      <div class="tasks-panel__column">
-        <input class="tasks-panel__input">
-      </div>
-      <div class="tasks-panel__column">
-        <input class="tasks-panel__input">
-      </div>
-      <div class="tasks-panel__column">
-        <input class="tasks-panel__input">
       </div>
     </div>
     <div class="shadow shadow__right"
-         :class="{ 'shadow__right_active': maxScrollLeft !== scrollStart ||
-    !maxScrollLeftg}">
+         :class="{ 'shadow__right_active': maxScrollLeft !== scrollStart }">
     </div>
   </div>
 </template>
@@ -138,20 +58,8 @@ export default {
       isActiveCheckbox: true,
       isActiveItemTools: false,
       scrollPosition: null,
-      scrollStart: 0,
-      maxScrollLeft: 0
+      scrollStart: 0
     }
-  },
-  methods: {
-    handleScroll () {
-      setTimeout(() => {
-        this.scrollStart = Math.floor(this.$refs.columns.scrollLeft)
-        this.maxScrollLeft = Math.floor(this.$refs.columns.scrollWidth - this.$refs.columns.clientWidth)
-      }, 0)
-    }
-  },
-  created () {
-    this.handleScroll()
   }
 }
 </script>
@@ -168,7 +76,7 @@ export default {
 
     &__column-name {
       text-align: center;
-      font-size: $font-size-M;
+      font-size: $font-size-S;
       margin-bottom: 10px;
       font-weight: $weight-semi-bold;
     }
@@ -200,10 +108,11 @@ export default {
       min-width: 280px;
       width: 100%;
       background-color: $white;
-      border-radius: 5px;
+      border-radius: 3px;
       padding: 10px;
       margin: 0 10px 10px 0;
       max-height: 100%;
+      border: 1px solid $gray-border;
       &:last-child {
         margin-right: 0;
       }
@@ -217,7 +126,7 @@ export default {
     &__input {
       @include size(100%, 40px);
 
-      background-color: $gray-lightest;
+      background-color: $gray-light;
       border-radius: 5px;
       padding: 0 10px;
       margin-bottom: 10px;
@@ -234,7 +143,7 @@ export default {
     }
     &__item-desc {
       width: 170px;
-      font-size: $font-size-XXS;
+      font-size: $font-size-XS;
       font-weight: $weight-light;
       color: $gray-dark;
       word-wrap: break-word;
@@ -249,7 +158,7 @@ export default {
       cursor: pointer;
 
       &:hover {
-        background-color: $gray-lightest;
+        background-color: $gray-light;
         /*box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);*/
       }
     }

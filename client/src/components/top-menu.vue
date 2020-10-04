@@ -36,13 +36,14 @@ export default {
     justify-content: flex-end;
     align-items: center;
     position: fixed;
-    padding: 0 280px 0 130px;
+    padding: 0 30px 0 130px;
     top: 0;
     z-index: 2;
     transition: 0.3s;
+    border-bottom: 1px solid $gray-border;
 
     &_active {
-      padding: 0 30px 0 130px;
+      padding: 0 280px 0 130px;
     }
   }
 </style>

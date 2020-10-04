@@ -7,8 +7,8 @@
       <div class="left-menu-item__icon">
         <div :class="{
           'icon-category-household': item === 'home',
-          'icon-tasks': item === 'tasks',
-          'icon-adventure': item === 'adventure',
+          'icon-check-2': item === 'tasks',
+          'icon-list': item === 'adventure',
           'icon-rules': item === 'rules',
           'icon-progress': item === 'progress',
           'icon-achievement': item === 'achievement',
@@ -33,7 +33,7 @@
       </div>
     </router-link>
 
-    <div :to="item" class="left-menu-item" v-if="item === 'logout'">
+    <div :to="item" class="left-menu-item" v-if="item === 'logout'" @click="logout">
       <div class="left-menu-item__icon">
         <div :class="{
           'icon-logout': item === 'logout',
@@ -55,6 +55,11 @@ export default {
   methods: {
     closeLeftMenu () {
       this.$store.dispatch('closeOfLeftMenu')
+    },
+    logout () {
+      this.$store.dispatch('logout').then(() => {
+        this.$router.push({ name: 'login' })
+      })
     }
   },
   computed: {

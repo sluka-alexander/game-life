@@ -29,7 +29,8 @@ export default {
 
     @include size(100%, 50px);
     max-width: 400px;
-    border-radius: 15px;
+    border-radius: 3px;
+    border: 1px solid $gray-border;
     background-color: $white;
     margin:0 auto 10px;
     font-size: $font-size-XS;
@@ -42,20 +43,19 @@ export default {
       cursor: pointer;
       transition: 0.3s;
       &:last-child {
-        border-radius: 0 15px 15px 0;
+        border-radius: 0 3px 3px 0;
       }
       &:first-child {
-        border-radius: 15px 0 0 15px;
+        border-radius: 3px 0 0 3px;
       }
       &:hover {
         background-color: $gray-light;
       }
       &_active {
-        color: $white;
-        background-color: $blue-dark;
+        background-color: $gray-border;
 
         &:hover {
-          background-color: $blue-dark;
+          background-color: $gray-border;
         }
       }
     }

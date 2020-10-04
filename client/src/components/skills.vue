@@ -38,6 +38,7 @@ export default {
   .skills {
     &__title {
       font-size: $font-size-S;
+      font-weight: $weight-extra-bold;
       text-align: center;
       margin-bottom: 15px;
 
@@ -49,7 +50,6 @@ export default {
     &__item {
       @extend %flex;
 
-      color: $lilac;
       margin-bottom: 15px;
       font-size: $font-size-XS;
       font-weight: $weight-light;

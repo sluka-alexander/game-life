@@ -1,8 +1,8 @@
 <template>
-  <div class="main-right-block" :class="{ 'main-right-block_close': isActiveRightBlock }">
+  <div class="main-right-block" :class="{ 'main-right-block_close': !isActiveRightBlock }">
     <div class="main-right-block__top-navbar">
       <div class="main-right-block__top-navbar-icon ">
-        <div class="icon-dark-theme">
+        <div class="icon-moon">
         </div>
       </div>
       <div class="main-right-block__top-navbar-icon ">
@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="main-right-block__top-navbar-icon ">
-        <div class="icon-user">
+        <div class="icon-profile">
         </div>
       </div>
     </div>
@@ -53,7 +53,7 @@ export default {
 .icon-rus {
   @extend %img;
 
-  @include size(20px);
+  @include size(16px);
   background-image: url('../views/img/rus.svg');
 }
 
@@ -62,6 +62,7 @@ export default {
 
   overflow-y: auto;
   position: fixed;
+  border-left: 1px solid $gray-border;
   top: 0;
   right: 0;
   background-color: $white;
@@ -83,8 +84,7 @@ export default {
 
   &__top-navbar-icon {
     position: relative;
-    font-size: $icon-size-L;
-    color: $lilac;
+    font-size: $icon-size-M;
     cursor: pointer;
   }
 }

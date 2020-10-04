@@ -28,7 +28,7 @@ export default {
 
     &:before {
       font-family: 'icomoon' !important;
-      content: "\e917";
+      content: "\e912";
     }
 
     &:hover {

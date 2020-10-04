@@ -1,17 +1,24 @@
 @import "../common/index";
 
 .button {
-  padding: 0 15px;
+  display: flex;
+  justify-content: center;
+  max-width: 300px;
+  width: 100%;
+  padding: 12px 15px;
   background-color: $color-main;
-  font-size: $font-size-XS;
+  font-size: $font-size-S;
   color: $white;
-  border-radius: 5px;
-    font-weight: $weight-semi-bold;
-  height: 35px;
+  margin-top: 17px;
+  border-radius: 4px;
+  font-weight: $weight-semi-bold;
   cursor: pointer;
-  display: table-cell;
   vertical-align: middle;
   transition: 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
 
   &__no-active {
     background-color: $gray;

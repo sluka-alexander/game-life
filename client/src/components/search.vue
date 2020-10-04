@@ -2,7 +2,7 @@
   <div class="search">
       <div class="search__tags">
         <div class="search__tags-text">Tags</div>
-        <div class="search__tags-icon_arrow icon-arrow"></div>
+        <div class="search__tags-icon_arrow icon-right-arrow"></div>
       </div>
       <input class="search__input" placeholder="Search..." v-model="searchValue" ref="input">
       <div class="search__icons" :class="{'search__icons_active' : searchValue}">
@@ -39,8 +39,8 @@ export default {
     height: 50px;
     max-width: 400px;
     margin: 0 auto 10px;
-    background-color: $white;
-    border-radius: 15px;
+    background-color: $gray-light;
+    border-radius: 3px;
     padding: 10px 15px;
 
     &__tags {
@@ -48,9 +48,9 @@ export default {
 
       @include size(70px, 100%);
 
+      font-size: $font-size-S;
       align-items: center;
       cursor: pointer;
-      font-size: $font-size-S;
       margin-right: 15px;
 
       &:hover {
@@ -59,9 +59,10 @@ export default {
       &:after {
         @include size(1px, 30px);
         content: '';
+        pointer-events: none;
         transform: translateX(70px);
         position: absolute;
-        background-color: $gray;
+        background-color: $gray-dark;
       }
     }
 
@@ -71,12 +72,14 @@ export default {
 
     &__tags-icon_arrow {
       font-size: 10px;
+      transform: rotate(90deg);
     }
 
     &__input {
-      padding: 0 15px;
-      width: 100%;
       font-size: $font-size-S;
+      padding: 0 35px;
+      width: 100%;
+      background-color: $gray-light;
     }
 
     &__icons {
@@ -103,7 +106,7 @@ export default {
 
     &__icon {
       @include size(35px, 20px);
-      font-size: 15px;
+      font-size: 16px;
       transition: 0.3s;
 
       &_clear {
@@ -122,7 +125,7 @@ export default {
           content: '';
           transform: translateX(35px);
           position: absolute;
-          background-color: $gray;
+          background-color: $gray-dark;
         }
 
         &_active {

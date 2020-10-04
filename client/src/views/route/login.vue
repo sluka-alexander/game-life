@@ -1,12 +1,19 @@
 <template>
-  <div class="login">
-    Login
-  </div>
+  <welcome-page>
+    <form-login></form-login>
+  </welcome-page>
 </template>
 
 <script>
+import welcomePage from '@/components/welcome-page.vue'
+import formLogin from '@/components/forms/form-login.vue'
+
 export default {
-  name: 'login'
+  name: 'login',
+  components: {
+    welcomePage,
+    formLogin
+  }
 }
 </script>
 

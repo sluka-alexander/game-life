@@ -1,6 +1,6 @@
 <template>
     <div class="resize-btn">
-      <div class="resize-btn__icon icon-arrow"
+      <div class="resize-btn__icon icon-right-arrow"
            :class="{ 'resize-btn__icon_active': isActiveRightBlock }"></div>
     </div>
 </template>
@@ -24,13 +24,12 @@ export default {
 
     @include size(24px);
 
-    font-size: 8px;
+    font-size: 9px;
     background-color: $white;
     border-radius: 50px;
     cursor: pointer;
     transition: 0.2s;
     box-shadow: rgba(9, 30, 66, 0.08) 0 2px 4px 1px;
-    color: rgb(107, 119, 140);
 
     &:hover {
       color: $white;
@@ -41,13 +40,12 @@ export default {
       @extend %flex-center;
 
       @include size(20px);
-
-      transform: rotate(-90deg);
-      margin-left: 1px;
+      margin-left: -2px;
+      transform: rotate(-180deg);
 
       &_active {
-        transform: rotate(90deg);
-        margin-left: -1px;
+        transform: rotate(0deg);
+        margin-left: 2px;
       }
     }
   }

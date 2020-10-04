@@ -27,7 +27,7 @@ export default {
     padding: $margin-standard 0;
 
     &__title {
-      font-size: $font-size-S;
+      font-size: $font-size-XS;
       text-align: center;
       margin-bottom: 5px;
     };

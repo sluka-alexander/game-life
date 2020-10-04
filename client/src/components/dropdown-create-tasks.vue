@@ -11,7 +11,7 @@
           <div class="dropdown-create-tasks__item icon-habits"
                @click="openModal('habits')"
                data-tooltip="Habit"></div>
-          <div class="dropdown-create-tasks__item icon-check-tasks"
+          <div class="dropdown-create-tasks__item icon-check"
                @click="openModal('tasks')"
                data-tooltip="Task"></div>
         </div>
@@ -20,7 +20,7 @@
           <div class="dropdown-create-tasks__item icon-daily"
                @click="openModal('daily')"
                data-tooltip="Daily chore"></div>
-          <div class="dropdown-create-tasks__item icon-achievement-create"
+          <div class="dropdown-create-tasks__item icon-awards"
                @click="openModal('awards')"
                data-tooltip="Award"></div>
         </div>
@@ -63,7 +63,8 @@ export default {
       @include size(250px, 50px);
 
       background-color: $white;
-      border-radius: 15px;
+      border-radius: 50px;
+      border: 1px solid $gray-border;
       transition: 0.3s;
       max-width: 0;
 
@@ -109,7 +110,7 @@ export default {
       position: absolute;
       font-size: $icon-size-M;
       color: $white;
-      border-radius: 15px;
+      border-radius: 50px;
       background-color: $color-main;
       z-index: 1;
       transition: 0.3s;
