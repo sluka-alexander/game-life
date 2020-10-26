@@ -33,6 +33,7 @@ export default {
     @extend %flex;
 
     @include size(100%, 80px);
+    background-color: $white;
     justify-content: flex-end;
     align-items: center;
     position: fixed;

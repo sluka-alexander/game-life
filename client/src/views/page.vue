@@ -20,6 +20,11 @@ import mainRightBlock from '@/components/main-right-block.vue'
 
 export default {
   name: 'page',
+  data () {
+    return {
+      f: false
+    }
+  },
   components: {
     leftMenu,
     mainRightBlock,

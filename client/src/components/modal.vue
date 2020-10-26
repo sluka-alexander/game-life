@@ -2,7 +2,7 @@
   <transition name="modal">
     <div class="modal__mask">
       <div class="modal__container" ref="container">
-        <div class="modal__close icon-close" @click="closeModal"></div>
+        <div class="modal__close icon-close" @mouseup="closeModal"></div>
           <slot></slot>
       </div>
     </div>
@@ -29,11 +29,11 @@ export default {
   },
   created () {
     setTimeout(() => {
-      document.addEventListener('click', this.closeModalOutside)
+      document.addEventListener('mousedown', this.closeModalOutside)
     }, 300)
   },
   destroyed () {
-    document.removeEventListener('click', this.closeModalOutside)
+    document.removeEventListener('mousedown', this.closeModalOutside)
   }
 
 }

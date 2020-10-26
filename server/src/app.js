@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const key = require('../keys/keys');
 const userRouter = require('../routes/users');
+const taskRouter = require('../routes/tasks');
 
 mongoose.set('useCreateIndex', true);
 
@@ -25,6 +26,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/user', userRouter);
+app.use('/task', taskRouter);
 
 app.get('/', (req,res)=> {
     res.send('welcome');

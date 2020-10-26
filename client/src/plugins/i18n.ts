@@ -6,7 +6,7 @@ import ru from './ru'
 Vue.use(VueI18n)
 
 export default {
-  locale: 'en',
+  locale: 'ru',
   fallbackLocale: 'en',
   messages: {
     en,

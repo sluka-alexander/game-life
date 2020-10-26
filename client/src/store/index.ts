@@ -73,8 +73,8 @@ export default new Vuex.Store({
         axios.post(`${environment.baseUrl}${endpoints.LOGIN}`, user)
           .then(res => {
             localStorage.setItem('token', res.data.token)
-            commit('successAuth', res.data.token)
             this.state.userData = res.data.user
+            console.log('норм')
             resolve(res)
           })
           .catch(err => {
@@ -88,18 +88,27 @@ export default new Vuex.Store({
       commit('logout')
       localStorage.removeItem('token')
     },
-    getDataUser ({ dispatch, commit }) {
+    getDataUser ({ commit }) {
       return axios.post(`${environment.baseUrl}${endpoints.USERDATA}`, null,
         { headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` } })
         .then(res => {
+          localStorage.setItem('token', res.data.token)
           commit('success')
           this.state.userData = res.data.user
-          console.log(this.state.userData)
         }).catch(() => {
           commit('error')
         })
     },
 
+    createTask ({ commit }, data) {
+      return axios.put(`${environment.baseUrl}${endpoints.NEW_TASK}`, data, {
+        headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
+      }).then(() => {
+        commit('success')
+      }).catch(() => {
+        commit('error')
+      })
+    },
     changeStateOfLeftMenu (context) {
       context.commit('changeStateOfLeftMenu')
     },

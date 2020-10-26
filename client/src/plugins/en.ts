@@ -1,4 +1,20 @@
 export default {
+  categories: {
+    art: 'Art',
+    career: 'Career',
+    sport: 'Sport',
+    cooking: 'Cooking',
+    fun: 'Fun',
+    household: 'Household',
+    humanity: 'Humanity',
+    mental: 'Mental',
+    outdoors: 'Outdoors',
+    reading: 'Reading',
+    learning: 'Learning',
+    social: 'Social',
+    travel: 'Travel'
+  },
+
   form: {
     inputName: {
       email: 'Email',

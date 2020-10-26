@@ -19,7 +19,43 @@ const userSchema = new Schema({
         default: 'regular',
         required: true
     },
-    date: {
+    skills: {
+        type: Object,
+        default: {
+            strength: 50,
+            intellect: 60,
+            culture: 70,
+            charisma: 80,
+            humanity: 90,
+        }
+    },
+
+    level: {
+        type: Number,
+        default: 1,
+    },
+
+    tasks: {
+      type: Array,
+      default: []
+    },
+
+    habits: {
+        type: Array,
+        default: []
+    },
+
+    awards: {
+        type: Array,
+        default: []
+    },
+
+    daily: {
+        type: Array,
+        default: []
+    },
+
+    data: {
         type: Date,
         default: Date.now()
     },

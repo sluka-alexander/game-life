@@ -1,16 +1,11 @@
 <template>
-  <div class="register">
+  <div class="create-task">
     <form class="form" @submit="onSubmit">
       <div class="form__title" v-if="nameActiveModal ==='habits'">Create Habit</div>
       <div class="form__title" v-if="nameActiveModal ==='tasks'">Create Task</div>
       <div class="form__title" v-if="nameActiveModal ==='daily'">Create Daily Chores</div>
       <div class="form__title" v-if="nameActiveModal ==='awards'">Create Award</div>
-      <div class="form__widget">
-        <div class="input-title">Name</div>
-        <input type="password" class="input-form" placeholder="Name">
-      </div>
-      <button type="submit" class="button"
-              :class="{'button__no-active': $v.$invalid }">Create</button>
+      <formTask v-if="nameActiveModal ==='tasks'"></formTask>
     </form>
   </div>
 </template>
@@ -19,9 +14,13 @@
 import {
   required, maxLength, email
 } from 'vuelidate/lib/validators'
+import formTask from '../forms/form-task'
 
 export default {
   name: 'create-task-modal',
+  components: {
+    formTask
+  },
   data () {
     return {
       email: null

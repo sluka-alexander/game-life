@@ -49,7 +49,8 @@ router.post('/login', async (req, res) => {
             })
         }
         else {
-            let token = jwt.sign({ id: user.id, name: user.name, role: user.role, email: user.email },
+            let token = jwt.sign({ id: user.id, name: user.name, role: user.role, email: user.email,
+                    skills: user.skills, habits: user.habits, tasks: user.tasks, daily: user.daily, awards: user.awards },
                 'secretKey', { expiresIn: 86400 });
             res.status(200).header('auth-token', token).send({ auth: true, token: token, user: user });
         }
@@ -62,7 +63,50 @@ router.post('/userData', verifyToken, (req, res) => {
             if(err) {
                 res.sendStatus(403);
             } else {
-                res.json({ user: authData, token: req.token });
+                const email = authData.email;
+                User.findOne({ email: email }, (err, user) => {
+                    if(user) {
+                        res.json({ user: user, token: req.token });
+                    }
+                });
+
+            }
+        });
+    } catch (err) {
+        res.sendStatus(500);
+    }
+});
+
+router.put('/newTask', verifyToken, async (req, res) => {
+    try {
+        jwt.verify(req.token, 'secretKey', async (err, authData) => {
+            if(err) {
+                res.sendStatus(403);
+            }
+            else {
+                const email = authData.email;
+                User.findOne({ email: email }, (err, user) => {
+                    if(user) {
+                        let task = {
+                            name: req.body.name,
+                            description: req.body.desc,
+                            difficulty: req.body.difficulty,
+                            category: req.body.category,
+                            price: req.body.price,
+                            xp: req.body.xp,
+                            skills: req.body.skills,
+                            task_id: String(Date.now())
+                        }
+                        user.tasks.push(task);
+                        user.save(err => {
+                            if (err) {
+                                res.sendStatus(500);
+                            } else {
+                                res.sendStatus(200)
+                            }
+                        })
+                    }
+                });
             }
         });
     } catch (err) {

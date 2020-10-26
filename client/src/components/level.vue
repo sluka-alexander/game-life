@@ -1,7 +1,7 @@
 <template>
   <div class="level">
-    <div class="level__title">{{ $t('level.title') }} 6</div>
-    <div class="level__subtitle">{{ $t('level.subtitle') }} 300 {{ $t('level.xp')}}</div>
+    <div class="level__title">level 6</div>
+    <div class="level__subtitle">300{{ $t('level.xp')}}</div>
     <div class="level-scale">
       <div class="level-scale__full">
         <div class="level-scale level-scale__full level-scale__full_user"></div>
@@ -14,6 +14,11 @@
 <script>
 export default {
   name: 'level'
+  // computed: {
+  //   userXP: function () {
+  //     return Object.values(this.$store.getters.USER_DATA.skills).reduce((accumulator, currentValue) => accumulator + currentValue)
+  //   }
+  // }
 }
 </script>
 

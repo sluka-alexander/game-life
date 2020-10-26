@@ -35,8 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="shadow shadow__right"
-         :class="{ 'shadow__right_active': maxScrollLeft !== scrollStart }">
+    <div class="shadow shadow__right">
     </div>
   </div>
 </template>

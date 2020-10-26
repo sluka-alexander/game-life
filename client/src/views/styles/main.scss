@@ -59,6 +59,16 @@ input::placeholder {
   padding: 50px;
 }
 
+select {
+  width: 100%;
+  max-width: 300px;
+  padding: 12px 10px;
+  border-radius: 3px;
+  border: 1px solid $gray-border;
+  font-size: $font-size-XS;
+  margin-bottom: 10px;
+}
+
 @keyframes ripple {
   100% {
     transform: translate(-50%, -50%) scale(100);
@@ -134,4 +144,11 @@ input::placeholder {
 .center {
   @extend %flex-center;
   flex-direction: column;
+}
+
+.tags {
+  font-size: $font-size-XS;
+  input {
+    margin-right: 10px;
+  }
 }

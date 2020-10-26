@@ -1,4 +1,19 @@
 export default {
+  categories: {
+    art: 'Искусство',
+    career: 'Карьера',
+    sport: 'Спорт',
+    cooking: 'Готовка',
+    fun: 'Развлечение',
+    household: 'Уборка',
+    humanity: 'Помощь',
+    mental: 'Ментальность',
+    outdoors: 'Свежий воздух',
+    reading: 'Чтение',
+    learning: 'Учёба',
+    social: 'Общение',
+    travel: 'Путешествие'
+  },
   form: {
     inputName: {
       email: 'E-mail',

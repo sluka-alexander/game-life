@@ -1,6 +1,8 @@
 <template>
-  <welcome v-if="!isLoggedIn"></welcome>
-  <page v-else></page>
+  <div v-if="loadedData">
+    <welcome v-if="!isLoggedIn"></welcome>
+    <page v-else></page>
+  </div>
 </template>
 
 <script>
@@ -12,6 +14,7 @@ export default {
   data () {
     return {
       notAuth: true,
+      loadedData: false,
       token: localStorage.getItem('token')
     }
   },
@@ -25,9 +28,9 @@ export default {
     }
   },
   mounted () {
-    if (this.$store.getters.IS_LOGGED_IN) {
-      this.$store.dispatch('getDataUser')
-    }
+    this.$store.dispatch('getDataUser').then(() => {
+      this.loadedData = true
+    })
   }
 }
 
