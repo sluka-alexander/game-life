@@ -28,9 +28,14 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('getDataUser').then(() => {
+    console.log(this.isLoggedIn)
+    if (this.isLoggedIn) {
+      this.$store.dispatch('getDataUser').then(() => {
+        this.loadedData = true
+      })
+    } else {
       this.loadedData = true
-    })
+    }
   }
 }
 

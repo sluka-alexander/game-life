@@ -9,6 +9,10 @@
       <dropdown-create-tasks></dropdown-create-tasks>
       <div class="tasks">
         <div class="task" v-for="task in userTasks" v-bind:key="task.task_id" :id="'tasks_' + task.task_id">
+          <div class="task-tools">
+            <div :id="task.task_id" class="icon icon-edit" :task="task" @click="openModal('updateTask', task)"></div>
+            <div :id="task.task_id" class="icon icon-delete" @click="deleteTask(task.task_id)"></div>
+          </div>
           <div class="task-name item"> {{ task.name }} </div>
           <div CLASS="task-desc item">{{ task.description }}</div>
           <div class="item">category: {{ task.category }}</div>
@@ -45,13 +49,14 @@ import search from '@/components/search'
 import dropdownCreateTasks from '@/components/dropdown-create-tasks'
 import modal from '@/components/modal'
 
-import createTaskModal from '@/components/modals/create-task-modal.vue'
+import createTaskModal from '@/components/modals/all-modals.vue'
 
 export default {
   name: 'tasks',
   data () {
     return {
-      showModal: true
+      showModal: true,
+      isActiveItemTools: false
     }
   },
   components: {
@@ -67,6 +72,36 @@ export default {
     },
     userTasks: function () {
       return this.$store.getters.USER_DATA.tasks
+    },
+    updateDataTask: function () {
+      return this.$store.getters.UPDATE_TASK
+    }
+  },
+  methods: {
+    deleteTask (id) {
+      let idTask = 0
+      idTask = { id }
+      this.$store.dispatch('deleteTask', idTask)
+        .then(() => {
+          this.$store.dispatch('getDataUser')
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    assignNameModal (nameModal) {
+      this.$store.commit('assignNameModal', nameModal)
+    },
+    openModal (nameModal, data) {
+      this.assignNameModal(nameModal)
+      this.$store.dispatch('openModal')
+      this.$store.commit('modalUpdateDataTask', data)
+      // let idTask = 0
+      // idTask = { id }
+      // this.$store.dispatch('getDataUpdateTask', idTask).then(() => {
+      //   console.log(this.updateDataTask)
+      //   this.$store.dispatch('openModal')
+      // })
     }
   }
 }
@@ -104,11 +139,11 @@ export default {
     width: 100%;
     align-items: center;
     flex-direction: column;
-  }
-  .skills {
-    flex-wrap: wrap;
-    div {
-      margin-right: 20px;
+    .skills {
+      flex-wrap: wrap;
+      div {
+        margin-right: 20px;
+      }
     }
   }
   .task-price {
@@ -148,6 +183,7 @@ export default {
     border: 1px solid $gray-border;
     margin-bottom: 10px;
     padding: 10px 20px;
+    position: relative;
     .task-name {
       font-size: 18px;
       font-weight: $weight-bold;
@@ -156,6 +192,31 @@ export default {
     }
     .item {
       margin-bottom: 8px;
+    }
+  }
+  .task-tools {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    display: flex;
+    font-size: 16px;
+
+    .icon {
+      @extend %flex-center;
+      height: 30px;
+      width: 30px;
+      border-radius: 50px;
+      &:hover {
+        border: 1px solid $gray-border;
+      }
+    }
+    .icon-delete {
+      color: $red;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    .icon-edit {
+      cursor: pointer;
     }
   }
 

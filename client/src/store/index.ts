@@ -13,11 +13,12 @@ export default new Vuex.Store({
     error: '',
     token: localStorage.getItem('token') || null,
     isAdmin: false,
-    userData: {},
     isActiveLeftMenu: false,
     isActiveRightBlock: true,
     isActiveModal: false,
-    nameActiveModal: null
+    nameActiveModal: null,
+    userData: {},
+    updateTask: {}
   },
   mutations: {
     errorAuth (state) {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
     assignNameModal (state, nameModal) {
       state.nameActiveModal = nameModal
     },
+    modalUpdateDataTask (state, data) {
+      state.updateTask = data
+    },
     changeStateOfRightBlock (state) {
       state.isActiveRightBlock = !state.isActiveRightBlock
     }
@@ -74,6 +78,7 @@ export default new Vuex.Store({
           .then(res => {
             localStorage.setItem('token', res.data.token)
             this.state.userData = res.data.user
+            commit('successAuth', res.data.token)
             console.log('норм')
             resolve(res)
           })
@@ -99,7 +104,6 @@ export default new Vuex.Store({
           commit('error')
         })
     },
-
     createTask ({ commit }, data) {
       return axios.put(`${environment.baseUrl}${endpoints.NEW_TASK}`, data, {
         headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
@@ -109,6 +113,35 @@ export default new Vuex.Store({
         commit('error')
       })
     },
+    updateTask ({ commit }, data) {
+      return axios.put(`${environment.baseUrl}${endpoints.UPDATE_TASK}`, data, {
+        headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
+      }).then(() => {
+        commit('success')
+      }).catch(() => {
+        commit('error')
+      })
+    },
+    // getDataUpdateTask ({ commit }, id) {
+    //   return axios.post(`${environment.baseUrl}${endpoints.GET_UPDATE_TASK_DATA}`, id, {
+    //     headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
+    //   }).then(res => {
+    //     commit('success')
+    //     this.state.updateTask = res.data.task
+    //   }).catch(() => {
+    //     commit('error')
+    //   })
+    // },
+    deleteTask ({ commit }, id) {
+      return axios.put(`${environment.baseUrl}${endpoints.DELETE_TASK}`, id, {
+        headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
+      }).then(() => {
+        commit('success')
+      }).catch(() => {
+        commit('error')
+      })
+    },
+
     changeStateOfLeftMenu (context) {
       context.commit('changeStateOfLeftMenu')
     },
@@ -145,6 +178,9 @@ export default new Vuex.Store({
     },
     NAME_ACTIVE_MODAL (state) {
       return state.nameActiveModal
+    },
+    UPDATE_TASK (state) {
+      return state.updateTask
     }
   }
 })

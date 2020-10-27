@@ -6,6 +6,7 @@
       <div class="form__title" v-if="nameActiveModal ==='daily'">Create Daily Chores</div>
       <div class="form__title" v-if="nameActiveModal ==='awards'">Create Award</div>
       <formTask v-if="nameActiveModal ==='tasks'"></formTask>
+      <form-task-update :task="task" v-if="nameActiveModal ==='updateTask'"></form-task-update>
     </form>
   </div>
 </template>
@@ -15,11 +16,16 @@ import {
   required, maxLength, email
 } from 'vuelidate/lib/validators'
 import formTask from '../forms/form-task'
+import formTaskUpdate from '../forms/form-task-update'
 
 export default {
   name: 'create-task-modal',
   components: {
-    formTask
+    formTask,
+    formTaskUpdate
+  },
+  props: {
+    task: String
   },
   data () {
     return {

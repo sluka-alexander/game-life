@@ -99,6 +99,11 @@ export default {
       minLength: minLength(8)
     }
   },
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.IS_LOGGED_IN
+    }
+  },
   methods: {
     onSubmit () {
       const data = {
@@ -108,6 +113,7 @@ export default {
       this.$store.dispatch('login', data)
         .then(() => {
           this.$router.push({ name: 'home' })
+          console.log(this.isLoggedIn)
         })
         .catch(err => {
           this.isValidateCorrect = true

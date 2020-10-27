@@ -113,3 +113,79 @@ router.put('/newTask', verifyToken, async (req, res) => {
         res.sendStatus(500);
     }
 });
+
+router.put('/deleteTask', verifyToken, async (req, res) => {
+    try {
+        jwt.verify(req.token, 'secretKey', async (err, authData) => {
+            if(err) {
+                res.sendStatus(403);
+            }
+            else {
+                const email = authData.email;
+                User.findOne({ email: email }, (err, user) => {
+                    if(user) {
+                        let positionTask = 0;
+                        for (let i = 0; i < user.tasks.length; i++) {
+                            if(user.tasks[i].task_id === req.body.id) {
+                                positionTask = i;
+                            }
+                        }
+                        user.tasks.splice(positionTask, 1);
+                        user.save(err => {
+                            if (err) {
+                                res.sendStatus(500);
+                            } else {
+                                res.sendStatus(200)
+                            }
+                        })
+                    }
+                });
+            }
+        });
+    } catch (err) {
+        res.sendStatus(500);
+    }
+});
+
+router.put('/updateTask', verifyToken, async (req, res) => {
+    try {
+        jwt.verify(req.token, 'secretKey', async (err, authData) => {
+            if(err) {
+                res.sendStatus(403);
+            }
+            else {
+                const email = authData.email;
+                User.findOne({ email: email }, (err, user) => {
+                    if(user) {
+                        let positionTask = 0;
+                        let task = {
+                            name: req.body.name,
+                            description: req.body.desc,
+                            difficulty: req.body.difficulty,
+                            category: req.body.category,
+                            price: req.body.price,
+                            xp: req.body.xp,
+                            skills: req.body.skills,
+                            task_id: req.body.taskId,
+                        }
+                        for (let i = 0; i < user.tasks.length; i++) {
+                            if(user.tasks[i].task_id === req.body.taskId) {
+                                positionTask = i;
+                            }
+                        }
+                        user.tasks.splice(positionTask, 1, task);
+                        user.save(err => {
+                            if (err) {
+                                res.sendStatus(500);
+                            } else {
+                                res.sendStatus(200)
+                            }
+                        })
+                    }
+                });
+            }
+        });
+    } catch (err) {
+        res.sendStatus(500);
+    }
+});
