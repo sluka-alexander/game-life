@@ -1,12 +1,17 @@
 <template>
-    <div class="dropdown-menu">
+    <div class="dropdown-menu" :class="{ 'dropdown-menu_active' : isActive}">
       <slot></slot>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'details-menu'
+  name: 'details-menu',
+  data () {
+    return {
+      isActive: true
+    }
+  }
 }
 </script>
 
@@ -14,6 +19,7 @@ export default {
 @import "../views/styles/common/index";
 
 .dropdown-menu {
+  display: none;
   font-size: $font-size-XS;
   font-family: 'Open Sans', sans-serif;
   position: absolute;
@@ -27,5 +33,8 @@ export default {
   z-index: 15;
   background-color: $white;
   user-select: none;
+  &_active {
+    display: block;
+  }
 }
 </style>

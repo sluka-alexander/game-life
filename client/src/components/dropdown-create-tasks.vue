@@ -9,7 +9,7 @@
         <div class="dropdown-create-tasks__items_left"
              :class="{ 'dropdown-create-tasks__items_left_active': isActiveDropdown }">
           <div class="dropdown-create-tasks__item icon-habits"
-               @click="openModal('habits')"
+               @click="openModal({ name: 'habit', action: 'create' })"
                data-tooltip="Habit"></div>
           <div class="dropdown-create-tasks__item icon-check"
                @click="openModal('tasks')"

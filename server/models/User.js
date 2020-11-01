@@ -22,14 +22,17 @@ const userSchema = new Schema({
     skills: {
         type: Object,
         default: {
-            strength: 50,
-            intellect: 60,
-            culture: 70,
-            charisma: 80,
-            humanity: 90,
+            str: 0,
+            int: 0,
+            cul: 0,
+            cha: 0,
+            hum: 0,
         }
     },
-
+    xp: {
+        type: Number,
+        default: 0,
+    },
     level: {
         type: Number,
         default: 1,
@@ -53,6 +56,10 @@ const userSchema = new Schema({
     daily: {
         type: Array,
         default: []
+    },
+    money: {
+        type: Number,
+        default: 0
     },
 
     data: {

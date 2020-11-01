@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="title">Home</div>
+    <div class="title">{{ $t('items.home') }}</div>
     <div class="center">
       <banner :text="'home'"></banner>
       <router-link to="./tasks"

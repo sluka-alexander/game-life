@@ -1,24 +1,24 @@
 <template>
   <div class="level">
-    <div class="level__title">level 6</div>
-    <div class="level__subtitle">300{{ $t('level.xp')}}</div>
+    <div class="level__title">{{ $t('level.title')}} {{ userData.level }}</div>
+    <div class="level__subtitle">{{ userData.xp }}{{ $t('level.xp')}}</div>
     <div class="level-scale">
       <div class="level-scale__full">
         <div class="level-scale level-scale__full level-scale__full_user"></div>
       </div>
     </div>
-    <div class="level-scale__experience">300XP / 2000XP</div>
+    <div class="level-scale__experience">{{ userData.xp }}{{ $t('level.xp')}} / 2000XP</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'level'
-  // computed: {
-  //   userXP: function () {
-  //     return Object.values(this.$store.getters.USER_DATA.skills).reduce((accumulator, currentValue) => accumulator + currentValue)
-  //   }
-  // }
+  name: 'level',
+  computed: {
+    userData: function () {
+      return this.$store.getters.USER_DATA
+    }
+  }
 }
 </script>
 
@@ -50,6 +50,7 @@ export default {
 
     border-radius: 50px;
     margin-bottom: 10px;
+    transition: 0.3s;
 
     &__full {
       @include size(100%, 100%);
@@ -58,7 +59,7 @@ export default {
       border-radius: 50px;
 
       &_user {
-        @include size(40%, 100%);
+        @include size(30%, 100%);
 
         background-color: $color-main;
       }

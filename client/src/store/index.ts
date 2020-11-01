@@ -16,9 +16,20 @@ export default new Vuex.Store({
     isActiveLeftMenu: false,
     isActiveRightBlock: true,
     isActiveModal: false,
+    isLoading: false,
     nameActiveModal: null,
-    userData: {},
-    updateTask: {}
+    userData: {
+      xp: 0,
+      money: 0,
+      skills: {
+        str: 0,
+        int: 0,
+        cul: 0,
+        cha: 0,
+        hum: 0
+      }
+    },
+    updateElementData: {}
   },
   mutations: {
     errorAuth (state) {
@@ -31,6 +42,46 @@ export default new Vuex.Store({
     success (state) {
       state.status = 'Success'
     },
+    // complete (state, data) {
+    //   if (data.action === 'increase') {
+    //     state.userData.xp += data.xp
+    //     state.userData.money += data.money
+    //     state.userData.skills.str += data.skills.str
+    //     state.userData.skills.int += data.skills.int
+    //     state.userData.skills.cul += data.skills.cul
+    //     state.userData.skills.cha += data.skills.cha
+    //     state.userData.skills.hum += data.skills.hum
+    //   } else {
+    //     state.userData.xp -= data.xp
+    //     state.userData.money -= data.money
+    //     state.userData.skills.str -= data.skills.str
+    //     state.userData.skills.int -= data.skills.int
+    //     state.userData.skills.cul -= data.skills.cul
+    //     state.userData.skills.cha -= data.skills.cha
+    //     state.userData.skills.hum -= data.skills.hum
+    //     if (state.userData.money < 0) {
+    //       state.userData.money = 0
+    //     }
+    //     if (state.userData.xp < 0) {
+    //       state.userData.xp = 0
+    //     }
+    //     if (state.userData.skills.str < 0) {
+    //       state.userData.skills.str = 0
+    //     }
+    //     if (state.userData.skills.int < 0) {
+    //       state.userData.skills.int = 0
+    //     }
+    //     if (state.userData.skills.cul < 0) {
+    //       state.userData.skills.cul = 0
+    //     }
+    //     if (state.userData.skills.cha < 0) {
+    //       state.userData.skills.cha = 0
+    //     }
+    //     if (state.userData.skills.hum < 0) {
+    //       state.userData.skills.hum = 0
+    //     }
+    //   }
+    // },
     changeStateOfLeftMenu (state) {
       state.isActiveLeftMenu = !state.isActiveLeftMenu
     },
@@ -41,7 +92,13 @@ export default new Vuex.Store({
       state.status = ''
       state.token = null
       state.isAdmin = false
-      state.userData = {}
+      state.userData = {
+        str: 0,
+        int: 0,
+        cul: 0,
+        cha: 0,
+        hum: 0
+      }
     },
     closeModal (state) {
       state.isActiveModal = false
@@ -49,11 +106,14 @@ export default new Vuex.Store({
     openModal (state) {
       state.isActiveModal = true
     },
+    loading (state) {
+      state.isLoading = !state.isLoading
+    },
     assignNameModal (state, nameModal) {
       state.nameActiveModal = nameModal
     },
     modalUpdateDataTask (state, data) {
-      state.updateTask = data
+      state.updateElementData = data
     },
     changeStateOfRightBlock (state) {
       state.isActiveRightBlock = !state.isActiveRightBlock
@@ -104,8 +164,8 @@ export default new Vuex.Store({
           commit('error')
         })
     },
-    createTask ({ commit }, data) {
-      return axios.put(`${environment.baseUrl}${endpoints.NEW_TASK}`, data, {
+    create ({ commit }, data) {
+      return axios.put(`${environment.baseUrl}${endpoints.NEW}`, data, {
         headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
       }).then(() => {
         commit('success')
@@ -113,8 +173,8 @@ export default new Vuex.Store({
         commit('error')
       })
     },
-    updateTask ({ commit }, data) {
-      return axios.put(`${environment.baseUrl}${endpoints.UPDATE_TASK}`, data, {
+    update ({ commit }, data) {
+      return axios.put(`${environment.baseUrl}${endpoints.UPDATE}`, data, {
         headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
       }).then(() => {
         commit('success')
@@ -122,18 +182,17 @@ export default new Vuex.Store({
         commit('error')
       })
     },
-    // getDataUpdateTask ({ commit }, id) {
-    //   return axios.post(`${environment.baseUrl}${endpoints.GET_UPDATE_TASK_DATA}`, id, {
-    //     headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
-    //   }).then(res => {
-    //     commit('success')
-    //     this.state.updateTask = res.data.task
-    //   }).catch(() => {
-    //     commit('error')
-    //   })
-    // },
-    deleteTask ({ commit }, id) {
-      return axios.put(`${environment.baseUrl}${endpoints.DELETE_TASK}`, id, {
+    delete ({ commit }, element) {
+      return axios.put(`${environment.baseUrl}${endpoints.DELETE}`, element, {
+        headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
+      }).then(() => {
+        commit('success')
+      }).catch(() => {
+        commit('error')
+      })
+    },
+    complete ({ commit }, data) {
+      return axios.put(`${environment.baseUrl}${endpoints.COMPLETE}`, data, {
         headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
       }).then(() => {
         commit('success')
@@ -179,8 +238,11 @@ export default new Vuex.Store({
     NAME_ACTIVE_MODAL (state) {
       return state.nameActiveModal
     },
-    UPDATE_TASK (state) {
-      return state.updateTask
+    UPDATE_ELEMENT_DATA (state) {
+      return state.updateElementData
+    },
+    IS_LOADING (state) {
+      return state.isLoading
     }
   }
 })

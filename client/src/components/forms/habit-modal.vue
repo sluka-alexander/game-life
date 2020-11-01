@@ -1,6 +1,7 @@
 <template>
-  <form class="form" @submit="onSubmit">
-    <div class="title">{{ $t('form.name.createTask')}}</div>
+  <form class="form">
+    <div v-if="nameActiveModal.action === 'create'" class="title">{{ $t('form.name.createHabit')}}</div>
+    <div v-if="nameActiveModal.action === 'update'" class="title">{{ $t('form.name.updateHabit')}}</div>
     <div class="form__widget">
       <div class="input-title">{{ $t('form.inputName.name')}}</div>
       <input
@@ -63,13 +64,28 @@
       </select>
     </div>
     <div class="form__widget">
+      <div class="input-title">{{ $t('form.inputName.typeHabit')}}</div>
+      <select v-model="typeHabit">
+        <option value="good">{{ $t('main.habits.good')}}</option>
+        <option value="bad">{{ $t('main.habits.bad')}}</option>
+        <option value="both">{{ $t('main.habits.both')}}</option>
+      </select>
+    </div>
+    <div class="form__widget">
       <div class="input-title">{{ $t('form.inputName.category')}}</div>
       <select class="categories" v-model="category">
         <option v-for="category in categories" v-bind:key="category" :value="category">{{ $t('categories.' + category) }}</option>>
       </select>
     </div>
-    <button type="submit" class="form__button"
+    <button v-if="nameActiveModal.action === 'create'" @click="createElement"  class="form__button"
             :class="{'button__no-active': $v.$invalid }">{{ $t('form.btn.create')}}</button>
+    <button v-if="nameActiveModal.action === 'update'" @click="updateElement" class="form__button"
+            :class="{'button__no-active': $v.$invalid ||
+            this.name === this.oldData.name &&
+            this.desc === this.oldData.description &&
+            this.difficulty === this.oldData.difficulty &&
+            this.typeHabit === this.oldData.typeHabit &&
+            this.category === this.oldData.category}">{{ $t('form.btn.update')}}</button>
   </form>
 </template>
 
@@ -82,14 +98,16 @@ import {
 } from 'vuelidate/lib/validators'
 
 export default {
-  name: 'formTask',
+  name: 'habitModal',
   data () {
     return {
       name: null,
       desc: null,
       difficulty: 3,
       category: 'not',
-      categories: []
+      categories: [],
+      typeHabit: 'good',
+      oldData: []
     }
   },
   validations: {
@@ -105,18 +123,42 @@ export default {
     }
   },
   methods: {
-    onSubmit () {
-      const newTask = {
+    createElement () {
+      const newHabit = {
         name: this.name,
         desc: this.desc,
+        typeHabit: this.typeHabit,
         difficulty: this.difficulty,
         category: this.category,
-        price: 20 * this.difficulty,
-        xp: 100 * this.difficulty,
-        skills: skills.calculatedSkill(this.category, this.difficulty),
-        type: 'Task'
+        price: 5 * this.difficulty,
+        xp: 10 * this.difficulty,
+        skills: skills.calculatedSkill(this.category, this.difficulty / 2),
+        type: 'Habit'
       }
-      this.$store.dispatch('create', newTask)
+      this.$store.dispatch('create', newHabit)
+        .then(() => {
+          this.$store.dispatch('getDataUser').then(() => {
+            this.$store.dispatch('closeModal')
+          })
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    updateElement () {
+      const updateData = {
+        name: this.name,
+        desc: this.desc,
+        typeHabit: this.typeHabit,
+        difficulty: this.difficulty,
+        category: this.category,
+        price: 5 * this.difficulty,
+        xp: 10 * this.difficulty,
+        skills: skills.calculatedSkill(this.category, this.difficulty / 2),
+        type: 'Habit',
+        habitId: this.oldData.habit_id
+      }
+      this.$store.dispatch('update', updateData)
         .then(() => {
           this.$store.dispatch('getDataUser')
           this.$store.dispatch('closeModal')
@@ -125,11 +167,31 @@ export default {
           console.error(err)
         })
     },
+    getData () {
+      this.name = this.updateElementData.name
+      this.desc = this.updateElementData.description
+      this.difficulty = this.updateElementData.difficulty
+      this.category = this.updateElementData.category
+      this.typeHabit = this.updateElementData.typeHabit
+
+      this.oldData = this.updateElementData
+    },
     getCategories () {
       this.categories = categories.categories
     }
   },
+  computed: {
+    nameActiveModal () {
+      return this.$store.getters.NAME_ACTIVE_MODAL
+    },
+    updateElementData () {
+      return this.$store.getters.UPDATE_ELEMENT_DATA
+    }
+  },
   mounted () {
+    if (this.nameActiveModal.action === 'update') {
+      this.getData()
+    }
     this.getCategories()
   }
 }

@@ -1,6 +1,10 @@
 <template>
     <div class="top-menu" :class="{ 'top-menu_active': isActiveRightBlock }">
       <div class="left-menu__top-part">
+        <div class="money">
+          <div class="icon-money"></div>
+          {{ userMoney }}
+        </div>
         <resize-menu-btn v-on:click.native="changeStateOfRightBlock"></resize-menu-btn>
       </div>
     </div>
@@ -21,6 +25,9 @@ export default {
   computed: {
     isActiveRightBlock: function () {
       return this.$store.getters.IS_ACTIVE_RIGHT_BLOCK
+    },
+    userMoney: function () {
+      return this.$store.getters.USER_DATA.money
     }
   }
 }
@@ -45,6 +52,19 @@ export default {
 
     &_active {
       padding: 0 280px 0 130px;
+    }
+    .left-menu {
+      &__top-part {
+        font-size: 14px;
+        @extend %flex;
+        .money {
+          @extend %flex-center;
+          margin-right: 10px;
+          .icon-money {
+            margin-right: 10px;
+          }
+        }
+      }
     }
   }
 </style>

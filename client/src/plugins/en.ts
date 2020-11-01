@@ -1,5 +1,34 @@
 export default {
+  main: {
+    categories: 'Category:',
+    difficulty: 'Difficulty:',
+    skillsId: {
+      str: 'str:',
+      int: 'int:',
+      cul: 'cul:',
+      cha: 'cha:',
+      hum: 'hum:'
+    },
+    habits: {
+      good: 'Good habit',
+      bad: 'Bad habit',
+      both: 'Good / Bad'
+    },
+    missing: {
+      tasks: 'You have no tasks',
+      habits: 'You have no habits',
+      dailies: 'You have no dailies',
+      awards: 'You have no awards'
+    },
+    tabs: {
+      habits: 'Habits',
+      tasks: 'Tasks',
+      daily: 'Daily chores',
+      awards: 'Awards'
+    }
+  },
   categories: {
+    not: 'No category',
     art: 'Art',
     career: 'Career',
     sport: 'Sport',
@@ -14,13 +43,31 @@ export default {
     social: 'Social',
     travel: 'Travel'
   },
-
+  lang: {
+    ru: 'Russian',
+    en: 'English'
+  },
   form: {
+    name: {
+      createTask: 'Create task',
+      updateTask: 'Update task',
+      createHabit: 'Create habit',
+      updateHabit: 'Update habit'
+    },
+    btn: {
+      create: 'Create',
+      update: 'Update'
+    },
     inputName: {
       email: 'Email',
       password: 'Password',
       confirmPassword: 'Confirm password',
-      nameUser: 'Name'
+      nameUser: 'Name',
+      name: 'Name',
+      difficulty: 'Difficulty',
+      desc: 'Desc',
+      category: 'Category',
+      typeHabit: 'Type of habit'
     },
     placeholder: {
       enterYour: 'Enter your',
@@ -28,8 +75,8 @@ export default {
     },
     error: {
       required: 'The field must not be empty',
-      minLength: 'Should be less than {action} characters',
-      maxLength: 'Should be more than {action} characters',
+      minLength: 'Should be more than {action} characters',
+      maxLength: 'Should be less than {action} characters',
       email: 'Please, enter correct email',
       notMatch: 'Passwords mismatch',
       alreadyExist: 'An account with this email is already registered',
@@ -62,9 +109,20 @@ export default {
     btn: 'Get started',
     rules: 'I want to read the rules'
   },
+  search: {
+    placeholder: 'Search...'
+  },
   level: {
     title: 'Level:',
     subtitle: 'Skill:',
     xp: 'XP'
+  },
+  skills: {
+    title: 'Skills',
+    str: 'Strength',
+    int: 'Intellect',
+    cul: 'Culture',
+    cha: 'Charisma',
+    hum: 'Humanity'
   }
 }

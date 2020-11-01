@@ -1,10 +1,6 @@
 <template>
   <div class="search">
-      <div class="search__tags">
-        <div class="search__tags-text">Tags</div>
-        <div class="search__tags-icon_arrow icon-right-arrow"></div>
-      </div>
-      <input class="search__input" placeholder="Search..." v-model="searchValue" ref="input">
+      <input class="search__input" :placeholder="$t('search.placeholder')" v-model="searchValue" ref="input">
       <div class="search__icons" :class="{'search__icons_active' : searchValue}">
         <div class="search__icon search__icon_clear icon-close"
         :class="{ 'search__icon_clear_active' : searchValue }" @click="clearInput()"></div>
@@ -41,7 +37,7 @@ export default {
     margin: 0 auto 10px;
     background-color: $gray-light;
     border-radius: 3px;
-    padding: 10px 15px;
+    padding: 10px 25px;
 
     &__tags {
       @extend %flex;
@@ -77,7 +73,7 @@ export default {
 
     &__input {
       font-size: $font-size-S;
-      padding: 0 35px;
+      padding-right: 35px;
       width: 100%;
       background-color: $gray-light;
     }

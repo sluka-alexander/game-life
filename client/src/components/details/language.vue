@@ -1,13 +1,18 @@
 <template>
   <div class="lang">
-    <div class="lang__item">Russian</div>
-    <div class="lang__item">English</div>
+    <div class="lang__item" @click="setLocale('ru')">{{ $t('lang.ru') }}</div>
+    <div class="lang__item" @click="setLocale('en')">{{ $t('lang.en') }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'language'
+  name: 'language',
+  methods: {
+    setLocale (locale) {
+      this.$i18n.locale = locale
+    }
+  }
 }
 </script>
 

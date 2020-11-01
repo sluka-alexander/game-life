@@ -1,13 +1,13 @@
 <template>
   <div class="tabs">
-    <div class="tabs__item" @click="activeTab = 'Habits'"
-         :class="{ 'tabs__item_active': activeTab === 'Habits' }">Habits</div>
-    <div class="tabs__item" @click="activeTab = 'Tasks'"
-         :class="{ 'tabs__item_active': activeTab === 'Tasks' }">Tasks</div>
-    <div class="tabs__item" @click="activeTab = 'Daily'"
-         :class="{ 'tabs__item_active': activeTab === 'Daily' }">Daily chores</div>
-    <div class="tabs__item" @click="activeTab = 'Awards'"
-         :class="{ 'tabs__item_active': activeTab === 'Awards' }">Awards</div>
+    <div class="tabs__item" @click="activeTabMethod('Habits')"
+         :class="{ 'tabs__item_active': activeTab === 'Habits' }">{{ $t('main.tabs.habits') }}</div>
+    <div class="tabs__item" @click="activeTabMethod('Tasks')"
+         :class="{ 'tabs__item_active': activeTab === 'Tasks' }">{{ $t('main.tabs.tasks') }}</div>
+    <div class="tabs__item" @click="activeTabMethod('Daily')"
+         :class="{ 'tabs__item_active': activeTab === 'Daily' }">{{ $t('main.tabs.daily') }}</div>
+    <div class="tabs__item" @click="activeTabMethod('Awards')"
+         :class="{ 'tabs__item_active': activeTab === 'Awards' }">{{ $t('main.tabs.awards') }}</div>
   </div>
 </template>
 
@@ -17,6 +17,12 @@ export default {
   data () {
     return {
       activeTab: 'Habits'
+    }
+  },
+  methods: {
+    activeTabMethod (tab) {
+      this.$emit('activeTabMethods', tab)
+      this.activeTab = tab
     }
   }
 }
@@ -28,10 +34,8 @@ export default {
     @extend %flex;
 
     @include size(100%, 50px);
-    max-width: 400px;
     border-radius: 3px;
-    border: 1px solid $gray-border;
-    background-color: $white;
+    background-color: $gray-light;
     margin:0 auto 10px;
     font-size: $font-size-XS;
 
@@ -42,6 +46,7 @@ export default {
       position: relative;
       cursor: pointer;
       transition: 0.3s;
+      border-bottom: 3px solid $gray;
       &:last-child {
         border-radius: 0 3px 3px 0;
       }
@@ -49,13 +54,14 @@ export default {
         border-radius: 3px 0 0 3px;
       }
       &:hover {
-        background-color: $gray-light;
+        background-color: $gray;
       }
       &_active {
-        background-color: $gray-border;
+        transition: 0s;
+        border-bottom: 3px solid $color-main;
 
         &:hover {
-          background-color: $gray-border;
+          background-color: $gray;
         }
       }
     }

@@ -77,7 +77,7 @@ router.post('/userData', verifyToken, (req, res) => {
     }
 });
 
-router.put('/newTask', verifyToken, async (req, res) => {
+router.put('/new', verifyToken, async (req, res) => {
     try {
         jwt.verify(req.token, 'secretKey', async (err, authData) => {
             if(err) {
@@ -87,17 +87,35 @@ router.put('/newTask', verifyToken, async (req, res) => {
                 const email = authData.email;
                 User.findOne({ email: email }, (err, user) => {
                     if(user) {
-                        let task = {
-                            name: req.body.name,
-                            description: req.body.desc,
-                            difficulty: req.body.difficulty,
-                            category: req.body.category,
-                            price: req.body.price,
-                            xp: req.body.xp,
-                            skills: req.body.skills,
-                            task_id: String(Date.now())
+                        switch (req.body.type) {
+                            case "Task":
+                            let task = {
+                                name: req.body.name,
+                                description: req.body.desc,
+                                difficulty: req.body.difficulty,
+                                category: req.body.category,
+                                price: req.body.price,
+                                xp: req.body.xp,
+                                skills: req.body.skills,
+                                task_id: String(Date.now())
+                            }
+                            user.tasks.push(task);
+                            break;
+                            case "Habit": {
+                                let habit = {
+                                    name: req.body.name,
+                                    description: req.body.desc,
+                                    difficulty: req.body.difficulty,
+                                    typeHabit: req.body.typeHabit,
+                                    category: req.body.category,
+                                    price: req.body.price,
+                                    xp: req.body.xp,
+                                    skills: req.body.skills,
+                                    habit_id: String(Date.now())
+                                }
+                                user.habits.push(habit);
+                            }
                         }
-                        user.tasks.push(task);
                         user.save(err => {
                             if (err) {
                                 res.sendStatus(500);
@@ -114,7 +132,7 @@ router.put('/newTask', verifyToken, async (req, res) => {
     }
 });
 
-router.put('/deleteTask', verifyToken, async (req, res) => {
+router.put('/delete', verifyToken, async (req, res) => {
     try {
         jwt.verify(req.token, 'secretKey', async (err, authData) => {
             if(err) {
@@ -124,13 +142,26 @@ router.put('/deleteTask', verifyToken, async (req, res) => {
                 const email = authData.email;
                 User.findOne({ email: email }, (err, user) => {
                     if(user) {
-                        let positionTask = 0;
-                        for (let i = 0; i < user.tasks.length; i++) {
-                            if(user.tasks[i].task_id === req.body.id) {
-                                positionTask = i;
+                        let position = 0;
+                        switch (req.body.type) {
+                            case "Task":
+                                for (let i = 0; i < user.tasks.length; i++) {
+                                    if(user.tasks[i].task_id === req.body.idElement) {
+                                        position = i;
+                                    }
+                                }
+                                user.tasks.splice(position, 1);
+                                break;
+                            case "Habit": {
+                                for (let i = 0; i < user.habits.length; i++) {
+                                    if(user.habits[i].habit_id === req.body.idElement) {
+                                        position = i;
+                                    }
+                                }
+                                user.habits.splice(position, 1);
+                                break;
                             }
                         }
-                        user.tasks.splice(positionTask, 1);
                         user.save(err => {
                             if (err) {
                                 res.sendStatus(500);
@@ -147,7 +178,7 @@ router.put('/deleteTask', verifyToken, async (req, res) => {
     }
 });
 
-router.put('/updateTask', verifyToken, async (req, res) => {
+router.put('/update', verifyToken, async (req, res) => {
     try {
         jwt.verify(req.token, 'secretKey', async (err, authData) => {
             if(err) {
@@ -157,23 +188,117 @@ router.put('/updateTask', verifyToken, async (req, res) => {
                 const email = authData.email;
                 User.findOne({ email: email }, (err, user) => {
                     if(user) {
-                        let positionTask = 0;
-                        let task = {
-                            name: req.body.name,
-                            description: req.body.desc,
-                            difficulty: req.body.difficulty,
-                            category: req.body.category,
-                            price: req.body.price,
-                            xp: req.body.xp,
-                            skills: req.body.skills,
-                            task_id: req.body.taskId,
-                        }
-                        for (let i = 0; i < user.tasks.length; i++) {
-                            if(user.tasks[i].task_id === req.body.taskId) {
-                                positionTask = i;
+                        let position = 0;
+                        switch (req.body.type) {
+                            case "Task":
+                                let task = {
+                                    name: req.body.name,
+                                    description: req.body.desc,
+                                    difficulty: req.body.difficulty,
+                                    category: req.body.category,
+                                    price: req.body.price,
+                                    xp: req.body.xp,
+                                    skills: req.body.skills,
+                                    task_id: req.body.taskId,
+                                }
+                                for (let i = 0; i < user.tasks.length; i++) {
+                                    if(user.tasks[i].task_id === req.body.taskId) {
+                                        positionTask = i;
+                                    }
+                                }
+                                user.tasks.splice(positionTask, 1, task);
+                                break;
+                            case "Habit": {
+                                let habit = {
+                                    name: req.body.name,
+                                    description: req.body.desc,
+                                    difficulty: req.body.difficulty,
+                                    typeHabit: req.body.typeHabit,
+                                    category: req.body.category,
+                                    price: req.body.price,
+                                    xp: req.body.xp,
+                                    skills: req.body.skills,
+                                    habit_id: req.body.habitId,
+                                }
+                                for (let i = 0; i < user.habits.length; i++) {
+                                    if(user.habits[i].habit_id === req.body.habitId) {
+                                        position = i;
+                                    }
+                                }
+                                user.habits.splice(position, 1, habit);
+                                break;
                             }
                         }
-                        user.tasks.splice(positionTask, 1, task);
+                        user.save(err => {
+                            if (err) {
+                                res.sendStatus(500);
+                            } else {
+                                res.sendStatus(200)
+                            }
+                        })
+                    }
+                });
+            }
+        });
+    } catch (err) {
+        res.sendStatus(500);
+    }
+});
+
+router.put('/complete', verifyToken, async (req, res) => {
+    try {
+        jwt.verify(req.token, 'secretKey', async (err, authData) => {
+            if(err) {
+                res.sendStatus(403);
+            }
+            else {
+                const email = authData.email;
+                User.findOne({ email: email }, (err, user) => {
+                    if(user) {
+                        if(req.body.action === 'increase') {
+                            user.xp += req.body.xp
+                            user.skills = {
+                                str: user.skills.str + req.body.skills.str,
+                                int: user.skills.int + req.body.skills.int,
+                                cul: user.skills.cul + req.body.skills.cul,
+                                cha: user.skills.cha + req.body.skills.cha,
+                                hum: user.skills.hum + req.body.skills.hum,
+                            }
+                            user.money += req.body.money
+                        }
+                        else {
+                            user.xp -= req.body.xp
+                            user.skills = {
+                                str: user.skills.str - req.body.skills.str,
+                                int: user.skills.int - req.body.skills.int,
+                                cul: user.skills.cul - req.body.skills.cul,
+                                cha: user.skills.cha - req.body.skills.cha,
+                                hum: user.skills.hum - req.body.skills.hum,
+                            }
+                            user.money -= req.body.money
+                        }
+                        if(user.money < 0) {
+                            user.money = 0;
+                        }
+                        if(user.xp < 0) {
+                            user.xp = 0;
+                        }
+                        if(user.skills.str < 0) {
+                            user.skills.str = 0;
+                        }
+                        if(user.skills.int < 0) {
+                            user.skills.int = 0;
+                        }
+                        if(user.skills.cul < 0) {
+                            user.skills.cul = 0;
+                        }
+                        if(user.skills.cha < 0) {
+                            user.skills.cha = 0;
+                        }
+                        if(user.skills.hum < 0) {
+                            user.skills.hum = 0;
+                        }
+
                         user.save(err => {
                             if (err) {
                                 res.sendStatus(500);

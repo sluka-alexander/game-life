@@ -7,6 +7,13 @@ export function calculatedSkill (category, difficulty) {
     hum: 0
   }
   switch (category) {
+    case 'not':
+      skills.str = 1
+      skills.int = 1
+      skills.cul = 1
+      skills.cha = 1
+      skills.hum = 1
+      break
     case 'art':
       skills.cul = difficulty * 2
       break

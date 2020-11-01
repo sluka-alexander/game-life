@@ -111,7 +111,7 @@
       </div>
       <div class="form__error"
            v-if="!$v.name.minLength && $v.name.$dirty">
-        <i18n path="form.error.maxLength">
+        <i18n path="form.error.minLength">
           <span place="action">{{ $v.name.$params.minLength.min}}</span>
         </i18n>
       </div>

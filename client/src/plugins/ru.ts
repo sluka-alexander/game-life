@@ -1,5 +1,34 @@
 export default {
+  main: {
+    categories: 'Категория:',
+    difficulty: 'Сложность:',
+    skillsId: {
+      str: 'сил:',
+      int: 'инт:',
+      cul: 'кул:',
+      cha: 'хар:',
+      hum: 'гум:'
+    },
+    habits: {
+      good: 'Полезная привычки',
+      bad: 'Вредная привычки',
+      both: 'Полезная / Вредная'
+    },
+    missing: {
+      tasks: 'У вас нет задач',
+      habits: 'У вас нет привычек',
+      dailies: 'У вас нет дневных дел',
+      awards: 'У вас нет наград'
+    },
+    tabs: {
+      habits: 'Привычки',
+      tasks: 'Задачи',
+      daily: 'Дневные',
+      awards: 'Награды'
+    }
+  },
   categories: {
+    not: 'Без категории',
     art: 'Искусство',
     career: 'Карьера',
     sport: 'Спорт',
@@ -15,11 +44,24 @@ export default {
     travel: 'Путешествие'
   },
   form: {
+    name: {
+      createTask: 'Создание задачи',
+      updateTask: 'Изменение задачи'
+    },
+    btn: {
+      create: 'Создать',
+      update: 'Изменить'
+    },
     inputName: {
       email: 'E-mail',
       password: 'Пароль',
       confirmPassword: 'Подтвердите пароль',
-      nameUser: 'Имя'
+      nameUser: 'Имя',
+      name: 'Имя',
+      difficulty: 'Сложность',
+      desc: 'Описание',
+      category: 'Категория',
+      typeHabit: 'Тип привычки'
     },
     placeholder: {
       enterYour: 'Введите ваш',
@@ -54,7 +96,13 @@ export default {
     rules: 'Правила',
     achievement: 'Достижения'
   },
-
+  home: {
+    btn: 'Начать игру',
+    rules: 'Перед этим я хочу прочитать правила'
+  },
+  search: {
+    placeholder: 'Поиск...'
+  },
   titles: {
     nameOfTask: 'Название миссии',
     levelOfDifficulty: 'Сложность',
@@ -101,11 +149,6 @@ export default {
     emptyField: 'Заполните пустое поле'
   },
 
-  home: {
-    title: 'Прокачай себя {break} в реальной {break} жизни',
-    subtitle: 'Создавай миссии {break} на день и следи за своим {break} прогрессом'
-  },
-
   level: {
     title: 'Уровень:',
     subtitle: 'Опыт:',
@@ -118,5 +161,13 @@ export default {
     },
     subtitle: 'За рубины вы можете покупать в {break} магазине различные вещички',
     routeStore: 'Перейти к магазину'
+  },
+  skills: {
+    title: 'Умения',
+    str: 'Сила',
+    int: 'Интеллект',
+    cul: 'Культура',
+    cha: 'Харизма',
+    hum: 'Гуманность'
   }
 }

@@ -1,26 +1,26 @@
 <template>
   <div class="skills">
-    <div class="skills__title">Skills</div>
+    <div class="skills__title">{{$t('skills.title')}}</div>
     <div class="skills__items">
       <div class="skills__item">
         <div class="skills__icon icon-strength"></div>
-        <div class="skills__item-text">Strength: {{ userSkills.strength }}</div>
+        <div class="skills__item-text"><div class="item-text-after">{{$t('skills.str')}}</div> {{ userSkills.str }}</div>
       </div>
       <div class="skills__item">
         <div class="skills__icon icon-intellect"></div>
-        <div class="skills__item-text">Intellect: {{ userSkills.intellect }}</div>
+        <div class="skills__item-text"><div class="item-text-after">{{$t('skills.int')}}</div> {{ userSkills.int }}</div>
       </div>
       <div class="skills__item">
         <div class="skills__icon icon-culture"></div>
-        <div class="skills__item-text">Culture: {{ userSkills.culture }}</div>
+        <div class="skills__item-text"><div class="item-text-after">{{$t('skills.cul')}}</div> {{ userSkills.cul }}</div>
       </div>
       <div class="skills__item">
         <div class="skills__icon icon-charisma"></div>
-        <div class="skills__item-text">Charisma: {{ userSkills.charisma }}</div>
+        <div class="skills__item-text"><div class="item-text-after">{{$t('skills.cha')}}</div> {{ userSkills.cha }}</div>
       </div>
       <div class="skills__item">
         <div class="skills__icon icon-humanity"></div>
-        <div class="skills__item-text">Humanity: {{ userSkills.humanity }}</div>
+        <div class="skills__item-text"><div class="item-text-after">{{$t('skills.hum')}}</div> {{ userSkills.hum }}</div>
       </div>
     </div>
   </div>
@@ -65,9 +65,18 @@ export default {
       margin-right: 15px;
     }
     &__item-text {
-      &:after {
-        content: ':';
+      @extend %flex;
+      .item-text-after {
+        margin-right: 5px;
+        &:after {
+          content: ':';
+        }
       }
+      /*&:first-child {*/
+      /*  &:after {*/
+      /*    content: ':';*/
+      /*  }*/
+      /*}*/
     }
   }
 

@@ -1,7 +1,8 @@
 <template>
   <form class="form" @submit="onSubmit">
+    <div class="title">{{ $t('form.name.updateTask')}}</div>
     <div class="form__widget">
-      <div class="input-title">Name</div>
+      <div class="input-title">{{ $t('form.inputName.name')}}</div>
       <input
         type="text"
         class="input"
@@ -10,12 +11,24 @@
         :class="{ 'input__invalid': $v.name.$error }"
       >
       <div class="form__error"
+           v-if="!$v.name.maxLength && $v.name.$dirty">
+        <i18n path="form.error.maxLength">
+          <span place="action">{{ $v.name.$params.maxLength.max}}</span>
+        </i18n>
+      </div>
+      <div class="form__error"
+           v-if="!$v.name.minLength && $v.name.$dirty">
+        <i18n path="form.error.minLength">
+          <span place="action">{{ $v.name.$params.minLength.min}}</span>
+        </i18n>
+      </div>
+      <div class="form__error"
            v-if="!$v.name.required && $v.name.$dirty">
         {{ $t('form.error.required') }}
       </div>
     </div>
     <div class="form__widget">
-      <div class="input-title">Desc</div>
+      <div class="input-title">{{ $t('form.inputName.desc')}}</div>
       <textarea
         class="input"
         v-model.trim="desc"
@@ -23,12 +36,24 @@
         :class="{ 'input__invalid': $v.desc.$error }"
       ></textarea>
       <div class="form__error"
+           v-if="!$v.desc.maxLength && $v.desc.$dirty">
+        <i18n path="form.error.maxLength">
+          <span place="action">{{ $v.desc.$params.maxLength.max}}</span>
+        </i18n>
+      </div>
+      <div class="form__error"
+           v-if="!$v.desc.minLength && $v.desc.$dirty">
+        <i18n path="form.error.minLength">
+          <span place="action">{{ $v.desc.$params.minLength.min}}</span>
+        </i18n>
+      </div>
+      <div class="form__error"
            v-if="!$v.desc.required && $v.desc.$dirty">
         {{ $t('form.error.required') }}
       </div>
     </div>
     <div class="form__widget">
-      <div class="input-title">Difficulty</div>
+      <div class="input-title">{{ $t('form.inputName.difficulty')}}</div>
       <select v-model="difficulty">
         <option value="1">Сложность: 1</option>
         <option value="2">Сложность: 2</option>
@@ -36,16 +61,13 @@
         <option value="4">Сложность: 4</option>
         <option value="5">Сложность: 5</option>
       </select>
-      {{ difficulty }}
     </div>
     <div class="form__widget">
-      <div class="input-title">Tags</div>
+      <div class="input-title">{{ $t('form.inputName.category')}}</div>
       <select class="categories" v-model="category">
         <option v-for="category in categories" v-bind:key="category" :value="category">{{ $t('categories.' + category) }}</option>>
       </select>
-      {{ category }}
     </div>
-    {{ oldData }}
     <button type="submit" class="form__button"
             :class="{'button__no-active': $v.$invalid ||
             this.name === this.oldData.name &&
@@ -57,6 +79,7 @@
 
 <script>
 import * as skills from '@/methods/skills'
+import * as categories from '@/const/categories'
 
 import {
   required, maxLength, minLength
@@ -69,9 +92,8 @@ export default {
       name: null,
       desc: null,
       difficulty: 3,
-      category: 'art',
-      categories: ['art', 'career', 'sport', 'cooking', 'fun', 'household',
-        'humanity', 'mental', 'outdoors', 'reading', 'learning', 'social', 'travel'],
+      category: 'not',
+      categories: [],
       oldData: {}
     }
   },
@@ -119,10 +141,14 @@ export default {
       this.difficulty = this.updateData.difficulty
       this.category = this.updateData.category
       this.oldData = this.updateData
+    },
+    getCategories () {
+      this.categories = categories.categories
     }
   },
   mounted () {
     this.getData()
+    this.getCategories()
   }
 }
 </script>

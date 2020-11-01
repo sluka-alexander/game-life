@@ -1,0 +1,130 @@
+.cards-container {
+  font-size: 13px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  .missing {
+    padding: 30px 0;
+  }
+}
+.card {
+  @extend %flex;
+  max-width: 540px;
+  width: 100%;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  position: relative;
+  border: 1px solid $gray-border;
+  word-wrap: break-word;
+  &__content {
+    width: 100%;
+    padding-right: 70px;
+  }
+  &__name {
+    font-size: 18px;
+    font-weight: $weight-bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &__desc {
+  }
+  &__price {
+    display: flex;
+    align-items: center;
+    .icon {
+      margin-right: 6px;
+    }
+  }
+  &__dif {
+    display: flex;
+    align-items: center;
+    font-weight: $weight-bold;
+    &--stars {
+      margin-left: 3px;
+      display: flex;
+      .icon {
+        margin-right: 6px;
+      }
+    }
+  }
+  &__dpx {
+    display: flex;
+    flex-wrap: wrap;
+
+    &--item {
+      margin-right: 20px;
+    }
+  }
+  .icon-star-filled{
+    color: $yellow;
+  }
+  &__tools {
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    display: flex;
+    font-size: 16px;
+
+    .icon {
+      @extend %flex-center;
+      height: 30px;
+      width: 30px;
+      border-radius: 50px;
+      &:hover {
+        border: 1px solid $gray-border;
+      }
+    }
+    .icon-delete {
+      color: $red;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    .icon-edit {
+      cursor: pointer;
+    }
+  }
+  .item {
+    margin-bottom: 8px;
+  }
+  .skills {
+    flex-wrap: wrap;
+    text-transform: uppercase;
+    div {
+      margin-right: 20px;
+    }
+  }
+  &__habit {
+    @extend %flex-center;
+    width: 30px;
+    height: auto;
+    border-radius: 3px;
+    background-color: $gray-light;
+    cursor: pointer;
+    transition: 0.1s;
+    font-size: 14px;
+    color: $white;
+    &_plus {
+      margin-right: 15px;
+      background-color: $blue-light;
+    }
+    &_minus {
+      margin-left: 15px;
+      background-color: $red;
+    }
+    &:hover {
+      box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
+    }
+    &_disable {
+      cursor: auto;
+      background-color: $gray-light;
+      pointer-events: none;
+      color: $gray-dark;
+      &:hover {
+        box-shadow: none;
+      }
+    }
+  }
+}
