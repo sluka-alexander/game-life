@@ -50,6 +50,13 @@ export default {
     social: 'Social',
     travel: 'Travel'
   },
+  rules: {
+    1: 'Be honest with yourself',
+    2: 'Never give up',
+    3: 'Remember to use coins',
+    4: 'Track your progress',
+    5: 'Upgrade your skills without forgetting about one'
+  },
   lang: {
     ru: 'Russian',
     en: 'English'

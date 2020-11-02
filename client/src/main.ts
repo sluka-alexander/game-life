@@ -5,10 +5,14 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import i18n from './plugins/i18n'
+import VueApexCharts from 'vue-apexcharts'
 
 Vue.config.productionTip = false
 
 Vue.use(Vuelidate)
+Vue.use(VueApexCharts)
+
+Vue.component('apexchart', VueApexCharts)
 
 new Vue({
   router,

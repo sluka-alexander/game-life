@@ -1,76 +1,86 @@
 <template>
-  <div class="rules-page">
-    {{ widthBlock }}
-    <div class="blocks" ref="widthBlock" v-on:scroll="scrollMeth">
-      <div class="shadow"></div>
-      <div class="block-1"></div>
-      <div class="block-1"></div>
-      <div class="block-1"></div>
-      <div class="block-1"></div>
-      <div class="block-1"></div>
-      <div class="block-1"></div>
-      <div class="shadow shadow_right"></div>
+  <div class="rules">
+    <div class="title">{{$t('items.rules')}}</div>
+    <div class="rules__container">
+      <div class="rules__items">
+        <div class="rules__item">
+          <div>
+            <div class="rules__number">1</div>
+          </div>
+          <div class="rules__text">{{$t('rules.1')}}</div>
+        </div>
+        <div class="rules__item">
+          <div>
+            <div class="rules__number">2</div>
+          </div>
+          <div class="rules__text">{{$t('rules.2')}}</div>
+        </div>
+        <div class="rules__item">
+          <div>
+            <div class="rules__number">3</div>
+          </div>
+          <div class="rules__text">{{$t('rules.3')}}</div>
+        </div>
+        <div class="rules__item">
+          <div>
+            <div class="rules__number">4</div>
+          </div>
+          <div class="rules__text">{{$t('rules.4')}}</div>
+        </div>
+        <div class="rules__item">
+          <div>
+            <div class="rules__number">5</div>
+          </div>
+          <div class="rules__text">{{$t('rules.5')}}</div>
+        </div>
+      </div>
+      <div class="rules__img"></div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'rules',
-  data () {
-    return {
-      widthBlock: false
-    }
-  },
-  methods: {
-    scrollMeth () {
-      this.widthBlock = true
-    }
-  },
-  mounted () {
-    console.log(event)
-  }
+  name: 'rules'
 }
 </script>
+
 <style lang="scss" scoped>
-  .rules-page {
-    display: flex;
-    justify-content: space-between;
-    height: 100%;
-    position: relative;
-    overflow: auto;
-    background-color: green;
-  }
-  .blocks {
-    display: flex;
+  @import "src/views/styles/main";
+  .rules {
     width: 100%;
-    height: 100%;
-    overflow-x: auto;
-    padding-bottom: 30px;
-  }
-  .block-1 {
-    min-width: 300px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    width: 400px;
-    max-width: 350px;
-    background-color: red;
-    margin: 0 30px;
-  }
-  .block-2 {
-    width: 100%;
-    height: 140px;
-    background-color: blue;
-    margin-bottom: 20px;
-  }
-  .shadow {
-    width: 30px;
-    height: 100%;
-    background-color: purple;
-    position: absolute;
-    z-index: 2;
-    &_right {
-      right: 0;
+    &__container {
+      @extend %flex;
+    }
+    &__img {
+      @extend %img;
+      width: 100%;
+      height: 200px;
+      background-image: url('../../views/img/rules.svg');
+    }
+    &__items {
+      width: 100%;
+    }
+    &__item {
+      display: flex;
+      max-width: 450px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    &__number {
+      @extend %flex-center;
+      @include size(50px);
+
+      background-color: $color-main;
+      border-radius: 3px;
+      color: $white;
+      font-size: 24px;
+      font-weight: $weight-extra-bold;
+      margin-right: 16px;
+    }
+    &__text {
+      @extend %flex-center;
+      font-size: 14px;
     }
   }
 </style>
