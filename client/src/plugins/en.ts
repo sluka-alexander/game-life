@@ -106,7 +106,7 @@ export default {
 
   items: {
     home: 'Home',
-    adventure: 'Adventure',
+    standings: 'Standings',
     habits: 'Habits',
     tasks: 'Tasks',
     profile: 'Profile',

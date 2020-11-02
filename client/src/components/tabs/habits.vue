@@ -1,10 +1,5 @@
 <template>
   <div>
-    <div v-if="isLoading" class="loading-bgc">
-        <div class="lds-ring ">
-          <div></div>
-        </div>
-    </div>
     <div class="cards-container">
       <div class="card" v-for="habit in userHabits" v-bind:key="habit.habit_id" :id="'habit_' + habit.habit_id">
         <div class="card__habit card__habit_plus" @click="complete(habit, 'increase')"

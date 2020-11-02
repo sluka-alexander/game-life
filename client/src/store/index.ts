@@ -18,6 +18,7 @@ export default new Vuex.Store({
     isActiveModal: false,
     isLoading: false,
     nameActiveModal: null,
+    allUsers: [],
     userData: {
       xp: 0,
       money: 0,
@@ -69,6 +70,11 @@ export default new Vuex.Store({
         cha: 0,
         hum: 0
       }
+      state.levelData = {
+        level: 0,
+        to: 0,
+        from: 0
+      }
     },
     closeModal (state) {
       state.isActiveModal = false
@@ -109,7 +115,6 @@ export default new Vuex.Store({
             localStorage.setItem('token', res.data.token)
             this.state.userData = res.data.user
             commit('successAuth', res.data.token)
-            console.log('норм')
             resolve(res)
           })
           .catch(err => {
@@ -130,6 +135,14 @@ export default new Vuex.Store({
           localStorage.setItem('token', res.data.token)
           commit('success')
           this.state.userData = res.data.user
+        }).catch(() => {
+          commit('error')
+        })
+    },
+    getAllUsers ({ commit }) {
+      return axios.get(`${environment.baseUrl}${endpoints.ALL_USERS}`)
+        .then(res => {
+          this.state.allUsers = res.data.users
         }).catch(() => {
           commit('error')
         })
@@ -182,12 +195,10 @@ export default new Vuex.Store({
         if (oldLevel > res.data.level) {
           commit('assignNameModal', { name: 'level', action: 'down' })
           commit('openModal')
-          console.log('У вас понизился уровень')
         }
         if (oldLevel < res.data.level) {
           commit('assignNameModal', { name: 'level', action: 'up' })
           commit('openModal')
-          console.log('У вас повысился уровень')
         }
         this.state.userData.level = res.data.level
         commit('success')
@@ -198,7 +209,7 @@ export default new Vuex.Store({
     calcLevelScale () {
       const widthLevel = 100 * (this.state.userData.xp - this.state.levelData.to) / (this.state.levelData.from - this.state.levelData.to)
       const levelScale = document.getElementById('levelScale') as HTMLElement
-      levelScale.style.width = widthLevel + '%'
+      if (levelScale) levelScale.style.width = widthLevel + '%'
     },
 
     changeStateOfLeftMenu (context) {
@@ -219,6 +230,9 @@ export default new Vuex.Store({
   getters: {
     USER_DATA: (state) => {
       return state.userData
+    },
+    ALL_USERS: (state) => {
+      return state.allUsers
     },
     IS_LOGGED_IN: (state) => {
       return !!state.token

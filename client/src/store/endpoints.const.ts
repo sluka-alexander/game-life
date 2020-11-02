@@ -10,5 +10,6 @@ export default {
   DELETE: 'user/delete',
   UPDATE: 'user/update',
   COMPLETE: 'user/complete',
-  UPDATE_LEVEL: 'user/updateLevel'
+  UPDATE_LEVEL: 'user/updateLevel',
+  ALL_USERS: 'user/'
 }

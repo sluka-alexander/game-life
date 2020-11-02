@@ -3,9 +3,6 @@
     <div class="title">{{ $t('items.tasks') }}</div>
     <div class="top-part">
       <search></search>
-      <modal v-if="isActiveModal">
-        <create-task-modal></create-task-modal>
-      </modal>
       <dropdown-create-tasks></dropdown-create-tasks>
       <tabs @activeTabMethods ='activeTabMethods'></tabs>
       <habits v-if="activeTab === 'Habits'"></habits>
@@ -19,13 +16,11 @@
 <script>
 import search from '@/components/search'
 import dropdownCreateTasks from '@/components/dropdown-create-tasks'
-import modal from '@/components/modal'
 import tasksTabs from '@/components/tabs/tasks-tabs'
 import awards from '@/components/tabs/awards'
 import habits from '@/components/tabs/habits'
 import dailies from '@/components/tabs/dailies'
 
-import createTaskModal from '@/components/modals/all-modals.vue'
 import tabs from '@/components/tabs'
 
 export default {
@@ -40,8 +35,6 @@ export default {
     tabs,
     search,
     dropdownCreateTasks,
-    modal,
-    createTaskModal,
     habits,
     awards,
     dailies,

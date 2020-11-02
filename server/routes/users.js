@@ -77,6 +77,16 @@ router.post('/userData', verifyToken, (req, res) => {
     }
 });
 
+router.get('/', async (req, res) => {
+    try {
+        const users = await User.find().sort({ xp: - 1 });
+        res.json({ users: users });
+    } catch (err) {
+        res.sendStatus(500);
+    }
+});
+
+
 router.put('/new', verifyToken, async (req, res) => {
     try {
         jwt.verify(req.token, 'secretKey', async (err, authData) => {

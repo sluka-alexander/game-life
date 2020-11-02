@@ -100,6 +100,7 @@ export default {
 
   items: {
     home: 'Главная',
+    standings: 'Турнирная таблица',
     newTask: 'Создать миссию',
     tasks: 'Миссии',
     profile: 'Профиль',

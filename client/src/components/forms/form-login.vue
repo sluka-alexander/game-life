@@ -113,7 +113,6 @@ export default {
       this.$store.dispatch('login', data)
         .then(() => {
           this.$router.push({ name: 'home' })
-          console.log(this.isLoggedIn)
         })
         .catch(err => {
           this.isValidateCorrect = true

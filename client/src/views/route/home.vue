@@ -13,11 +13,21 @@
 </template>
 
 <script>
+import * as level from '@/methods/xp'
 import banner from '@/components/banner'
 export default {
   name: 'home',
   components: {
     banner
+  },
+  computed: {
+    userXp: function () {
+      return this.$store.getters.USER_DATA.xp
+    }
+  },
+  mounted () {
+    this.$store.commit('updateLevel', level.xpMethod(this.userXp))
+    this.$store.dispatch('calcLevelScale')
   }
 }
 </script>
