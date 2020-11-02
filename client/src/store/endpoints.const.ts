@@ -9,5 +9,6 @@ export default {
   NEW: 'user/new',
   DELETE: 'user/delete',
   UPDATE: 'user/update',
-  COMPLETE: 'user/complete'
+  COMPLETE: 'user/complete',
+  UPDATE_LEVEL: 'user/updateLevel'
 }

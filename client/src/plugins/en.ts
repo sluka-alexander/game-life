@@ -25,6 +25,13 @@ export default {
       tasks: 'Tasks',
       daily: 'Daily chores',
       awards: 'Awards'
+    },
+    modal: {
+      level: {
+        up: 'Congratulations, your level has increased',
+        down: 'Your level has decreased',
+        new: 'New level:'
+      }
     }
   },
   categories: {

@@ -52,15 +52,25 @@
   </div>
 </template>
 <script>
+import * as level from '@/methods/xp'
+
 export default {
   name: 'Habits',
-  showModal: true,
+  data () {
+    return {
+      showModal: true
+    }
+  },
+
   computed: {
     userHabits: function () {
       return this.$store.getters.USER_DATA.habits
     },
     isLoading: function () {
       return this.$store.getters.IS_LOADING
+    },
+    userXp: function () {
+      return this.$store.getters.USER_DATA.xp
     }
   },
   methods: {
@@ -103,6 +113,11 @@ export default {
         .then(() => {
           this.$store.dispatch('getDataUser').then(() => {
             this.$store.commit('loading')
+            if (level.xpMethod !== level.xpMethod(this.userXp)) {
+              this.$store.dispatch('updateLevel', level.xpMethod(this.userXp)).then(() => {
+                this.$store.dispatch('calcLevelScale')
+              })
+            }
           })
         })
         .catch(err => {

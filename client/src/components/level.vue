@@ -4,10 +4,10 @@
     <div class="level__subtitle">{{ userData.xp }}{{ $t('level.xp')}}</div>
     <div class="level-scale">
       <div class="level-scale__full">
-        <div class="level-scale level-scale__full level-scale__full_user"></div>
+        <div id="levelScale" class="level-scale level-scale__full level-scale__full_user"></div>
       </div>
     </div>
-    <div class="level-scale__experience">{{ userData.xp }}{{ $t('level.xp')}} / 2000XP</div>
+    <div class="level-scale__experience">{{ levelData.to }}{{ $t('level.xp')}} / {{ levelData.from }}{{ $t('level.xp')}}</div>
   </div>
 </template>
 
@@ -17,7 +17,16 @@ export default {
   computed: {
     userData: function () {
       return this.$store.getters.USER_DATA
+    },
+    levelData: function () {
+      return this.$store.getters.LEVEL_DATA
     }
+  },
+  methods: {
+
+  },
+  mounted () {
+    this.$store.dispatch('calcLevelScale')
   }
 }
 </script>
@@ -59,8 +68,7 @@ export default {
       border-radius: 50px;
 
       &_user {
-        @include size(30%, 100%);
-
+        height: 100%;
         background-color: $color-main;
       }
     }

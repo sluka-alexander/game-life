@@ -141,6 +141,9 @@ select {
   font-size: $font-size-XS;
   margin: 0 auto;
   font-weight: $weight-medium;
+  &_link {
+    color: $color-main;
+  }
 }
 .center {
   @extend %flex-center;

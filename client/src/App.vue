@@ -8,6 +8,7 @@
 <script>
 import welcome from './views/route/welcome.vue'
 import Page from '@/views/page.vue'
+import * as level from '@/methods/xp'
 
 export default {
   name: 'app',
@@ -25,12 +26,16 @@ export default {
   computed: {
     isLoggedIn: function () {
       return this.$store.getters.IS_LOGGED_IN
+    },
+    userXp: function () {
+      return this.$store.getters.USER_DATA.xp
     }
   },
   mounted () {
     console.log(this.isLoggedIn)
     if (this.isLoggedIn) {
       this.$store.dispatch('getDataUser').then(() => {
+        this.$store.commit('updateLevel', level.xpMethod(this.userXp))
         this.loadedData = true
       })
     } else {

@@ -314,3 +314,31 @@ router.put('/complete', verifyToken, async (req, res) => {
         res.sendStatus(500);
     }
 });
+
+
+router.put('/updateLevel', verifyToken, async (req, res) => {
+    try {
+        jwt.verify(req.token, 'secretKey', async (err, authData) => {
+            if(err) {
+                res.sendStatus(403);
+            }
+            else {
+                const email = authData.email;
+                User.findOne({ email: email }, (err, user) => {
+                    if(user) {
+                        user.level = req.body.level;
+                        user.save(err => {
+                            if (err) {
+                                res.sendStatus(500);
+                            } else {
+                                res.json({level: user.level})
+                            }
+                        })
+                    }
+                });
+            }
+        });
+    } catch (err) {
+        res.sendStatus(500);
+    }
+});

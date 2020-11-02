@@ -27,9 +27,15 @@ export default new Vuex.Store({
         cul: 0,
         cha: 0,
         hum: 0
-      }
+      },
+      level: 0
     },
-    updateElementData: {}
+    updateElementData: {},
+    levelData: {
+      level: 0,
+      to: 0,
+      from: 0
+    }
   },
   mutations: {
     errorAuth (state) {
@@ -42,46 +48,10 @@ export default new Vuex.Store({
     success (state) {
       state.status = 'Success'
     },
-    // complete (state, data) {
-    //   if (data.action === 'increase') {
-    //     state.userData.xp += data.xp
-    //     state.userData.money += data.money
-    //     state.userData.skills.str += data.skills.str
-    //     state.userData.skills.int += data.skills.int
-    //     state.userData.skills.cul += data.skills.cul
-    //     state.userData.skills.cha += data.skills.cha
-    //     state.userData.skills.hum += data.skills.hum
-    //   } else {
-    //     state.userData.xp -= data.xp
-    //     state.userData.money -= data.money
-    //     state.userData.skills.str -= data.skills.str
-    //     state.userData.skills.int -= data.skills.int
-    //     state.userData.skills.cul -= data.skills.cul
-    //     state.userData.skills.cha -= data.skills.cha
-    //     state.userData.skills.hum -= data.skills.hum
-    //     if (state.userData.money < 0) {
-    //       state.userData.money = 0
-    //     }
-    //     if (state.userData.xp < 0) {
-    //       state.userData.xp = 0
-    //     }
-    //     if (state.userData.skills.str < 0) {
-    //       state.userData.skills.str = 0
-    //     }
-    //     if (state.userData.skills.int < 0) {
-    //       state.userData.skills.int = 0
-    //     }
-    //     if (state.userData.skills.cul < 0) {
-    //       state.userData.skills.cul = 0
-    //     }
-    //     if (state.userData.skills.cha < 0) {
-    //       state.userData.skills.cha = 0
-    //     }
-    //     if (state.userData.skills.hum < 0) {
-    //       state.userData.skills.hum = 0
-    //     }
-    //   }
-    // },
+    updateLevel (state, data) {
+      state.userData.level = data.level
+      state.levelData = data
+    },
     changeStateOfLeftMenu (state) {
       state.isActiveLeftMenu = !state.isActiveLeftMenu
     },
@@ -200,6 +170,36 @@ export default new Vuex.Store({
         commit('error')
       })
     },
+    openModal (context) {
+      context.commit('openModal')
+    },
+    updateLevel ({ commit }, data) {
+      const oldLevel = this.state.levelData.level
+      commit('updateLevel', data)
+      return axios.put(`${environment.baseUrl}${endpoints.UPDATE_LEVEL}`, data, {
+        headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
+      }).then((res) => {
+        if (oldLevel > res.data.level) {
+          commit('assignNameModal', { name: 'level', action: 'down' })
+          commit('openModal')
+          console.log('У вас понизился уровень')
+        }
+        if (oldLevel < res.data.level) {
+          commit('assignNameModal', { name: 'level', action: 'up' })
+          commit('openModal')
+          console.log('У вас повысился уровень')
+        }
+        this.state.userData.level = res.data.level
+        commit('success')
+      }).catch(() => {
+        commit('error')
+      })
+    },
+    calcLevelScale () {
+      const widthLevel = 100 * (this.state.userData.xp - this.state.levelData.to) / (this.state.levelData.from - this.state.levelData.to)
+      const levelScale = document.getElementById('levelScale') as HTMLElement
+      levelScale.style.width = widthLevel + '%'
+    },
 
     changeStateOfLeftMenu (context) {
       context.commit('changeStateOfLeftMenu')
@@ -209,9 +209,6 @@ export default new Vuex.Store({
     },
     closeModal (context) {
       context.commit('closeModal')
-    },
-    openModal (context) {
-      context.commit('openModal')
     },
     changeStateOfRightBlock (context) {
       context.commit('changeStateOfRightBlock')
@@ -243,6 +240,9 @@ export default new Vuex.Store({
     },
     IS_LOADING (state) {
       return state.isLoading
+    },
+    LEVEL_DATA (state) {
+      return state.levelData
     }
   }
 })
