@@ -1,5 +1,5 @@
 <template>
-  <form class="form" @submit="onSubmit">
+  <form class="form">
     <div class="title">{{ $t('form.name.createTask')}}</div>
     <div class="form__widget">
       <div class="input-title">{{ $t('form.inputName.name')}}</div>
@@ -68,8 +68,14 @@
         <option v-for="category in categories" v-bind:key="category" :value="category">{{ $t('categories.' + category) }}</option>>
       </select>
     </div>
-    <button type="submit" class="form__button"
+    <button v-if="nameActiveModal.action === 'create'" @click="createElement"  class="form__button"
             :class="{'button__no-active': $v.$invalid }">{{ $t('form.btn.create')}}</button>
+    <button v-if="nameActiveModal.action === 'update'" @click="updateElement" class="form__button"
+            :class="{'button__no-active': $v.$invalid ||
+            this.name === this.oldData.name &&
+            this.desc === this.oldData.description &&
+            this.difficulty === this.oldData.difficulty &&
+            this.category === this.oldData.category}">{{ $t('form.btn.update')}}</button>
   </form>
 </template>
 
@@ -89,7 +95,8 @@ export default {
       desc: null,
       difficulty: 3,
       category: 'not',
-      categories: []
+      categories: [],
+      oldData: []
     }
   },
   validations: {
@@ -105,7 +112,7 @@ export default {
     }
   },
   methods: {
-    onSubmit () {
+    createElement () {
       const newTask = {
         name: this.name,
         desc: this.desc,
@@ -125,11 +132,51 @@ export default {
           console.error(err)
         })
     },
+    updateElement () {
+      const updateData = {
+        name: this.name,
+        desc: this.desc,
+        difficulty: this.difficulty,
+        category: this.category,
+        price: 20 * this.difficulty,
+        xp: 100 * this.difficulty,
+        skills: skills.calculatedSkill(this.category, this.difficulty),
+        type: 'Task',
+        taskId: this.oldData.task_id
+      }
+      this.$store.dispatch('update', updateData)
+        .then(() => {
+          this.$store.dispatch('getDataUser')
+          this.$store.dispatch('closeModal')
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    getData () {
+      this.name = this.updateElementData.name
+      this.desc = this.updateElementData.description
+      this.difficulty = this.updateElementData.difficulty
+      this.category = this.updateElementData.category
+
+      this.oldData = this.updateElementData
+    },
     getCategories () {
       this.categories = categories.categories
     }
   },
+  computed: {
+    nameActiveModal () {
+      return this.$store.getters.NAME_ACTIVE_MODAL
+    },
+    updateElementData () {
+      return this.$store.getters.UPDATE_ELEMENT_DATA
+    }
+  },
   mounted () {
+    if (this.nameActiveModal.action === 'update') {
+      this.getData()
+    }
     this.getCategories()
   }
 }

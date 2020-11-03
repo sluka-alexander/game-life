@@ -66,7 +66,11 @@ export default {
       createTask: 'Create task',
       updateTask: 'Update task',
       createHabit: 'Create habit',
-      updateHabit: 'Update habit'
+      updateHabit: 'Update habit',
+      createDaily: 'Create daily',
+      updateDaily: 'Update daily',
+      createAward: 'Create award',
+      updateAward: 'Update award'
     },
     btn: {
       create: 'Create',

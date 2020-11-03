@@ -59,8 +59,14 @@ export default {
   },
   form: {
     name: {
-      createTask: 'Создание задачи',
-      updateTask: 'Изменение задачи'
+      createTask: 'Создать задачу',
+      updateTask: 'Изменить задачу',
+      createHabit: 'Создать привычку',
+      updateHabit: 'Изменить привычку',
+      createDaily: 'Создать дневную',
+      updateDaily: 'Изменить дневную',
+      createAward: 'Создать награду',
+      updateAward: 'Изменить награду'
     },
     btn: {
       create: 'Создать',

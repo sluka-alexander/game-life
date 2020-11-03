@@ -206,3 +206,6 @@ select {
 .bold {
   font-weight: $weight-bold;
 }
+.no-event {
+  pointer-events: none;
+}

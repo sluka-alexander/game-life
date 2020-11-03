@@ -206,12 +206,20 @@ export default new Vuex.Store({
         commit('error')
       })
     },
+    checkDailyDate ({ commit }, data) {
+      return axios.put(`${environment.baseUrl}${endpoints.CHECK_DAILY}`, data, {
+        headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
+      }).then(() => {
+        commit('success')
+      }).catch(() => {
+        commit('error')
+      })
+    },
     calcLevelScale () {
       const widthLevel = 100 * (this.state.userData.xp - this.state.levelData.to) / (this.state.levelData.from - this.state.levelData.to)
       const levelScale = document.getElementById('levelScale') as HTMLElement
       if (levelScale) levelScale.style.width = widthLevel + '%'
     },
-
     changeStateOfLeftMenu (context) {
       context.commit('changeStateOfLeftMenu')
     },

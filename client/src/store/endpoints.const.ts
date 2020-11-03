@@ -11,5 +11,6 @@ export default {
   UPDATE: 'user/update',
   COMPLETE: 'user/complete',
   UPDATE_LEVEL: 'user/updateLevel',
-  ALL_USERS: 'user/'
+  ALL_USERS: 'user/',
+  CHECK_DAILY: 'user/checkDaily'
 }

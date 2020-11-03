@@ -12,16 +12,16 @@
                @click="openModal({ name: 'habit', action: 'create' })"
                data-tooltip="Habit"></div>
           <div class="dropdown-create-tasks__item icon-check"
-               @click="openModal('tasks')"
+               @click="openModal({ name: 'task', action: 'create' })"
                data-tooltip="Task"></div>
         </div>
         <div class="dropdown-create-tasks__items_right"
              :class="{ 'dropdown-create-tasks__items_right_active': isActiveDropdown }">
           <div class="dropdown-create-tasks__item icon-daily"
-               @click="openModal('daily')"
+               @click="openModal({ name: 'daily', action: 'create' })"
                data-tooltip="Daily chore"></div>
           <div class="dropdown-create-tasks__item icon-awards"
-               @click="openModal('awards')"
+               @click="openModal({ name: 'awards', action: 'create' })"
                data-tooltip="Award"></div>
         </div>
       </div>

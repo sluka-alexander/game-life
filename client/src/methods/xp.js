@@ -41,7 +41,7 @@ export function xpMethod (xp) {
     levelData.from = 6999
   }
   if (xp >= 7000 && xp <= 9990) {
-    levelData.level = 7
+    levelData.level = 8
     levelData.to = 7000
     levelData.from = 9999
   }

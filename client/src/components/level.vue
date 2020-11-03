@@ -7,7 +7,7 @@
         <div id="levelScale" class="level-scale level-scale__full level-scale__full_user"></div>
       </div>
     </div>
-    <div class="level-scale__experience">{{ levelData.to }}{{ $t('level.xp')}} / {{ levelData.from }}{{ $t('level.xp')}}</div>
+    <div class="level-scale__experience">{{ userData.xp }}{{ $t('level.xp')}} / {{ levelData.from }}{{ $t('level.xp')}}</div>
   </div>
 </template>
 

@@ -2,9 +2,11 @@
   <div>
     <div class="cards-container">
       <div class="card" v-for="habit in userHabits" v-bind:key="habit.habit_id" :id="'habit_' + habit.habit_id">
-        <div class="card__habit card__habit_plus" @click="complete(habit, 'increase')"
-        :class="{ card__habit_disable: habit.typeHabit === 'bad'}">
-          <div class="icon-plus-2"></div>
+        <div>
+          <div class="card__habit card__habit_plus" @click="complete(habit, 'increase')"
+               :class="{ card__habit_disable: habit.typeHabit === 'bad'}">
+            <div class="icon-plus-2"></div>
+          </div>
         </div>
         <div class="card__content">
           <div class="card__tools">
@@ -37,9 +39,11 @@
             <div>{{ $t('main.skillsId.hum')}} {{ habit.skills.hum }}</div>
           </div>
         </div>
-        <div class="card__habit card__habit_minus" @click="complete(habit, 'decrease')"
-             :class="{ card__habit_disable: habit.typeHabit === 'good'}">
-          <div class="icon-minus"></div>
+        <div>
+          <div class="card__habit card__habit_minus" @click="complete(habit, 'decrease')"
+               :class="{ card__habit_disable: habit.typeHabit === 'good'}">
+            <div class="icon-minus"></div>
+          </div>
         </div>
       </div>
       <div class="missing" v-if="!userHabits.length">{{ $t('main.missing.habits')}}</div>
@@ -102,7 +106,8 @@ export default {
         xp: dataEl.xp,
         skills: dataEl.skills,
         money: dataEl.price,
-        action: actionElement
+        action: actionElement,
+        type: 'habit'
       }
       this.$store.dispatch('complete', data)
         .then(() => {

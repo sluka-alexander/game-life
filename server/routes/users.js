@@ -107,24 +107,39 @@ router.put('/new', verifyToken, async (req, res) => {
                                 price: req.body.price,
                                 xp: req.body.xp,
                                 skills: req.body.skills,
+                                isActive: false,
                                 task_id: String(Date.now())
                             }
                             user.tasks.push(task);
                             break;
-                            case "Habit": {
-                                let habit = {
+                            case "Habit":
+                            let habit = {
+                                name: req.body.name,
+                                description: req.body.desc,
+                                difficulty: req.body.difficulty,
+                                typeHabit: req.body.typeHabit,
+                                category: req.body.category,
+                                price: req.body.price,
+                                xp: req.body.xp,
+                                skills: req.body.skills,
+                                habit_id: String(Date.now())
+                            }
+                            user.habits.push(habit);
+                            break;
+                            case "Daily":
+                                let daily = {
                                     name: req.body.name,
                                     description: req.body.desc,
                                     difficulty: req.body.difficulty,
-                                    typeHabit: req.body.typeHabit,
                                     category: req.body.category,
                                     price: req.body.price,
                                     xp: req.body.xp,
                                     skills: req.body.skills,
-                                    habit_id: String(Date.now())
+                                    isActive: false,
+                                    daily_id: String(Date.now())
                                 }
-                                user.habits.push(habit);
-                            }
+                                user.daily.push(daily);
+                                break;
                         }
                         user.save(err => {
                             if (err) {
@@ -171,6 +186,14 @@ router.put('/delete', verifyToken, async (req, res) => {
                                 user.habits.splice(position, 1);
                                 break;
                             }
+                            case "Daily":
+                                for (let i = 0; i < user.daily.length; i++) {
+                                    if(user.daily[i].daily_id === req.body.idElement) {
+                                        position = i;
+                                    }
+                                }
+                                user.daily.splice(position, 1);
+                                break;
                         }
                         user.save(err => {
                             if (err) {
@@ -209,16 +232,16 @@ router.put('/update', verifyToken, async (req, res) => {
                                     price: req.body.price,
                                     xp: req.body.xp,
                                     skills: req.body.skills,
-                                    task_id: req.body.taskId,
+                                    habit__id: req.body.habitId,
                                 }
                                 for (let i = 0; i < user.tasks.length; i++) {
                                     if(user.tasks[i].task_id === req.body.taskId) {
-                                        positionTask = i;
+                                        position = i;
                                     }
                                 }
-                                user.tasks.splice(positionTask, 1, task);
+                                user.tasks.splice(position, 1, task);
                                 break;
-                            case "Habit": {
+                            case "Habit":
                                 let habit = {
                                     name: req.body.name,
                                     description: req.body.desc,
@@ -237,8 +260,25 @@ router.put('/update', verifyToken, async (req, res) => {
                                 }
                                 user.habits.splice(position, 1, habit);
                                 break;
+                            case "Daily":
+                                let daily = {
+                                    name: req.body.name,
+                                    description: req.body.desc,
+                                    difficulty: req.body.difficulty,
+                                    category: req.body.category,
+                                    price: req.body.price,
+                                    xp: req.body.xp,
+                                    skills: req.body.skills,
+                                    daily_id: req.body.dailyId,
+                                }
+                                for (let i = 0; i < user.daily.length; i++) {
+                                    if(user.daily[i].daily_id === req.body.dailyId) {
+                                        position = i;
+                                    }
+                                }
+                                user.daily.splice(position, 1, daily);
+                                break;
                             }
-                        }
                         user.save(err => {
                             if (err) {
                                 res.sendStatus(500);
@@ -265,28 +305,106 @@ router.put('/complete', verifyToken, async (req, res) => {
                 const email = authData.email;
                 User.findOne({ email: email }, (err, user) => {
                     if(user) {
-                        if(req.body.action === 'increase') {
-                            user.xp += req.body.xp
-                            user.skills = {
-                                str: user.skills.str + req.body.skills.str,
-                                int: user.skills.int + req.body.skills.int,
-                                cul: user.skills.cul + req.body.skills.cul,
-                                cha: user.skills.cha + req.body.skills.cha,
-                                hum: user.skills.hum + req.body.skills.hum,
-                            }
-                            user.money += req.body.money
+                        let positionTask =0
+                        switch (req.body.type) {
+                            case 'habit':
+                                if(req.body.action === 'increase') {
+                                    user.xp += req.body.xp
+                                    user.skills = {
+                                        str: Number( user.skills.str + req.body.skills.str),
+                                        int: Number( user.skills.int + req.body.skills.int),
+                                        cul: Number( user.skills.cul + req.body.skills.cul),
+                                        cha: Number( user.skills.cha + req.body.skills.cha),
+                                        hum: Number( user.skills.hum + req.body.skills.hum),
+                                    }
+                                    user.money += req.body.money
+                                }
+                                else {
+                                    user.xp -= req.body.xp
+                                    user.skills = {
+                                        str: Number(user.skills.str - req.body.skills.str),
+                                        int: Number(user.skills.int - req.body.skills.int),
+                                        cul: Number(user.skills.cul - req.body.skills.cul),
+                                        cha: Number(user.skills.cha - req.body.skills.cha),
+                                        hum: Number(user.skills.hum - req.body.skills.hum),
+                                    }
+                                    user.money -= req.body.money
+                                }
+                                break;
+                            case 'task':
+                                for (let i = 0; i < user.tasks.length; i++) {
+                                    if(user.tasks[i].task_id === req.body.taskId) {
+                                        positionTask = i;
+                                    }
+                                }
+                                let task = {
+                                    name: user.tasks[positionTask].name,
+                                    description: user.tasks[positionTask].description,
+                                    difficulty: user.tasks[positionTask].difficulty,
+                                    category: user.tasks[positionTask].category,
+                                    price: user.tasks[positionTask].price,
+                                    xp: user.tasks[positionTask].xp,
+                                    skills: user.tasks[positionTask].skills,
+                                    isActive: !req.body.isActive,
+                                    task_id: req.body.taskId,
+                                }
+                                user.tasks.splice(positionTask, 1, task);
+                                if(!req.body.isActive) {
+                                    user.xp += req.body.xp
+                                    user.skills = {
+                                        str: Number(user.skills.str + req.body.skills.str),
+                                        int: Number(user.skills.int + req.body.skills.int),
+                                        cul: Number(user.skills.cul + req.body.skills.cul),
+                                        cha: Number(user.skills.cha + req.body.skills.cha),
+                                        hum: Number(user.skills.hum + req.body.skills.hum),
+                                    }
+                                    user.money += req.body.money
+                                }
+                                if(req.body.isActive) {
+                                    user.xp -= req.body.xp
+                                    user.skills = {
+                                        str: Number(user.skills.str - req.body.skills.str),
+                                        int: Number(user.skills.int - req.body.skills.int),
+                                        cul: Number(user.skills.cul - req.body.skills.cul),
+                                        cha: Number(user.skills.cha - req.body.skills.cha),
+                                        hum: Number(user.skills.hum - req.body.skills.hum),
+                                    }
+                                    user.money -= req.body.money
+                                }
+                                break;
+                            case 'daily':
+                                for (let i = 0; i < user.daily.length; i++) {
+                                    if(user.daily[i].daily_id === req.body.dailyId) {
+                                        positionTask = i;
+                                    }
+                                }
+                                let daily = {
+                                    name: user.daily[positionTask].name,
+                                    description: user.daily[positionTask].description,
+                                    difficulty: user.daily[positionTask].difficulty,
+                                    category: user.daily[positionTask].category,
+                                    price: user.daily[positionTask].price,
+                                    xp: user.daily[positionTask].xp,
+                                    skills: user.daily[positionTask].skills,
+                                    isActive: true,
+                                    daily_id: user.daily_id,
+                                    toDate: Date.now() + 15000,
+                                }
+                                user.daily.splice(positionTask, 1, daily);
+                                if(!req.body.isActive) {
+                                    user.xp += req.body.xp
+                                    user.skills = {
+                                        str: Number(user.skills.str + req.body.skills.str),
+                                        int: Number(user.skills.int + req.body.skills.int),
+                                        cul: Number(user.skills.cul + req.body.skills.cul),
+                                        cha: Number(user.skills.cha + req.body.skills.cha),
+                                        hum: Number(user.skills.hum + req.body.skills.hum),
+                                    }
+                                    user.money += req.body.money
+                                }
+                                break;
                         }
-                        else {
-                            user.xp -= req.body.xp
-                            user.skills = {
-                                str: user.skills.str - req.body.skills.str,
-                                int: user.skills.int - req.body.skills.int,
-                                cul: user.skills.cul - req.body.skills.cul,
-                                cha: user.skills.cha - req.body.skills.cha,
-                                hum: user.skills.hum - req.body.skills.hum,
-                            }
-                            user.money -= req.body.money
-                        }
+
                         if(user.money < 0) {
                             user.money = 0;
                         }
@@ -308,7 +426,6 @@ router.put('/complete', verifyToken, async (req, res) => {
                         if(user.skills.hum < 0) {
                             user.skills.hum = 0;
                         }
-
                         user.save(err => {
                             if (err) {
                                 res.sendStatus(500);
@@ -342,6 +459,50 @@ router.put('/updateLevel', verifyToken, async (req, res) => {
                                 res.sendStatus(500);
                             } else {
                                 res.json({level: user.level})
+                            }
+                        })
+                    }
+                });
+            }
+        });
+    } catch (err) {
+        res.sendStatus(500);
+    }
+});
+
+router.put('/checkDaily', verifyToken, async (req, res) => {
+    try {
+        jwt.verify(req.token, 'secretKey', async (err, authData) => {
+            if(err) {
+                res.sendStatus(403);
+            }
+            else {
+                const email = authData.email;
+                User.findOne({ email: email }, (err, user) => {
+                    if(user) {
+
+                        user.daily.forEach((el)=> {
+                            if(el.toDate < Date.now()) {
+                                let daily = {
+                                    name: el.name,
+                                    description: el.description,
+                                    difficulty: el.difficulty,
+                                    category: el.category,
+                                    price: el.price,
+                                    xp: el.xp,
+                                    skills: el.skills,
+                                    isActive: false,
+                                    daily_id: user.daily_id,
+                                    toDate: null,
+                                }
+                                user.daily.splice(el, 1, daily);
+                            }
+                        })
+                        user.save(err => {
+                            if (err) {
+                                res.sendStatus(500);
+                            } else {
+                                res.sendStatus(200)
                             }
                         })
                     }
