@@ -1,13 +1,12 @@
 <template>
   <div class="create-task">
     <form class="form" @submit="onSubmit">
-      <div class="form__title" v-if="nameActiveModal ==='daily'">Create Daily Chores</div>
-      <div class="form__title" v-if="nameActiveModal ==='awards'">Create Award</div>
       <formTask v-if="nameActiveModal.name ==='task'"></formTask>
       <delete-modal :task="task" v-if="nameActiveModal ==='deleteTask'"></delete-modal>
       <create-habit class="form__title" v-if="nameActiveModal.name ==='habit'"></create-habit>
       <level-modal v-if="nameActiveModal.name ==='level'"></level-modal>
       <daily-modal v-if="nameActiveModal.name ==='daily'"></daily-modal>
+      <award-modal v-if="nameActiveModal.name ==='awards'"></award-modal>
     </form>
   </div>
 </template>
@@ -20,6 +19,7 @@ import formTask from '../forms/task-modal'
 import createHabit from '../forms/habit-modal'
 import levelModal from '../modals/level-modal'
 import dailyModal from '../forms/daily-modal'
+import awardModal from '../forms/award-modal'
 
 export default {
   name: 'create-task-modal',
@@ -27,7 +27,8 @@ export default {
     formTask,
     createHabit,
     levelModal,
-    dailyModal
+    dailyModal,
+    awardModal
   },
   props: {
     task: String

@@ -74,7 +74,8 @@ export default {
     },
     btn: {
       create: 'Create',
-      update: 'Update'
+      update: 'Update',
+      buy: 'Buy'
     },
     inputName: {
       email: 'Email',
@@ -85,7 +86,8 @@ export default {
       difficulty: 'Difficulty',
       desc: 'Desc',
       category: 'Category',
-      typeHabit: 'Type of habit'
+      typeHabit: 'Type of habit',
+      price: 'Price'
     },
     placeholder: {
       enterYour: 'Enter your',

@@ -77,6 +77,18 @@
   .icon-star-filled{
     color: $yellow;
   }
+  &__btn {
+    color: $white;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: inline-block;
+    font-size: 14px;
+    background-color: $color-main;
+    border-radius: 3px;
+    padding: 12px 24px;
+    cursor: pointer;
+  }
   &__tools {
     position: absolute;
     right: 50px;

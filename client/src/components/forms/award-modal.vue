@@ -1,7 +1,7 @@
 <template>
   <form class="form">
-    <div v-if="nameActiveModal.action === 'create'" class="title">{{ $t('form.name.createDaily')}}</div>
-    <div v-if="nameActiveModal.action === 'update'" class="title">{{ $t('form.name.updateDaily')}}</div>
+    <div v-if="nameActiveModal.action === 'create'" class="title">{{ $t('form.name.createAward')}}</div>
+    <div v-if="nameActiveModal.action === 'update'" class="title">{{ $t('form.name.updateAward')}}</div>
     <div class="form__widget">
       <div class="input-title">{{ $t('form.inputName.name')}}</div>
       <input
@@ -54,29 +54,39 @@
       </div>
     </div>
     <div class="form__widget">
-      <div class="input-title">{{ $t('form.inputName.difficulty')}}</div>
-      <select v-model="difficulty">
-        <option value="1">{{ $t('main.difficulty')}} 1</option>
-        <option value="2">{{ $t('main.difficulty')}} 2</option>
-        <option value="3">{{ $t('main.difficulty')}} 3</option>
-        <option value="4">{{ $t('main.difficulty')}} 4</option>
-        <option value="5">{{ $t('main.difficulty')}} 5</option>
-      </select>
+      <div class="input-title">{{ $t('form.inputName.price')}}</div>
+      <input
+        type="number"
+        class="input"
+        v-model.trim="price"
+        @blur="$v.price.$touch()"
+        :class="{ 'input__invalid': $v.price.$error }"
+      >
+      <div class="form__error"
+           v-if="!$v.price.maxLength && $v.price.$dirty">
+        <i18n path="form.error.maxLength">
+          <span place="action">{{ $v.price.$params.maxLength.max}}</span>
+        </i18n>
+      </div>
+      <div class="form__error"
+           v-if="!$v.price.minLength && $v.price.$dirty">
+        <i18n path="form.error.minLength">
+          <span place="action">{{ $v.price.$params.minLength.min}}</span>
+        </i18n>
+      </div>
+      <div class="form__error"
+           v-if="!$v.price.required && $v.price.$dirty">
+        {{ $t('form.error.required') }}
+      </div>
     </div>
-    <div class="form__widget">
-      <div class="input-title">{{ $t('form.inputName.category')}}</div>
-      <select class="categories" v-model="category">
-        <option v-for="category in categories" v-bind:key="category" :value="category">{{ $t('categories.' + category) }}</option>>
-      </select>
-    </div>
+
     <button v-if="nameActiveModal.action === 'create'" @click="createElement"  class="form__button"
             :class="{'button__no-active': $v.$invalid }">{{ $t('form.btn.create')}}</button>
     <button v-if="nameActiveModal.action === 'update'" @click="updateElement" class="form__button"
             :class="{'button__no-active': $v.$invalid ||
             this.name === this.oldData.name &&
             this.desc === this.oldData.description &&
-            this.difficulty === this.oldData.difficulty &&
-            this.category === this.oldData.category}">{{ $t('form.btn.update')}}</button>
+            this.price === this.oldData.price}">{{ $t('form.btn.update')}}</button>
   </form>
 </template>
 
@@ -89,14 +99,12 @@ import {
 } from 'vuelidate/lib/validators'
 
 export default {
-  name: 'dailyModal',
+  name: 'awardTask',
   data () {
     return {
       name: null,
       desc: null,
-      difficulty: 3,
-      category: 'not',
-      categories: [],
+      price: null,
       oldData: []
     }
   },
@@ -110,21 +118,22 @@ export default {
       required,
       maxLength: maxLength(100),
       minLength: minLength(4)
+    },
+    price: {
+      required,
+      maxLength: maxLength(4),
+      minLength: minLength(1)
     }
   },
   methods: {
     createElement () {
-      const newTask = {
+      const newAward = {
         name: this.name,
         desc: this.desc,
-        difficulty: this.difficulty,
-        category: this.category,
-        price: 20 * this.difficulty,
-        xp: 100 * this.difficulty,
-        skills: skills.calculatedSkill(this.category, this.difficulty),
-        type: 'Daily'
+        price: this.price,
+        type: 'Award'
       }
-      this.$store.dispatch('create', newTask)
+      this.$store.dispatch('create', newAward)
         .then(() => {
           this.$store.dispatch('getDataUser')
           this.$store.dispatch('closeModal')
@@ -137,13 +146,9 @@ export default {
       const updateData = {
         name: this.name,
         desc: this.desc,
-        difficulty: this.difficulty,
-        category: this.category,
-        price: 20 * this.difficulty,
-        xp: 100 * this.difficulty,
-        skills: skills.calculatedSkill(this.category, this.difficulty),
-        type: 'Daily',
-        taskId: this.oldData.task_id
+        price: this.price,
+        type: 'Award',
+        taskId: this.oldData.award_id
       }
       this.$store.dispatch('update', updateData)
         .then(() => {
@@ -157,8 +162,7 @@ export default {
     getData () {
       this.name = this.updateElementData.name
       this.desc = this.updateElementData.description
-      this.difficulty = this.updateElementData.difficulty
-      this.category = this.updateElementData.category
+      this.price = this.updateElementData.price
 
       this.oldData = this.updateElementData
     },

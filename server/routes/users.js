@@ -140,6 +140,15 @@ router.put('/new', verifyToken, async (req, res) => {
                                 }
                                 user.daily.push(daily);
                                 break;
+                            case "Award":
+                                let award = {
+                                    name: req.body.name,
+                                    description: req.body.desc,
+                                    price: req.body.price,
+                                    award_id: String(Date.now())
+                                }
+                                user.awards.push(award);
+                                break;
                         }
                         user.save(err => {
                             if (err) {
@@ -193,6 +202,14 @@ router.put('/delete', verifyToken, async (req, res) => {
                                     }
                                 }
                                 user.daily.splice(position, 1);
+                                break;
+                            case "Award":
+                                for (let i = 0; i < user.awards.length; i++) {
+                                    if(user.awards[i].award_id === req.body.idElement) {
+                                        position = i;
+                                    }
+                                }
+                                user.awards.splice(position, 1);
                                 break;
                         }
                         user.save(err => {
@@ -277,6 +294,20 @@ router.put('/update', verifyToken, async (req, res) => {
                                     }
                                 }
                                 user.daily.splice(position, 1, daily);
+                                break;
+                            case "Award":
+                                let award = {
+                                    name: req.body.name,
+                                    description: req.body.desc,
+                                    price: req.body.price,
+                                    award_id: req.body.awardId,
+                                }
+                                for (let i = 0; i < user.awards.length; i++) {
+                                    if(user.awards[i].award_id === req.body.awardId) {
+                                        position = i;
+                                    }
+                                }
+                                user.awards.splice(position, 1, award);
                                 break;
                             }
                         user.save(err => {

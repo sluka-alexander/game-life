@@ -70,7 +70,8 @@ export default {
     },
     btn: {
       create: 'Создать',
-      update: 'Изменить'
+      update: 'Изменить',
+      buy: 'Купить'
     },
     inputName: {
       email: 'E-mail',
@@ -81,7 +82,8 @@ export default {
       difficulty: 'Сложность',
       desc: 'Описание',
       category: 'Категория',
-      typeHabit: 'Тип привычки'
+      typeHabit: 'Тип привычки',
+      price: 'Цена'
     },
     placeholder: {
       enterYour: 'Введите ваш',
