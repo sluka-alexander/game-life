@@ -1,4 +1,15 @@
 export default {
+  notify: {
+    createdElement: 'Элемент был успешно создан',
+    updatedElement: 'Элемент был успешно изменён',
+    removedElement: 'Элемент был успешно удалён',
+    completedElement: {
+      increase: 'Ваш опыт был увеличен',
+      decrease: 'Ваш опыт был уменьшен'
+    },
+    buy: 'Покупка прошла успешно',
+    noMoney: 'У вас недостаточно средств'
+  },
   main: {
     categories: 'Категория:',
     difficulty: 'Сложность:',
