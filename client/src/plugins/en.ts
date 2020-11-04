@@ -1,4 +1,15 @@
 export default {
+  notify: {
+    createdElement: 'The element has been created',
+    updatedElement: 'The element has been updated',
+    removedElement: 'The element has been removed',
+    completedElement: {
+      increase: 'Your XP has been increased',
+      decrease: 'Your XP has been decreased'
+    },
+    buy: 'Purchase was successful',
+    noMoney: 'You dont have enough money'
+  },
   main: {
     categories: 'Category:',
     difficulty: 'Difficulty:',

@@ -434,8 +434,10 @@ router.put('/complete', verifyToken, async (req, res) => {
                                     user.money += req.body.money
                                 }
                                 break;
+                            case 'award':
+                                user.money -= req.body.price
+                                break;
                         }
-
                         if(user.money < 0) {
                             user.money = 0;
                         }

@@ -26,7 +26,7 @@ export default {
   },
   data () {
     return {
-      items: ['tasks', 'adventure', 'rules', 'progress']
+      items: ['tasks', 'standings', 'rules', 'progress']
     }
   },
   methods: {

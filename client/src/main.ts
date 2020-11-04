@@ -6,11 +6,14 @@ import router from './router'
 import store from './store'
 import i18n from './plugins/i18n'
 import VueApexCharts from 'vue-apexcharts'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css'
 
 Vue.config.productionTip = false
 
 Vue.use(Vuelidate)
 Vue.use(VueApexCharts)
+Vue.component('v-select', vSelect)
 
 Vue.component('apexchart', VueApexCharts)
 

@@ -12,12 +12,14 @@ export default new Vuex.Store({
     status: '',
     error: '',
     token: localStorage.getItem('token') || null,
-    isAdmin: false,
+    lang: localStorage.getItem('lang') || 'en',
+    darkTheme: localStorage.getItem('dark') || null,
     isActiveLeftMenu: false,
     isActiveRightBlock: true,
     isActiveModal: false,
     isLoading: false,
     nameActiveModal: null,
+    nameActiveNotify: null,
     allUsers: [],
     userData: {
       xp: 0,
@@ -39,6 +41,16 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    darkTheme (state) {
+      if (localStorage.getItem('dark')) {
+        localStorage.removeItem('dark')
+      } else {
+        localStorage.setItem('dark', 'true')
+      }
+    },
+    changeLang (state, data) {
+      state.lang = data
+    },
     errorAuth (state) {
       state.status = 'ErrorAuth'
     },
@@ -93,9 +105,31 @@ export default new Vuex.Store({
     },
     changeStateOfRightBlock (state) {
       state.isActiveRightBlock = !state.isActiveRightBlock
+    },
+    openNotify (state, data) {
+      state.nameActiveNotify = data
+      setTimeout(() => {
+        state.nameActiveNotify = null
+      }, 3000)
     }
   },
   actions: {
+    changeLang ({ commit }, data) {
+      commit('changeLang', data)
+      localStorage.setItem('lang', data)
+    },
+    darkTheme ({ commit }, data) {
+      if (data === 'clicked') {
+        commit('darkTheme')
+        const html = document.querySelector('html') as any
+        html.classList.toggle('dark')
+      } else {
+        if (this.state.darkTheme) {
+          const html = document.querySelector('html') as any
+          html.classList.toggle('dark')
+        }
+      }
+    },
     register ({ commit }, user) {
       return new Promise((resolve, reject) => {
         axios.post(`${environment.baseUrl}${endpoints.REGISTER}`, user)
@@ -152,6 +186,7 @@ export default new Vuex.Store({
         headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
       }).then(() => {
         commit('success')
+        commit('openNotify', 'created')
       }).catch(() => {
         commit('error')
       })
@@ -161,6 +196,7 @@ export default new Vuex.Store({
         headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
       }).then(() => {
         commit('success')
+        commit('openNotify', 'updated')
       }).catch(() => {
         commit('error')
       })
@@ -170,6 +206,7 @@ export default new Vuex.Store({
         headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
       }).then(() => {
         commit('success')
+        commit('openNotify', 'removed')
       }).catch(() => {
         commit('error')
       })
@@ -177,8 +214,18 @@ export default new Vuex.Store({
     complete ({ commit }, data) {
       return axios.put(`${environment.baseUrl}${endpoints.COMPLETE}`, data, {
         headers: { 'auth-token': `Bearer ${localStorage.getItem('token')}` }
-      }).then(() => {
+      }).then((res) => {
         commit('success')
+        if (data.type === 'habit') {
+          if (data.action === 'increase') {
+            commit('openNotify', 'completeIncrease')
+          } else {
+            commit('openNotify', 'completeDecrease')
+          }
+        }
+        if (data.type === 'award') {
+          commit('openNotify', 'buy')
+        }
       }).catch(() => {
         commit('error')
       })
@@ -265,6 +312,12 @@ export default new Vuex.Store({
     },
     LEVEL_DATA (state) {
       return state.levelData
+    },
+    LANG (state) {
+      return state.lang
+    },
+    NAME_NOTIFY (state) {
+      return state.nameActiveNotify
     }
   }
 })

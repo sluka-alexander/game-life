@@ -8,7 +8,7 @@
         <div :class="{
           'icon-category-household': item === 'home',
           'icon-check-2': item === 'tasks',
-          'icon-list': item === 'adventure',
+          'icon-list': item === 'standings',
           'icon-rules': item === 'rules',
           'icon-progress': item === 'progress',
           'icon-achievement': item === 'achievement',

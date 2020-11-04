@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import home from '../views/route/home.vue'
 import tasks from '../views/route/tasks.vue'
-import adventure from '../views/route/standings.vue'
+import standings from '../views/route/standings.vue'
 import rules from '../views/route/rules.vue'
 import progress from '../views/route/progress.vue'
 import achievement from '../views/route/achievement.vue'
@@ -30,12 +30,12 @@ const routes: Array<RouteConfig> = [
     component: tasks
   },
   {
-    path: '/adventure',
-    name: 'adventure',
+    path: '/standings',
+    name: 'standings',
     meta: {
       auth: true
     },
-    component: adventure
+    component: standings
   },
   {
     path: '/rules',

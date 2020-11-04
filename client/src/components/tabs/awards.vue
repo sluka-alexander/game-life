@@ -7,7 +7,7 @@
             <div :id="award.award_id" class="icon icon-edit" :award="award" @click="openModal({ name: 'awards', action: 'update' }, award)"></div>
             <div :id="award.award_id" class="icon icon-delete" @click="deleteElement(award.award_id)"></div>
           </div>
-          <div class="card__btn">{{ $t('form.btn.buy') }}</div>
+          <div class="card__btn" @click="complete(award)">{{ $t('form.btn.buy') }}</div>
           <div class="card__name item"> {{ award.name }} </div>
           <div class="card__desc item">{{ award.description }}</div>
           <div class="card__dpx item">
@@ -42,6 +42,9 @@ export default {
     },
     userXp: function () {
       return this.$store.getters.USER_DATA.xp
+    },
+    userMoney: function () {
+      return this.$store.getters.USER_DATA.money
     }
   },
   methods: {
@@ -69,32 +72,30 @@ export default {
           })
       }
     },
-    complete (dataEl, action) {
-      this.$store.commit('loading')
-      let actionElement = ''
-      if (action === 'increase') actionElement = 'increase'
-      else actionElement = 'decrease'
+    complete (dataEl) {
       const data = {
-        xp: dataEl.xp,
-        skills: dataEl.skills,
         price: dataEl.price,
-        action: actionElement,
-        type: 'habit'
+        type: 'award'
       }
-      this.$store.dispatch('complete', data)
-        .then(() => {
-          this.$store.dispatch('getDataUser').then(() => {
-            this.$store.commit('loading')
-            if (level.xpMethod !== level.xpMethod(this.userXp)) {
-              this.$store.dispatch('updateLevel', level.xpMethod(this.userXp)).then(() => {
-                this.$store.dispatch('calcLevelScale')
-              })
-            }
+      if (this.userMoney > dataEl.price) {
+        this.$store.commit('loading')
+        this.$store.dispatch('complete', data)
+          .then(() => {
+            this.$store.dispatch('getDataUser').then(() => {
+              this.$store.commit('loading')
+              if (level.xpMethod !== level.xpMethod(this.userXp)) {
+                this.$store.dispatch('updateLevel', level.xpMethod(this.userXp)).then(() => {
+                  this.$store.dispatch('calcLevelScale')
+                })
+              }
+            })
           })
-        })
-        .catch(err => {
-          console.error(err)
-        })
+          .catch(err => {
+            console.error(err)
+          })
+      } else {
+        this.$store.commit('openNotify', 'noMoney')
+      }
     }
   }
 }

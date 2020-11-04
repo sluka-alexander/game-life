@@ -8,6 +8,7 @@
     <modal v-if="isActiveModal">
       <all-modal></all-modal>
     </modal>
+    <all-notify></all-notify>
     <welcome v-if="!isLoggedIn"></welcome>
     <page v-else></page>
   </div>
@@ -19,6 +20,7 @@ import Page from '@/views/page.vue'
 import * as level from '@/methods/xp'
 import modal from '@/components/modal'
 import allModal from '@/components/modals/all-modals'
+import allNotify from '@/components/notify/all-notify'
 
 export default {
   name: 'app',
@@ -33,7 +35,8 @@ export default {
     Page,
     welcome,
     modal,
-    allModal
+    allModal,
+    allNotify
   },
   computed: {
     isLoggedIn: function () {
@@ -47,9 +50,14 @@ export default {
     },
     isLoading: function () {
       return this.$store.getters.IS_LOADING
+    },
+    lang: function () {
+      return this.$store.getters.LANG
     }
   },
   mounted () {
+    this.$i18n.locale = this.lang
+    this.$store.dispatch('darkTheme')
     if (this.isLoggedIn) {
       this.$store.commit('loading')
       this.$store.dispatch('getDataUser').then(() => {

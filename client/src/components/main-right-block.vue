@@ -2,12 +2,12 @@
   <div class="main-right-block" :class="{ 'main-right-block_close': !isActiveRightBlock }">
     <div class="main-right-block__top-navbar">
       <div class="main-right-block__top-navbar-icon ">
-        <div class="icon-moon">
+        <div class="icon-moon" @click="darkTheme">
         </div>
       </div>
       <div class="main-right-block__top-navbar-icon ">
-        <div class="icon-rus">
-          <details-menu>
+        <div class="icon-rus" @click="changeLang" :class="{'icon-eng': lang === 'en'}">
+          <details-menu v-if="isActiveDropdown">
             <language></language>
           </details-menu>
         </div>
@@ -32,6 +32,11 @@ import language from '@/components/details/language'
 
 export default {
   name: 'main-right-block',
+  data () {
+    return {
+      isActiveDropdown: false
+    }
+  },
   components: {
     avatar,
     level,
@@ -39,9 +44,20 @@ export default {
     detailsMenu,
     language
   },
+  methods: {
+    changeLang () {
+      this.isActiveDropdown = !this.isActiveDropdown
+    },
+    darkTheme () {
+      this.$store.dispatch('darkTheme', 'clicked')
+    }
+  },
   computed: {
     isActiveRightBlock: function () {
       return this.$store.getters.IS_ACTIVE_RIGHT_BLOCK
+    },
+    lang: function () {
+      return this.$store.getters.LANG
     }
   }
 }
@@ -55,6 +71,12 @@ export default {
 
   @include size(16px);
   background-image: url('../views/img/rus.svg');
+}
+.icon-eng {
+  @extend %img;
+
+  @include size(16px);
+  background-image: url('../views/img/eng.svg');
 }
 
 .main-right-block {

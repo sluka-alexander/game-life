@@ -1,0 +1,130 @@
+@import "common/index";
+
+.dark {
+  color: $white;
+  body {
+    background-color: $dark-gray-1!important;
+  }
+  body,
+  .left-menu,
+  .top-menu,
+  .main-right-block {
+    transition: 0.3s;
+  }
+
+  .main-right-block,
+  .left-menu,
+  .top-menu {
+    background-color: $dark-gray-2;
+    border-color: $dark-gray-3;
+  }
+  .level-scale__full,
+  .avatar-block__avatar,
+  .resize-btn,
+  .tabs,
+  .tabs__item,
+  .standings__user,
+  {
+    background-color: $dark-gray-3;
+    border-color: $dark-gray-3;
+    .tabs__item_active {
+      border-color: $color-main;
+    }
+  }
+  .card {
+    border-color: $color-main;
+  }
+  .card__content {
+    background: $dark-gray-1;
+  }
+  .tabs__item {
+    &:hover {
+      background-color: $dark-gray-2;
+      border-color: $dark-gray-2;
+    }
+     &_active {
+       &:hover {
+         border-color: $color-main;
+       }
+     }
+  }
+  .level-scale__full_user, {
+    background-color: $color-main;
+  }
+  .loading-bgc {
+    background-color: $black;
+    opacity: 0.5;
+  }
+  .modal__mask {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .left-menu-item {
+    &:hover {
+      background-color: $dark-gray-3;
+    }
+    color: white;
+  }
+  ::placeholder,
+  .search,
+  .search__input,
+   input,
+  .modal__container,
+  .form,
+  .dropdown-menu,
+  {
+    background-color: $dark-gray-3;
+  }
+  .lang__item:hover {
+    background-color: $dark-gray-4;
+  }
+  .form {
+    input,
+    textarea {
+      color: $white;
+      background-color: $dark-gray-3;
+      border-color: $color-main;
+    }
+  }
+  .form__button {
+    background-color: $color-main;
+  }
+  .button__no-active {
+    background-color: $dark-gray-2;
+  }
+  .router-link-exact-active {
+    background-color: $dark-gray-3;
+    &:hover {
+      background-color: $dark-gray-3;
+    }
+  }
+  .dropdown-create-tasks__items, {
+    border-color: $dark-gray-3;
+    background: $dark-gray-3;
+    .dropdown-create-tasks__item {
+      &:hover {
+        background: $dark-gray-2;
+      }
+    }
+  }
+  .menu-btn__burger,
+  .menu-btn__burger:after,
+  .menu-btn__burger:before {
+    background-color: $white;
+  }
+  .menu-btn__burger_active {
+    background-color: transparent;
+  }
+  .subtitle {
+    color: $white;
+  }
+  .menu-btn {
+    &:hover {
+      background-color: $dark-gray-3;
+    }
+  }
+  select {
+    border-color: $color-main;
+    color: white;
+    background-color: $dark-gray-3;
+  }
+}
