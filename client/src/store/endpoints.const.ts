@@ -12,5 +12,6 @@ export default {
   COMPLETE: 'user/complete',
   UPDATE_LEVEL: 'user/updateLevel',
   ALL_USERS: 'user/',
-  CHECK_DAILY: 'user/checkDaily'
+  CHECK_DAILY: 'user/checkDaily',
+  SORT: 'user/sort'
 }

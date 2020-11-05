@@ -11,6 +11,9 @@ export default {
     noMoney: 'You dont have enough money'
   },
   main: {
+    sort: {
+      diffUp: 'Difficulty'
+    },
     categories: 'Category:',
     difficulty: 'Difficulty:',
     skillsId: {

@@ -62,8 +62,11 @@ export default {
   },
 
   computed: {
+    searchFilter: function () {
+      return this.$store.getters.SEARCH_FILTER
+    },
     userHabits: function () {
-      return this.$store.getters.USER_DATA.habits
+      return this.$store.getters.USER_DATA_HABITS
     },
     isLoading: function () {
       return this.$store.getters.IS_LOADING

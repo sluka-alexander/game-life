@@ -5,6 +5,9 @@
       <search></search>
       <dropdown-create-tasks></dropdown-create-tasks>
       <tabs @activeTabMethods ='activeTabMethods'></tabs>
+      <div class="sort-and-filter">
+        <sort></sort>
+      </div>
       <habits v-if="activeTab === 'Habits'"></habits>
       <tasks-tabs v-if="activeTab === 'Tasks'"></tasks-tabs>
       <dailies v-if="activeTab === 'Daily'"></dailies>
@@ -20,6 +23,7 @@ import tasksTabs from '@/components/tabs/tasks-tabs'
 import awards from '@/components/tabs/awards'
 import habits from '@/components/tabs/habits'
 import dailies from '@/components/tabs/dailies'
+import sort from '@/components/sort'
 
 import tabs from '@/components/tabs'
 
@@ -38,7 +42,8 @@ export default {
     habits,
     awards,
     dailies,
-    tasksTabs
+    tasksTabs,
+    sort
   },
 
   computed: {
@@ -67,6 +72,7 @@ export default {
 
     flex-direction: column;
     flex: 0 auto;
+    overflow-y: auto;
 
     &__img {
       background-size: contain;
@@ -79,5 +85,9 @@ export default {
       margin: 0 auto;
       background-image: url('../img/tasks.png');
     }
+  }
+  .sort-and-filter {
+    display: flex;
+    justify-content: flex-end;
   }
 </style>

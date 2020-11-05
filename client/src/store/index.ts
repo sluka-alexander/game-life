@@ -9,6 +9,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    searchFilter: '',
     status: '',
     error: '',
     token: localStorage.getItem('token') || null,
@@ -31,7 +32,10 @@ export default new Vuex.Store({
         cha: 0,
         hum: 0
       },
-      level: 0
+      level: 0,
+      habits: [],
+      tasks: [],
+      daily: []
     },
     updateElementData: {},
     levelData: {
@@ -41,6 +45,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    search (state, data) {
+      state.searchFilter = data
+    },
     darkTheme (state) {
       if (localStorage.getItem('dark')) {
         localStorage.removeItem('dark')
@@ -61,6 +68,7 @@ export default new Vuex.Store({
     success (state) {
       state.status = 'Success'
     },
+
     updateLevel (state, data) {
       state.userData.level = data.level
       state.levelData = data
@@ -230,6 +238,20 @@ export default new Vuex.Store({
         commit('error')
       })
     },
+    sort ({ commit }, data) {
+      switch (data) {
+        case 'diffUp':
+          this.state.userData.habits = this.state.userData.habits.sort((a: any, b: any) => a.difficulty > b.difficulty ? 1 : -1)
+          this.state.userData.tasks = this.state.userData.tasks.sort((a: any, b: any) => a.difficulty > b.difficulty ? 1 : -1)
+          this.state.userData.daily = this.state.userData.daily.sort((a: any, b: any) => a.difficulty > b.difficulty ? 1 : -1)
+          break
+        case 'diffDown':
+          this.state.userData.habits = this.state.userData.habits.sort((a: any, b: any) => a.difficulty > b.difficulty ? -1 : 1)
+          this.state.userData.tasks = this.state.userData.tasks.sort((a: any, b: any) => a.difficulty > b.difficulty ? -1 : 1)
+          this.state.userData.daily = this.state.userData.daily.sort((a: any, b: any) => a.difficulty > b.difficulty ? -1 : 1)
+          break
+      }
+    },
     openModal (context) {
       context.commit('openModal')
     },
@@ -286,6 +308,18 @@ export default new Vuex.Store({
     USER_DATA: (state) => {
       return state.userData
     },
+    USER_DATA_HABITS: (state) => {
+      return state.userData.habits.filter((habit) => habit.name.toLowerCase().match(state.searchFilter.toLowerCase()) ||
+        habit.category.toLowerCase().match(state.searchFilter.toLowerCase()))
+    },
+    USER_DATA_TASKS: (state) => {
+      return state.userData.tasks.filter((task) => task.name.toLowerCase().match(state.searchFilter.toLowerCase()) ||
+        task.category.toLowerCase().match(state.searchFilter.toLowerCase()))
+    },
+    USER_DATA_DAILIES: (state) => {
+      return state.userData.daily.filter((daily) => daily.name.toLowerCase().match(state.searchFilter.toLowerCase()) ||
+        daily.category.toLowerCase().match(state.searchFilter.toLowerCase()))
+    },
     ALL_USERS: (state) => {
       return state.allUsers
     },
@@ -318,6 +352,9 @@ export default new Vuex.Store({
     },
     NAME_NOTIFY (state) {
       return state.nameActiveNotify
+    },
+    SEARCH_FILTER (state) {
+      return state.searchFilter
     }
   }
 })

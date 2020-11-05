@@ -11,6 +11,9 @@ export default {
     noMoney: 'У вас недостаточно средств'
   },
   main: {
+    sort: {
+      diffUp: 'По сложности'
+    },
     categories: 'Категория:',
     difficulty: 'Сложность:',
     skillsId: {

@@ -17,10 +17,23 @@ export default {
       searchValue: null
     }
   },
+  computed: {
+    searchFilter: function () {
+      return this.$store.getters.SEARCH_FILTER
+    }
+  },
   methods: {
     clearInput () {
       this.searchValue = null
       this.$refs.input.focus()
+    },
+    changeSearchFilter () {
+      this.$store.commit('search', this.searchValue)
+    }
+  },
+  watch: {
+    searchValue: function () {
+      this.changeSearchFilter()
     }
   }
 }

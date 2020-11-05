@@ -58,7 +58,7 @@ export default {
   showModal: true,
   computed: {
     userDailies: function () {
-      return this.$store.getters.USER_DATA.daily
+      return this.$store.getters.USER_DATA_DAILIES
     },
     userXp: function () {
       return this.$store.getters.USER_DATA.xp

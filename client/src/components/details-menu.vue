@@ -36,5 +36,21 @@ export default {
   &_active {
     display: block;
   }
+  .item {
+    padding: 10px 20px;
+    cursor: pointer;
+
+    &:last-child {
+      &:hover {
+        border-radius: 0 0 5px 5px;
+      }
+    }
+    &:first-child {
+      border-radius: 5px 5px 0 0;
+    }
+    &:hover {
+      background-color: $gray-light;
+    }
+  }
 }
 </style>

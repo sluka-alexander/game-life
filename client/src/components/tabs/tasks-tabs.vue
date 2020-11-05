@@ -57,7 +57,7 @@ export default {
   showModal: true,
   computed: {
     userTasks: function () {
-      return this.$store.getters.USER_DATA.tasks
+      return this.$store.getters.USER_DATA_TASKS
     },
     userXp: function () {
       return this.$store.getters.USER_DATA.xp

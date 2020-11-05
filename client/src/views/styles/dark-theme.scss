@@ -6,17 +6,22 @@
     background-color: $dark-gray-1!important;
   }
   body,
+  html,
   .left-menu,
   .top-menu,
   .main-right-block {
     transition: 0.3s;
   }
-
   .main-right-block,
   .left-menu,
-  .top-menu {
+  .top-menu,
+  .welcome__right-part,
+  {
     background-color: $dark-gray-2;
     border-color: $dark-gray-3;
+  }
+  .welcome__left-part {
+    background-color: $dark-gray-3;
   }
   .level-scale__full,
   .avatar-block__avatar,
@@ -126,5 +131,13 @@
     border-color: $color-main;
     color: white;
     background-color: $dark-gray-3;
+  }
+  .card__habit_disable {
+    background-color: $dark-gray-2;
+  }
+  .dropdown-menu .item {
+    &:hover {
+      background-color: $dark-gray-4;
+    }
   }
 }
